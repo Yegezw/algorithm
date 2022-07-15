@@ -29,11 +29,7 @@ public class ArrayQueueVSLoopQueueVSLinkedListQueue {
 
     public static void main(String[] args) {
         int opCount = 100000;
-
-        // O(n)
-        LoopQueue<Integer> loopQueue = new LoopQueue<>();
-        double time1 = testQueue(loopQueue, opCount);
-        System.out.println("LoopQueue, time: " + time1 + " s");
+        //int opCount = 10000000;
 
         // O(n^2)
         ArrayQueue<Integer> arrayQueue = new ArrayQueue<>();
@@ -41,9 +37,17 @@ public class ArrayQueueVSLoopQueueVSLinkedListQueue {
         System.out.println("ArrayQueue, time: " + time2 + " s");
 
         // O(n)
+        LoopQueue<Integer> loopQueue = new LoopQueue<>();
+        double time1 = testQueue(loopQueue, opCount);
+        System.out.println("LoopQueue, time: " + time1 + " s");
+
+        // O(n)
         LinkedListQueue<Integer> linkedListQueue = new LinkedListQueue<>();
         double time3 = testQueue(linkedListQueue, opCount);
         System.out.println("LinkedListQueue, time: " + time3 + " s");
+
+        System.out.println("在 opCount 少时, LoopQueue 扩容频繁, 因此 LinkedListQueue 更占优势");
+        System.out.println("在 opCount 多时, LoopQueue 扩容不再频繁, 而 LinkedListQueue 却要不停的 new, 因此 LoopQueue 更占优势");
     }
 
 }

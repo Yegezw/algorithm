@@ -2,6 +2,8 @@ package other.helper;
 
 import stage1.week2.InsertionSort;
 import stage1.week2.SelectionSort;
+import stage2.week5.mergesort.MergeSort;
+import stage2.week5.mergesort.MergeSortBU;
 
 @SuppressWarnings("all")
 public class SortingHelper {
@@ -16,6 +18,10 @@ public class SortingHelper {
         switch (sortName) {
             case SelectionSort -> SelectionSort.sort(arr);
             case InsertionSort -> InsertionSort.sort(arr);
+
+            case MergeSort -> MergeSort.sort(arr);
+            case MergeSortPlus -> MergeSort.sortPlus(arr);
+            case MergeSortBU -> MergeSortBU.sort(arr);
         }
     }
 

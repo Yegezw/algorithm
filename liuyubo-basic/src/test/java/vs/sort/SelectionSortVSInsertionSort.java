@@ -15,14 +15,14 @@ public class SelectionSortVSInsertionSort {
             System.out.println("Random Array:");
             Integer[] arr1 = ArrayGenerator.generateRandomArray(n, n);
             Integer[] arr2 = Arrays.copyOf(arr1, arr1.length);
-            SortingHelper.sortTest(SortName.InsertionSort, arr1);
-            SortingHelper.sortTest(SortName.SelectionSort, arr2);
+            SortingHelper.sortTest(SortName.SelectionSort, arr1);
+            SortingHelper.sortTest(SortName.InsertionSort, arr2);
 
             System.out.println("Order Array:");
             Integer[] arr3 = ArrayGenerator.generateOrderedArray(n);
             Integer[] arr4 = Arrays.copyOf(arr3, arr3.length);
-            SortingHelper.sortTest(SortName.InsertionSort, arr3);
-            SortingHelper.sortTest(SortName.SelectionSort, arr4);
+            SortingHelper.sortTest(SortName.SelectionSort, arr3);
+            SortingHelper.sortTest(SortName.InsertionSort, arr4);
 
             System.out.println("-------------------------------------");
         }

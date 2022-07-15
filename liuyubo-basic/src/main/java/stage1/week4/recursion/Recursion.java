@@ -1,5 +1,8 @@
 package stage1.week4.recursion;
 
+/**
+ * 递归
+ */
 @SuppressWarnings("all")
 public class Recursion {
 
