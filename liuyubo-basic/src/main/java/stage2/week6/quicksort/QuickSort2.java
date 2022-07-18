@@ -48,7 +48,7 @@ public class QuickSort2 {
             while (p1 <= p2 && arr[p1].compareTo(v) < 0) p1++; // arr[p1] >= v
             while (p1 <= p2 && arr[p2].compareTo(v) > 0) p2--; // arr[p2] <= v
 
-            if (p1 >= p2) break;
+            if (p1 >= p2) break; // 也可以理解为当 p1 >= p2 时, 就没必要 swap(arr, p1, p2) 了
 
             swap(arr, p1, p2);
             p1++;

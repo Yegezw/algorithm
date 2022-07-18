@@ -7,7 +7,7 @@ import java.util.Random;
  */
 public class ArrayGenerator {
 
-    private static final Random random = new Random();
+    private static final Random RANDOM = new Random();
 
     private ArrayGenerator() {
     }
@@ -29,7 +29,7 @@ public class ArrayGenerator {
     public static Integer[] generateRandomArray(int length, int bound) {
         Integer[] arr = new Integer[length];
         for (int i = 0; i < arr.length; i++) {
-            arr[i] = random.nextInt(bound + 1);
+            arr[i] = RANDOM.nextInt(bound + 1);
         }
         return arr;
     }
@@ -43,6 +43,9 @@ public class ArrayGenerator {
         return arr;
     }
 
+    /**
+     * 递归非常灵活
+     */
     private static void generateSpecialArray(Integer[] arr, int l, int r, int value) {
         if (l > r) return;
 
