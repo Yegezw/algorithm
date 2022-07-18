@@ -1,4 +1,4 @@
-package stage2.week5.mergesort;
+package stage2.week5;
 
 /**
  * 自底向上归并排序

@@ -1,4 +1,4 @@
-package stage2.week5.mergesort;
+package stage2.week5;
 
 import stage1.week2.InsertionSort;
 

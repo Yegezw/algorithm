@@ -2,8 +2,12 @@ package other.helper;
 
 import stage1.week2.InsertionSort;
 import stage1.week2.SelectionSort;
-import stage2.week5.mergesort.MergeSort;
-import stage2.week5.mergesort.MergeSortBU;
+import stage2.week5.MergeSort;
+import stage2.week5.MergeSortBU;
+import stage2.week6.quicksort.QuickSort1;
+import stage2.week6.quicksort.QuickSort2;
+import stage2.week6.quicksort.QuickSort3;
+import stage2.week6.work.QuickSortMid;
 
 @SuppressWarnings("all")
 public class SortingHelper {
@@ -22,6 +26,12 @@ public class SortingHelper {
             case MergeSort -> MergeSort.sort(arr);
             case MergeSortPlus -> MergeSort.sortPlus(arr);
             case MergeSortBU -> MergeSortBU.sort(arr);
+
+            case QuickSort1_1 -> QuickSort1.sort1(arr);
+            case QuickSort1_2 -> QuickSort1.sort2(arr);
+            case QuickSortMid -> QuickSortMid.sort(arr);
+            case QuickSort2 -> QuickSort2.sort(arr);
+            case QuickSort3 -> QuickSort3.sort(arr);
         }
     }
 
