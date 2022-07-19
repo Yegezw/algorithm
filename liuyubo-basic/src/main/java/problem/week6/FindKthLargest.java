@@ -4,7 +4,7 @@ import java.util.Random;
 
 /**
  * 215 - 数组中的第 K 个最大元素: https://leetcode-cn.com/problems/kth-largest-element-in-an-array/
- * <p>求数组升序排序好后, 从右往左数第 K 个元素, 即从左往右数第 length - K 个元素
+ * <p>求数组升序排序好后, 从右往左数第 K 个元素, 它的索引是 length - K
  */
 @SuppressWarnings("all")
 public class FindKthLargest {
