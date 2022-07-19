@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Random;
 
 /**
- * 面试题 17.14 最小 K 个数 - https://leetcode.cn/problems/smallest-k-lcci/
+ * 程序员面试金典 17.14. 小 K 个数 - https://leetcode.cn/problems/smallest-k-lcci/
  * <p>求数组升序排序好后, 从左往右数共 K 个元素
  */
 @SuppressWarnings("all")
