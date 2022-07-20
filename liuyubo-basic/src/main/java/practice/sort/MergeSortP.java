@@ -1,6 +1,5 @@
 package practice.sort;
 
-
 /**
  * 练习归并排序
  */
