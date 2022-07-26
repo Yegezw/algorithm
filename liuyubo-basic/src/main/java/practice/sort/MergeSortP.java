@@ -39,13 +39,13 @@ public class MergeSortP {
     }
 
     private static <E extends Comparable<E>> void merge(E[] arr, int l, int mid, int r, E[] temp) {
-        System.arraycopy(arr, l, temp, l, r- l + 1);
+        System.arraycopy(arr, l, temp, l, r - l + 1);
 
         int p1 = l;
         int p2 = mid + 1;
         int i = l;
 
-        while (p1 <= mid && p2 <= r) arr[i++] = temp[p1].compareTo(temp[p2]) < 0 ? temp[p1++] : temp[p2++];
+        while (p1 <= mid && p2 <= r) arr[i++] = temp[p1].compareTo(temp[p2]) <= 0 ? temp[p1++] : temp[p2++];
         while (p1 <= mid) arr[i++] = temp[p1++];
         while (p2 <= r) arr[i++] = temp[p2++];
     }

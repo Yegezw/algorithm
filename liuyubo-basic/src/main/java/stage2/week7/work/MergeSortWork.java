@@ -34,7 +34,7 @@ public class MergeSortWork {
         int p2 = mid;
         int i = l;
 
-        while (p1 < mid && p2 < r) arr[i++] = temp[p1].compareTo(temp[p2]) < 0 ? temp[p1++] : temp[p2++];
+        while (p1 < mid && p2 < r) arr[i++] = temp[p1].compareTo(temp[p2]) <= 0 ? temp[p1++] : temp[p2++];
         while (p1 < mid) arr[i++] = temp[p1++];
         while (p2 < r) arr[i++] = temp[p2++];
     }

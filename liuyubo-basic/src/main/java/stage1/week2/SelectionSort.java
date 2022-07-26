@@ -21,7 +21,7 @@ public class SelectionSort {
     public static <E extends Comparable<E>> void sort(E[] arr) {
         for (int i = 0; i < arr.length; i++) {
             // arr[0, i) 已排序, arr[i, n) 未排序
-            // 选择 arr[i, n) 最小值得索引 minIndex, 让 arr[minIndex] 与 arr[i] 做交换
+            // 选择 arr[i, n) 最小值的索引 minIndex, 让 arr[minIndex] 与 arr[i] 做交换
             int minIndex = i;
             for (int j = i + 1; j < arr.length; j++) {
                 if (arr[j].compareTo(arr[minIndex]) < 0) {

@@ -2,7 +2,6 @@ package stage1.week3.work;
 
 import port.Queue;
 
-
 /**
  * <p>使用 size, 不浪费空间
  * <p>队列为空: size == 0
