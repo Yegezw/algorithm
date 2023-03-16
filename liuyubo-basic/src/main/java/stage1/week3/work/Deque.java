@@ -5,6 +5,7 @@ package stage1.week3.work;
  * <p>使用 size, 不浪费空间
  * <p>队列为空: size == 0
  * <p>队列为满: size == length
+ * <p>size = (tail >= front) ? (tail - front) : (tail - front + length)
  */
 @SuppressWarnings("all")
 public class Deque<E> {

@@ -7,7 +7,6 @@ import port.Queue;
  * <p>不使用 size, 浪费一个空间 data[tail]
  * <p>队列为空: front == tail
  * <p>队列为满: (tail + 1) % length == front
- * <p>size = (tail >= front) ? (tail - front) : (tail - front + length)
  */
 @SuppressWarnings("all")
 public class LoopQueue3<E> implements Queue<E> {
