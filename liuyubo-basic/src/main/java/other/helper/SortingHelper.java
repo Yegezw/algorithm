@@ -2,6 +2,7 @@ package other.helper;
 
 import stage1.week2.InsertionSort;
 import stage1.week2.SelectionSort;
+import stage2.week5.*;
 
 @SuppressWarnings("all")
 public class SortingHelper {
@@ -16,6 +17,10 @@ public class SortingHelper {
         switch (sortName) {
             case SelectionSort: SelectionSort.sort(arr);
             case InsertionSort: InsertionSort.sort(arr);
+            
+            case MergeSort: MergeSort.sort(arr);
+            case MergeSortPlus: MergeSortPlus.sort(arr);
+            case MergeSortBU: MergeSortBU.sort(arr);
         }
     }
 
