@@ -4,7 +4,7 @@ import stage1.week2.InsertionSort;
 
 /**
  * <p>归并排序: O(N * logN)
- * <p>优化 1: merge 条件
+ * <p>优化 1: merge 条件, 对完全有序的数组 O(n)
  * <p>优化 2: 数据量小的时候(<=16)采用插入排序
  * <p>优化 3: 避免频繁的在内存中开辟空间
  */
