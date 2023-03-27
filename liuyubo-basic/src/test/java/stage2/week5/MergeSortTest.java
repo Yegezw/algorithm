@@ -16,7 +16,7 @@ public class MergeSortTest {
     }
 
     private static void testMergeSortPlus() {
-        int n = 100000;
+        int n = 1000000;
         Integer[] arr = ArrayGenerator.generateRandomArray(n, n);
         SortingHelper.sortTest(SortName.MergeSortPlus, arr);
     }
