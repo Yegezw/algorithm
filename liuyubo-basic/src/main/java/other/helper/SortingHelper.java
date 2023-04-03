@@ -9,6 +9,7 @@ import stage2.week6.quicksort.QuickSort1;
 import stage2.week6.quicksort.QuickSort2;
 import stage2.week6.quicksort.QuickSort3;
 import stage2.week6.work.QuickSortMid;
+import stage3.week9.sort.HeapSort;
 
 @SuppressWarnings("all")
 public class SortingHelper {
@@ -32,6 +33,9 @@ public class SortingHelper {
             case QuickSort2 -> QuickSort2.sort(arr);
             case QuickSort3 -> QuickSort3.sort(arr);
             case QuickSortMid -> QuickSortMid.sort(arr);
+            
+            case HeapSort1 -> HeapSort.sort1(arr);
+            case HeapSort2 -> HeapSort.sort2(arr);
         }
     }
 

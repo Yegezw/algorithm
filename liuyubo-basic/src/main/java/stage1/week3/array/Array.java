@@ -1,5 +1,7 @@
 package stage1.week3.array;
 
+import java.util.Arrays;
+
 /**
  * 动态数组
  */
@@ -16,6 +18,11 @@ public class Array<E> {
 
     public Array() {
         this(10);
+    }
+
+    public Array(E[] arr) {
+        data = Arrays.copyOf(arr, arr.length);
+        size = arr.length;
     }
 
     public int getSize() {
@@ -123,6 +130,15 @@ public class Array<E> {
         E[] newData = (E[]) new Object[newCapacity];
         System.arraycopy(data, 0, newData, 0, size);
         data = newData;
+    }
+
+    public void swap(int a, int b) {
+        if (a < 0 || a >= size || b < 0 || b >= size) {
+            throw new IllegalArgumentException("Swap failed, require 0 <= index < size");
+        }
+        E k = data[a];
+        data[a] = data[b];
+        data[b] = k;
     }
 
     @Override
