@@ -1,37 +1,102 @@
-package stage2.week8.map;
-
-import port.Map;
+package stage3.week12.tree;
 
 /**
- * key 不能重复, 且必须可比较
+ * <p>Red-Black-Tree 红黑树
+ * <p>红黑树是保持 "黑平衡" 的二叉树
+ * <p>红黑树添加和删除比 AVL 树快, 查询比 AVL 树慢(它比 AVL 树更高)
  */
 @SuppressWarnings("all")
-public class BSTMap<K extends Comparable<K>, V> implements Map<K, V> {
+public class RBTree<K extends Comparable<K>, V> {
+
+    private static final boolean RED = true;
+    private static final boolean BLACK = false;
 
     private class Node {
         public K key;
         public V value;
         public Node left;
         public Node right;
+        public boolean color;
 
         public Node(K key, V value) {
             this.key = key;
             this.value = value;
             this.left = null;
             this.right = null;
+            this.color = RED; // 默认插入红色节点
         }
     }
 
     private Node root;
     private int size;
 
-    public BSTMap() {
+    public RBTree() {
         root = null;
         size = 0;
     }
 
     /**
-     * 返回以 node 为根节点的二分搜索树中, 键为 key 所在的节点
+     * 判断节点 node 的颜色
+     */
+    private boolean isRed(Node node) {
+        if (node == null) return BLACK;
+        return node.color;
+    }
+
+    /**
+     * 对节点 node 进行左旋转操作, 返回旋转后新的根节点 x
+     */
+    //   node                            x
+    //  /    \     向左旋转 (node)      /    \
+    // T1     x   - - - - - - - ->   node   T3
+    //      /   \                   /    \
+    //     T2   T3                 T1     T2
+    private Node leftRotate(Node node) {
+        Node x = node.right;
+
+        // 向左旋转过程
+        node.right = x.left;
+        x.left = node;
+
+        // 调整颜色
+        x.color = node.color;
+        node.color = RED;
+
+        return x;
+    }
+
+    /**
+     * 对节点 node 进行右旋转操作, 返回旋转后新的根节点 x
+     */
+    //      node                           x
+    //     /    \     向右旋转 (node)     /    \
+    //    x     T3   - - - - - - - ->   T1   node
+    //  /   \                               /    \
+    // T1    T2                            T2    T3
+    private Node rightRotate(Node node) {
+        Node x = node.left;
+
+        // 向右旋转过程
+        node.left = x.right;
+        x.right = node;
+
+        // 调整颜色
+        x.color = node.color;
+        node.color = RED;
+
+        return x;
+    }
+
+    /**
+     * 颜色翻转
+     */
+    private void flipColors(Node node) {
+        node.color = RED;
+        node.left.color = node.right.color = BLACK;
+    }
+
+    /**
+     * 返回以 node 为根节点的红黑树中, 键为 key 所在的节点
      */
     private Node getNode(Node node, K key) {
         if (node == null) return null;
@@ -41,29 +106,37 @@ public class BSTMap<K extends Comparable<K>, V> implements Map<K, V> {
         return getNode(node.right, key);
     }
 
-    @Override
+    /**
+     * 向红黑树中添加元素 (key, value)
+     */
     public void add(K key, V value) {
         root = add(root, key, value);
+        root.color = BLACK; // 保持根节点为黑色节点
     }
 
     /**
-     * 向以 node 为根节点的二分搜索树中添加元素 (key, value), 并返回新的根节点
+     * 向以 node 为根节点的红黑树中添加元素 (key, value), 并返回新的根节点
      */
     private Node add(Node node, K key, V value) {
         if (node == null) {
             size++;
-            return new Node(key, value);
+            return new Node(key, value); // 默认插入红色节点
         }
 
         if (key.compareTo(node.key) < 0) node.left = add(node.left, key, value);
         else if (key.compareTo(node.key) > 0) node.right = add(node.right, key, value);
         else node.value = value;
 
+        // 保持 "黑平衡"
+        if (isRed(node.right) && !isRed(node.left)) node = leftRotate(node);     // 左旋转
+        if (isRed(node.left) && isRed(node.left.left)) node = rightRotate(node); // 右旋转
+        if (isRed(node.left) && isRed(node.right)) flipColors(node);             // 颜色翻转
+
         return node;
     }
 
     /**
-     * 返回以 node 为根节点的二分搜索树中的最小元素所在的节点
+     * 返回以 node 为根节点的红黑树中的最小元素所在的节点
      */
     private Node minimum(Node node) {
         if (node.left == null) return node;
@@ -71,7 +144,7 @@ public class BSTMap<K extends Comparable<K>, V> implements Map<K, V> {
     }
 
     /**
-     * 删除以 node 为根节点的二分搜索树的最小元素所在的节点, 并返回新的根节点
+     * 删除以 node 为根节点的红黑树的最小元素所在的节点, 并返回新的根节点
      */
     private Node removeMin(Node node) {
         if (node.left == null) {
@@ -85,7 +158,6 @@ public class BSTMap<K extends Comparable<K>, V> implements Map<K, V> {
         return node;
     }
 
-    @Override
     public V remove(K key) {
         Node node = getNode(root, key);
         if (node != null) {
@@ -96,7 +168,7 @@ public class BSTMap<K extends Comparable<K>, V> implements Map<K, V> {
     }
 
     /**
-     * 以 node 为根节点的二分搜索树, 删除键为 key 所在的节点, 并返回新的根节点
+     * 以 node 为根节点的红黑树, 删除键为 key 所在的节点, 并返回新的根节点
      */
     private Node remove(Node node, K key) {
         if (node == null) return null;
@@ -128,30 +200,25 @@ public class BSTMap<K extends Comparable<K>, V> implements Map<K, V> {
         }
     }
 
-    @Override
     public boolean contains(K key) {
         return getNode(root, key) != null;
     }
 
-    @Override
     public V get(K key) {
         Node node = getNode(root, key);
         return node != null ? node.value : null;
     }
 
-    @Override
     public void set(K key, V newValue) {
         Node node = getNode(root, key);
         if (node != null) node.value = newValue;
         else throw new IllegalArgumentException(key + " doesn't exist!");
     }
 
-    @Override
     public int getSize() {
         return size;
     }
 
-    @Override
     public boolean isEmpty() {
         return size == 0;
     }
