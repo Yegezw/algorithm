@@ -12,6 +12,9 @@ import stage2.week6.work.QuickSortMid;
 import stage3.week10.sort.BubbleSort;
 import stage3.week10.sort.ShellSort;
 import stage3.week9.sort.HeapSort;
+import stage4.week14.BucketSort;
+import stage4.week14.LSDSort;
+import stage4.week14.MSDSort;
 
 @SuppressWarnings("all")
 public class SortingHelper {
@@ -35,17 +38,28 @@ public class SortingHelper {
             case QuickSort2 -> QuickSort2.sort(arr);
             case QuickSort3 -> QuickSort3.sort(arr);
             case QuickSortMid -> QuickSortMid.sort(arr);
-            
+
             case HeapSort1 -> HeapSort.sort1(arr);
             case HeapSort2 -> HeapSort.sort2(arr);
-            
+
             case BubbleSort1 -> BubbleSort.sort1(arr);
             case BubbleSort2 -> BubbleSort.sort2(arr);
             case BubbleSort3 -> BubbleSort.sort3(arr);
-            
+
             case ShellSort1 -> ShellSort.sort1(arr);
             case ShellSort2 -> ShellSort.sort2(arr);
             case ShellSort3 -> ShellSort.sort3(arr);
+
+            case LSDSort -> {
+                String[] strArr = (String[]) arr;
+                if (strArr.length == 0) throw new IllegalArgumentException("Arr can not be empty!");
+                LSDSort.sort(strArr, strArr[0].length());
+            }
+            case MSDSort -> MSDSort.sort((String[]) arr);
+
+            case BucketSort1 -> BucketSort.sort1((Integer[]) arr, 200);
+            case BucketSort2 -> BucketSort.sort2((Integer[]) arr, 100);
+            case BucketSort3 -> BucketSort.sort3((Integer[]) arr, 10);
         }
     }
 
