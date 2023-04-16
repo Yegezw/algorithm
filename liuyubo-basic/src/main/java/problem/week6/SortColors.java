@@ -29,8 +29,7 @@ public class SortColors {
         nums[a] = nums[b];
         nums[b] = k;
     }
-
-
+    
     public static void main(String[] args) {
         int[] nums = {2, 0, 2, 1, 1, 0};
         sortColors(nums);
