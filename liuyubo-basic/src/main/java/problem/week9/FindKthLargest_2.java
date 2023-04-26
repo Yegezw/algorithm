@@ -20,7 +20,7 @@ public class FindKthLargest_2 {
                 pq.enqueue(arr[i]);
             }
         }
-        
+
         return pq.getFront();
     }
 

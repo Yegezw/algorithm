@@ -179,7 +179,7 @@ public class LinkedListR<E> {
      */
     private boolean contains(Node node, E e) {
         if (node == null) return false;
-        
+
         if (node.e.equals(e)) return true;
         return contains(node.next, e);
     }

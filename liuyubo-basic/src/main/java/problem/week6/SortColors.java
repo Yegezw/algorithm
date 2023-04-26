@@ -15,7 +15,7 @@ public class SortColors {
     public static void sortColors(int[] nums) {
         int p1 = -1;
         int p2 = nums.length;
-        
+
         int i = 0;
         while (i < p2) {
             if (nums[i] == 0) swap(nums, ++p1, i++);
@@ -29,7 +29,7 @@ public class SortColors {
         nums[a] = nums[b];
         nums[b] = k;
     }
-    
+
     public static void main(String[] args) {
         int[] nums = {2, 0, 2, 1, 1, 0};
         sortColors(nums);

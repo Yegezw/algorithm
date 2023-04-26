@@ -5,10 +5,10 @@ package stage1.week2;
  */
 @SuppressWarnings("all")
 public class SelectionSort {
-    
+
     private SelectionSort() {
     }
-    
+
     private static <E> void swap(E[] arr, int a, int b) {
         E k = arr[a];
         arr[a] = arr[b];

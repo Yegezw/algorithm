@@ -32,6 +32,7 @@ public class BucketSort {
             maxV = Math.max(maxV, arr[i]);
         }
         if (minV == maxV) return;
+        // d 代表每个桶中的元素可能数
         int d = (maxV - minV + 1) / B + ((maxV - minV + 1) % B != 0 ? 1 : 0);
 
         int[] cnt = new int[B];

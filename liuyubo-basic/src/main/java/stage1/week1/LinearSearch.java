@@ -15,7 +15,7 @@ public class LinearSearch {
             // 循环体维持循环不变量: 如果 data[i] 是目标, 就返回 i
             if (data[i].equals(target)) return i;
         }
-        
+
         return -1;
     }
 }

@@ -10,7 +10,7 @@ import stage1.week2.InsertionSort;
  */
 @SuppressWarnings("all")
 public class MergeSortPlus {
-    
+
     private MergeSortPlus() {
     }
 
@@ -30,11 +30,11 @@ public class MergeSortPlus {
             InsertionSort.sort(arr, l, r); // 优化 2: 数据量小的时候(<=16)采用插入排序
             return;
         }
-        
+
         int mid = l + (r - l) / 2;
         sort(arr, l, mid, temp);       // arr[l, mid]
         sort(arr, mid + 1, r, temp); // arr[mid + 1, r]
-        
+
         if (arr[mid].compareTo(arr[mid + 1]) > 0) merge(arr, l, mid, r, temp); // 优化 1: merge 条件
     }
 
@@ -43,11 +43,11 @@ public class MergeSortPlus {
      */
     private static <E extends Comparable<E>> void merge(E[] arr, int l, int mid, int r, E[] temp) {
         System.arraycopy(arr, l, temp, l, r - l + 1);
-        
+
         int p1 = l;       // temp[l, mid]
         int p2 = mid + 1; // temp[mid + 1, r]
         int i = l;        // arr[l, r]
-        
+
         while (p1 <= mid && p2 <= r) arr[i++] = temp[p1].compareTo(temp[p2]) <= 0 ? temp[p1++] : temp[p2++];
         while (p1 <= mid) arr[i++] = temp[p1++];
         while (p2 <= r) arr[i++] = temp[p2++];

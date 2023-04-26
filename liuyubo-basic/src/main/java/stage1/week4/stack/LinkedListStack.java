@@ -8,7 +8,7 @@ import stage1.week4.link.LinkedList;
  */
 @SuppressWarnings("all")
 public class LinkedListStack<E> implements Stack<E> {
-    
+
     private final LinkedList<E> list;
 
     public LinkedListStack() {

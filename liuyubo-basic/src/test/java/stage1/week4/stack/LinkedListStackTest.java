@@ -11,7 +11,7 @@ public class LinkedListStackTest {
 
         System.out.println(stack.pop());
         System.out.println(stack);
-        
+
         System.out.println("size = " + stack.getSize());
     }
 

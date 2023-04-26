@@ -32,7 +32,7 @@ public class LinkedListQueue<E> implements Queue<E> {
             return e.toString();
         }
     }
-    
+
     private Node head;
     private Node tail;
     private int size;
@@ -55,7 +55,7 @@ public class LinkedListQueue<E> implements Queue<E> {
     @Override
     public E dequeue() {
         if (isEmpty()) throw new RuntimeException("Queue is empty");
-        
+
         Node retNode = head;
         head = retNode.next;
         retNode.next = null;

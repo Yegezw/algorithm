@@ -44,7 +44,7 @@ public class SQRTDecomposition<E> {
     public void update(int index, E val) {
         if (index < 0 || index >= N) return;
         data[index] = val;
-        
+
         int b = index / B;
         blocks[b] = data[b * B];
         for (int i = b * B + 1; i < Math.min((b + 1) * B, N); i++) blocks[b] = merger.merge(blocks[b], data[i]);

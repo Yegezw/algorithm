@@ -14,7 +14,7 @@ public class LinkedListQueueTest {
                 System.out.println("---------------");
             }
         }
-        
+
         System.out.println("size = " + queue.getSize());
     }
 

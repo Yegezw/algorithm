@@ -9,7 +9,7 @@ import java.util.Arrays;
 public class MinEatingSpeed {
 
     /**
-     * <p>piles = [3,6,7,11], H = 8
+     * <p>piles = [3, 6, 7, 11], H = 8
      * <p>输出: 4
      */
     public static int minEatingSpeed(int[] piles, int h) {

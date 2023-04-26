@@ -56,7 +56,7 @@ public class QuickSort3 {
             else if (arr[i].compareTo(v) > 0) swap(arr, --p2, i);
             else i++;
         }
-        
+
         swap(arr, l, p1);
         return new int[]{p1 - 1, p2};
     }

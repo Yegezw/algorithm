@@ -13,7 +13,7 @@ public class QuickSortVSMergeSort {
 
         Integer[] arr1;
         Integer[] arr2;
-        
+
         for (int n : dataSize) {
             arr1 = ArrayGenerator.generateRandomArray(n, n);
             arr2 = Arrays.copyOf(arr1, arr1.length);

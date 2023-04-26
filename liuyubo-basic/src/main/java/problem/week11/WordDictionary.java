@@ -51,9 +51,9 @@ public class WordDictionary {
      */
     private boolean match(Node node, String word, int index) {
         if (index == word.length()) return node.isWord;
-        
+
         char c = word.charAt(index);
-        
+
         if (c != '.') {
             if (!node.next.containsKey(c)) return false;
             return match(node.next.get(c), word, index + 1);

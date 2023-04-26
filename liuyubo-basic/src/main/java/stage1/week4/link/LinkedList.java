@@ -98,8 +98,7 @@ public class LinkedList<E> {
             if (e.equals(prev.next.e)) {
                 prev.next = prev.next.next;
                 size--;
-            }
-            else prev = prev.next;
+            } else prev = prev.next;
         }
     }
 

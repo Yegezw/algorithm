@@ -4,7 +4,7 @@ import java.util.Objects;
 
 @SuppressWarnings("all")
 public class Teacher {
-    
+
     private String name;
 
     public Teacher(String name) {

@@ -28,7 +28,7 @@ public class LoopQueue3<E> implements Queue<E> {
     @Override
     public void enqueue(E e) {
         if ((tail + 1) % data.length == front) resize(getCapacity() * 2);
-        
+
         data[tail] = e;
         tail = (tail + 1) % data.length;
     }
@@ -36,11 +36,11 @@ public class LoopQueue3<E> implements Queue<E> {
     @Override
     public E dequeue() {
         if (isEmpty()) throw new RuntimeException("队列为空");
-        
+
         E ret = data[front];
         data[front] = null;
         front = (front + 1) % data.length;
-        
+
         if (getSize() == getCapacity() / 4 && getCapacity() / 2 != 0) resize(getCapacity() / 2);
         return ret;
     }
@@ -86,7 +86,7 @@ public class LoopQueue3<E> implements Queue<E> {
         for (int i = front; i != tail; i = (i + 1) % data.length) {
             sb.append(data[i]);
             if ((i + 1) % data.length != tail) sb.append(", ");
-        }       
+        }
         sb.append("] Tail");
         return sb.toString();
     }

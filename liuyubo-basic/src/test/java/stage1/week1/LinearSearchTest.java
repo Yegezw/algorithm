@@ -21,7 +21,7 @@ public class LinearSearchTest {
         System.out.println(LinearSearch.search(teachers, new Teacher("李四")));
         System.out.println(LinearSearch.search(teachers, new Teacher("赵六")));
     }
-    
+
     private static void test3() {
         int[] dataSize = {1000000, 10000000};
         Integer[] arr;
@@ -42,9 +42,9 @@ public class LinearSearchTest {
 
     public static void main(String[] args) {
         // test1();
-        
+
         // test2();
-        
+
         test3();
     }
 }

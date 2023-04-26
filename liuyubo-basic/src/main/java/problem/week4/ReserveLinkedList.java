@@ -35,7 +35,7 @@ public class ReserveLinkedList {
         ListNode newHead = reverseList2(head.next);
         head.next.next = head;
         head.next = null;
-        
+
         return newHead;
     }
 

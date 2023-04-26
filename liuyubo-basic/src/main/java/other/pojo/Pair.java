@@ -5,7 +5,7 @@ package other.pojo;
  */
 @SuppressWarnings("all")
 public class Pair<K, V> {
-    
+
     private K key;
     private V value;
 

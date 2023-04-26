@@ -24,7 +24,7 @@ public class MyQueue2 {
         if (stack.isEmpty()) front = x;
     }
 
-    public int pop() {        
+    public int pop() {
         Stack<Integer> temp = new Stack<>();
         while (stack.size() != 1) {
             front = stack.pop();

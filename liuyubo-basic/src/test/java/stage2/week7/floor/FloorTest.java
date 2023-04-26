@@ -13,7 +13,7 @@ public class FloorTest {
         Integer[] index = ArrayGenerator.generateOrderedArray(7);
         System.out.println(Arrays.toString(arr));
         System.out.println(Arrays.toString(index));
-        
+
         for (int i = 0; i <= 6; i++) {
             System.out.println("小于 " + i + " 的最大值的索引为 " + Floor.floorL(arr, i));
         }
@@ -27,7 +27,7 @@ public class FloorTest {
         Integer[] index = ArrayGenerator.generateOrderedArray(7);
         System.out.println(Arrays.toString(arr));
         System.out.println(Arrays.toString(index));
-        
+
         for (int i = 0; i <= 6; i++) {
             System.out.println("小于 " + i + " 的最大值的索引为 " + Floor.floorR(arr, i));
         }

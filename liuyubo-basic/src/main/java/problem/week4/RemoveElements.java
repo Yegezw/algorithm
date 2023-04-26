@@ -15,14 +15,14 @@ public class RemoveElements {
         // 1.先删除符合条件的头结点
         while (head != null && head.val == val) head = head.next;
         if (head == null) return null;
-        
+
         // 2.再删除其他节点
         ListNode prev = head;
         while (prev.next != null) {
             if (prev.next.val == val) prev.next = prev.next.next;
             else prev = prev.next;
         }
-        
+
         return head;
     }
 

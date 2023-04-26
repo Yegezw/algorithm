@@ -77,7 +77,7 @@ public class NumArray3 {
         int leftTreeIndex = leftChild(treeIndex);
         int rightTreeIndex = rightChild(treeIndex);
 
-        if (queryR <= mid) return query(leftTreeIndex, l, mid, queryL, queryR); 
+        if (queryR <= mid) return query(leftTreeIndex, l, mid, queryL, queryR);
         else if (queryL >= mid + 1) return query(rightTreeIndex, mid + 1, r, queryL, queryR);
         else {
             int leftResult = query(leftTreeIndex, l, mid, queryL, mid);

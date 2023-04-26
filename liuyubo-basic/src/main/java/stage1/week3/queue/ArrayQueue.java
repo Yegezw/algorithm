@@ -8,7 +8,7 @@ import stage1.week3.array.Array;
  */
 @SuppressWarnings("all")
 public class ArrayQueue<E> implements Queue<E> {
-    
+
     private final Array<E> array;
 
     public ArrayQueue() {
@@ -43,7 +43,7 @@ public class ArrayQueue<E> implements Queue<E> {
     public boolean isEmpty() {
         return array.isEmpty();
     }
-    
+
     public int getCapacity() {
         return array.getCapacity();
     }

@@ -37,12 +37,12 @@ public class LoopQueue2<E> implements Queue<E> {
     @Override
     public E dequeue() {
         if (isEmpty()) throw new RuntimeException("队列为空");
-        
+
         E ret = data[front];
         data[front] = null;
         front = (front + 1) % data.length;
         size--;
-        
+
         if (size == data.length / 4 && data.length / 2 != 0) resize(data.length / 2);
         return ret;
     }
