@@ -43,7 +43,7 @@ public class FindAnagrams {
         // s[l ... r] 是滑动窗口
         int l = 0;
         int r = -1;
-        int[] freq_s = new int[256];
+        int[] freq_s = new int[26];
 
         // 窗口的右边界可以继续扩展, 则循环继续
         while (r + 1 < s.length()) {
@@ -54,6 +54,27 @@ public class FindAnagrams {
                 freq_s[s.charAt(++r) - 'a']++;
                 freq_s[s.charAt(l++) - 'a']--;
                 if (same(freq_s, freq_p)) list.add(l);
+            }
+        }
+
+        return list;
+    }
+
+    public static List<Integer> findAnagrams3(String s, String p) {
+        List<Integer> list = new ArrayList<>();
+        if (s.length() < p.length()) return list;
+
+        int[] freq_p = new int[26];
+        for (char c : p.toCharArray()) freq_p[c - 'a']++;
+
+        int[] freq_s = new int[26];
+        for (int i = 0; i < s.length(); i++) {
+            freq_s[s.charAt(i) - 'a']++;
+
+            // s[i - len + 1 ... i]
+            if (i >= p.length() - 1) {
+                if (same(freq_s, freq_p)) list.add(i - p.length() + 1);
+                freq_s[s.charAt(i - p.length() + 1) - 'a']--;
             }
         }
 
@@ -72,5 +93,6 @@ public class FindAnagrams {
         String p = "abc";
         System.out.println(findAnagrams1(s, p));
         System.out.println(findAnagrams2(s, p));
+        System.out.println(findAnagrams3(s, p));
     }
 }
