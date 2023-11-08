@@ -89,7 +89,7 @@ public class Array<E> {
      * 修改
      */
     public void set(int index, E e) {
-        if (index < 0 || index > size) throw new RuntimeException("need 0 <= index <= size");
+        if (index < 0 || index >= size) throw new RuntimeException("need 0 <= index < size");
         data[index] = e;
     }
 

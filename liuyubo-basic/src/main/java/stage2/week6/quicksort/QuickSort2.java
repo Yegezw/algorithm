@@ -25,7 +25,7 @@ public class QuickSort2 {
     /**
      * 快速排序 arr[l, r]
      */
-    public static <E extends Comparable<E>> void sort(E[] arr, int l, int r) {
+    private static <E extends Comparable<E>> void sort(E[] arr, int l, int r) {
         if (r - l <= 15) {
             InsertionSort.sort(arr, l, r);
             return;
@@ -40,7 +40,7 @@ public class QuickSort2 {
     /**
      * 双路快排
      */
-    public static <E extends Comparable<E>> int partition(E[] arr, int l, int r) {
+    private static <E extends Comparable<E>> int partition(E[] arr, int l, int r) {
         int p = RANDOM.nextInt(r - l + 1) + l;
         swap(arr, l, p);
 
@@ -63,7 +63,7 @@ public class QuickSort2 {
         return p2;
     }
 
-    public static <E> void swap(E[] arr, int a, int b) {
+    private static <E> void swap(E[] arr, int a, int b) {
         E k = arr[a];
         arr[a] = arr[b];
         arr[b] = k;

@@ -42,7 +42,7 @@ public class ReversePairs2 {
             if (temp[p1] > temp[p2]) {
                 // 输出逆序数对
                 // for (int j = p1; j <= mid; j++) {
-                //    System.out.println(String.format("[%d, %d]", arr[j], temp[p2]));
+                //     System.out.println(String.format("[%d, %d]", temp[j], temp[p2]));
                 // }
                 res += mid - p1 + 1; // 后面区间的元素归并上来时, 和前面区间剩余元素形成逆序数对
                 arr[i++] = temp[p2++];

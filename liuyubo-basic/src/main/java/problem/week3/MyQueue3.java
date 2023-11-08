@@ -22,8 +22,8 @@ public class MyQueue3 {
     }
 
     public void push(int x) {
-        stack1.push(x);
         if (stack1.isEmpty()) front = x;
+        stack1.push(x);
     }
 
     public int pop() {
@@ -38,7 +38,7 @@ public class MyQueue3 {
     }
 
     public boolean empty() {
-        return stack1.empty() && stack2.empty();
+        return stack1.isEmpty() && stack2.isEmpty();
     }
 
     public static void main(String[] args) {

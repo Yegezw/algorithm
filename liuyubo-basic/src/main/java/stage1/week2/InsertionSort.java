@@ -9,7 +9,7 @@ public class InsertionSort {
     private InsertionSort() {
     }
 
-    private static <E extends Comparable<E>> void swap(E[] arr, int a, int b) {
+    private static <E> void swap(E[] arr, int a, int b) {
         E k = arr[a];
         arr[a] = arr[b];
         arr[b] = k;

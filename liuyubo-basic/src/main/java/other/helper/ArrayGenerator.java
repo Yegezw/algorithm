@@ -44,6 +44,20 @@ public class ArrayGenerator {
     }
 
     /**
+     * 递归非常灵活
+     */
+    private static void generateSpecialArray(Integer[] arr, int l, int r, int value) {
+        if (l > r) return;
+
+        int mid = l + (r - l) / 2;
+        arr[mid] = value;
+
+        swap(arr, l, mid);
+        generateSpecialArray(arr, l + 1, r, value + 1);
+        swap(arr, l, mid);
+    }
+
+    /**
      * 生成一个长度为 length 的随机字符串数组, 每个字符串的长度为 W
      */
     public static String[] generateRandomSameLengthStringArray(int length, int W) {
@@ -76,20 +90,6 @@ public class ArrayGenerator {
             sb.delete(0, sb.length());
         }
         return arr;
-    }
-
-    /**
-     * 递归非常灵活
-     */
-    private static void generateSpecialArray(Integer[] arr, int l, int r, int value) {
-        if (l > r) return;
-
-        int mid = l + (r - l) / 2;
-        arr[mid] = value;
-
-        swap(arr, l, mid);
-        generateSpecialArray(arr, l + 1, r, value + 1);
-        swap(arr, l, mid);
     }
 
     private static void swap(Integer[] arr, int a, int b) {

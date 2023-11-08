@@ -5,7 +5,7 @@ import other.helper.SortName;
 import other.helper.SortingHelper;
 
 @SuppressWarnings("all")
-public class InsertSortTest {
+public class InsertionSortTest {
 
     private static void test() {
         int[] dataSize = {10000, 100000};
