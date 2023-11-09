@@ -11,7 +11,7 @@ public class HeapSort {
     }
 
     public static <E extends Comparable<E>> void sort1(E[] arr) {
-        MinHeap<E> minHeap = new MinHeap<>();
+        MinHeap<E> minHeap = new MinHeap<>(arr.length);
         for (E e : arr) minHeap.add(e);
         for (int i = arr.length - 1; i >= 0; i--) arr[i] = minHeap.extractMin();
     }

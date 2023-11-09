@@ -16,7 +16,7 @@ public class HeapSort {
      * 自顶向下建堆: O(N * logN)
      */
     public static <E extends Comparable<E>> void sort1(E[] arr) {
-        MaxHeap<E> maxHeap = new MaxHeap<>();
+        MaxHeap<E> maxHeap = new MaxHeap<>(arr.length);
         for (E e : arr) maxHeap.add(e); // 自顶向下建堆: O(N * logN)
         for (int i = arr.length - 1; i >= 0; i--) arr[i] = maxHeap.extractMax();
     }

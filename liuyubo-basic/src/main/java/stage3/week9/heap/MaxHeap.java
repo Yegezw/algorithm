@@ -3,7 +3,7 @@ package stage3.week9.heap;
 import stage1.week3.array.Array;
 
 /**
- * <p>二叉堆是是一棵完全二叉树
+ * <p>二叉堆是一棵完全二叉树
  * <p>最大堆: 所有节点都大于等于孩子节点
  */
 @SuppressWarnings("all")
