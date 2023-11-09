@@ -35,6 +35,20 @@ public class BSTTest {
         testRemoveMax(bst, random);
     }
 
+    public static void testBST3() {
+        BST<Integer> bst = new BST<>();
+        for (int i = 1; i < 10; i += 2) bst.add(i); // 1 3 5 7 9
+        System.out.println("1 3 5 7 9");
+
+        System.out.print("floor : ");
+        for (int i = 0; i <= 10; i++) System.out.print(bst.floor(i) + " ");
+        System.out.println();
+
+        System.out.print("ceil  : ");
+        for (int i = 0; i <= 10; i++) System.out.print(bst.ceil(i) + " ");
+        System.out.println();
+    }
+
     private static void testRemoveMin(BST<Integer> bst, Random random) {
         int n = 1000;
         for (int i = 0; i < n; i++) bst.add(random.nextInt(10000));
@@ -70,6 +84,8 @@ public class BSTTest {
     public static void main(String[] args) {
         // testBST1();
 
-        testBST2();
+        // testBST2();
+
+        testBST3();
     }
 }
