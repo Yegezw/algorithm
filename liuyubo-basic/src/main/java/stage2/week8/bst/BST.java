@@ -303,10 +303,13 @@ public class BST<E extends Comparable<E>> {
      * <p>不存在时返回 null(e 比 BST 中的最大值还大)
      */
     public E ceil(E e) {
-        if (size == 0 || e.compareTo(maximum()) > 0) return null;
+        if (isEmpty() || e.compareTo(maximum()) > 0) return null;
         return ceil(root, e).e;
     }
 
+    /**
+     * 在以 node 为根节点的二分搜索树中搜索元素 e 的 ceil 节点
+     */
     private Node ceil(Node node, E e) {
         if (node == null) return null;
 
