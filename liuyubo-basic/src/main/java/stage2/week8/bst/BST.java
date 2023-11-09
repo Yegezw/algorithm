@@ -267,4 +267,61 @@ public class BST<E extends Comparable<E>> {
     private String generateDepthString(int depth) {
         return "--".repeat(Math.max(0, depth));
     }
+
+    /**
+     * <p>寻找 e 的 floor 值
+     * <p>不存在时返回 null(e 比 BST 中的最小值还小)
+     */
+    public E floor(E e) {
+        if (isEmpty() || e.compareTo(minimum()) < 0) return null;
+        return floor(root, e).e;
+    }
+
+    /**
+     * 在以 node 为根节点的二分搜索树中搜索元素 e 的 floor 节点
+     */
+    private Node floor(Node node, E e) {
+        if (node == null) return null;
+
+        // node.e == e
+        // 则 node 本身就是 e 的 floor 节点
+        if (node.e.compareTo(e) == 0) return node;
+
+        // node.e > e
+        // 则要寻找的 e 的 floor 节点一定在 node 的左子树中
+        if (node.e.compareTo(e) > 0) return floor(node.left, e);
+
+        // node.e < e
+        // 则 node 有可能是 e 的 floor 节点, 也有可能不是(存在比 node.e 大但是小于 e 的其余节点)
+        // 需要尝试向 node 的右子树寻找一下
+        Node tempNode = floor(node.right, e);
+        return tempNode != null ? tempNode : node;
+    }
+
+    /**
+     * <p>寻找 e 的 ceil 值
+     * <p>不存在时返回 null(e 比 BST 中的最大值还大)
+     */
+    public E ceil(E e) {
+        if (size == 0 || e.compareTo(maximum()) > 0) return null;
+        return ceil(root, e).e;
+    }
+
+    private Node ceil(Node node, E e) {
+        if (node == null) return null;
+
+        // node.e == e
+        // 则 node 本身就是 e 的 ceil 节点
+        if (node.e.compareTo(e) == 0) return node;
+
+        // node.e < e
+        // 则要寻找的 e 的 ceil 节点一定在 node 的右子树中
+        if (node.e.compareTo(e) < 0) return ceil(node.right, e);
+
+        // node.e > e
+        // 则 node 有可能是 e 的 ceil 节点, 也有可能不是(存在比 node.e 小但是大于 e 的其余节点)
+        // 需要尝试向 node 的左子树寻找一下
+        Node tempNode = ceil(node.left, e);
+        return tempNode != null ? tempNode : node;
+    }
 }
