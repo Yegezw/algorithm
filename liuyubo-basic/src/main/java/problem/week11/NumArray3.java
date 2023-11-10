@@ -9,8 +9,8 @@ import java.util.Arrays;
 @SuppressWarnings("all")
 public class NumArray3 {
 
-    private final int[] tree;
     private final int[] data;
+    private final int[] tree;
 
     public NumArray3(int[] nums) {
         data = Arrays.copyOf(nums, nums.length);
@@ -80,9 +80,9 @@ public class NumArray3 {
         if (queryR <= mid) return query(leftTreeIndex, l, mid, queryL, queryR);
         else if (queryL >= mid + 1) return query(rightTreeIndex, mid + 1, r, queryL, queryR);
         else {
-            int leftResult = query(leftTreeIndex, l, mid, queryL, mid);
-            int rightResult = query(rightTreeIndex, mid + 1, r, mid + 1, queryR);
-            return leftResult + rightResult;
+            int leftSum = query(leftTreeIndex, l, mid, queryL, mid);
+            int rightSum = query(rightTreeIndex, mid + 1, r, mid + 1, queryR);
+            return leftSum + rightSum;
         }
     }
 
