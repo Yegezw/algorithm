@@ -8,7 +8,7 @@ import java.util.TreeMap;
 @SuppressWarnings("all")
 public class MapSum {
 
-    private static class Node {
+    private class Node {
         public int val;
         public TreeMap<Character, Node> next;
 

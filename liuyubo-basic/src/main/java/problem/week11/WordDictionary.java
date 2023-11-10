@@ -9,7 +9,7 @@ import java.util.TreeMap;
 @SuppressWarnings("all")
 public class WordDictionary {
 
-    private static class Node {
+    private class Node {
         public boolean isWord;
         public TreeMap<Character, Node> next;
 
