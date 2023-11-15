@@ -9,7 +9,7 @@ public class RabinKarp {
     }
 
     public static int rabinKarp(String s, String t) {
-        if (t.length() == 0) return 0;
+        if (t.isEmpty()) return 0;
         if (s.length() < t.length()) return -1;
 
         int B = 256;
