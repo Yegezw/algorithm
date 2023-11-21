@@ -9,10 +9,11 @@ import java.util.Set;
 public class Solution3 {
 
     public boolean isHappy(int n) {
-        Set<Integer> set = new HashSet<>();
+        // visit 中存放的是已经看过的数字
+        Set<Integer> visit = new HashSet<>();
 
-        while (n != 1 && !set.contains(n)) {
-            set.add(n);
+        while (n != 1 && !visit.contains(n)) {
+            visit.add(n);
             n = getNextNumber(n);
         }
 

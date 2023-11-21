@@ -11,7 +11,7 @@ public class Solution7 {
         ListNode fast = head;
 
         while (true) {
-            if (fast == null || fast.next == null) return null;
+            if (fast == null || fast.next == null) return null; // 无环
             slow = slow.next;
             fast = fast.next.next;
             if (slow == fast) break;
