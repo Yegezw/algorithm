@@ -2,6 +2,8 @@ package stage1.week3.array;
 
 import other.pojo.Student;
 
+import java.util.Iterator;
+
 @SuppressWarnings("all")
 public class ArrayTest {
 
@@ -49,11 +51,25 @@ public class ArrayTest {
         System.out.println(arr);
     }
 
+    private static void test4() {
+        Array<Integer> arr = new Array<>(10);
+        for (int i = 0; i < 10; i++) arr.addLast(i);
+
+        Iterator<Integer> iterator = arr.iterator();
+        while (iterator.hasNext()) {
+            int i = iterator.next();
+            if (i % 3 == 1) iterator.remove(); // 删除 1 4 7
+            else System.out.print(i + " ");
+        }
+    }
+
     public static void main(String[] args) {
         // test1();
 
         // test2();
 
-        test3();
+        // test3();
+
+        test4();
     }
 }

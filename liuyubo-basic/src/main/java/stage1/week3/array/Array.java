@@ -1,15 +1,18 @@
 package stage1.week3.array;
 
 import java.util.Arrays;
+import java.util.ConcurrentModificationException;
+import java.util.Iterator;
 
 /**
  * 动态数组
  */
 @SuppressWarnings("all")
-public class Array<E> {
+public class Array<E> implements Iterable<E> {
 
     private E[] data;
     private int size;
+    private transient int modCount = 0;
 
     public Array(int capacity) {
         data = (E[]) new Object[capacity];
@@ -44,6 +47,7 @@ public class Array<E> {
         if (index < 0 || index > size) throw new RuntimeException("need 0 <= index <= size");
         if (size == data.length) resize(data.length * 2);
 
+        modCount++;
         System.arraycopy(data, index, data, index + 1, size - index);
         data[index] = e;
         size++;
@@ -63,6 +67,7 @@ public class Array<E> {
     public E remove(int index) {
         if (index < 0 || index >= size) throw new RuntimeException("need 0 <= index < size");
 
+        modCount++;
         E ret = data[index];
         System.arraycopy(data, index + 1, data, index, size - index - 1);
         size--;
@@ -90,6 +95,7 @@ public class Array<E> {
      */
     public void set(int index, E e) {
         if (index < 0 || index >= size) throw new RuntimeException("need 0 <= index < size");
+        modCount++;
         data[index] = e;
     }
 
@@ -136,6 +142,7 @@ public class Array<E> {
         if (a < 0 || a >= size || b < 0 || b >= size) {
             throw new IllegalArgumentException("Swap failed, require 0 <= index < size");
         }
+        modCount++;
         E k = data[a];
         data[a] = data[b];
         data[b] = k;
@@ -152,5 +159,50 @@ public class Array<E> {
         }
         sb.append(']');
         return sb.toString();
+    }
+
+    private class Itr implements Iterator<E> {
+        private int cursor;
+        private int lastRet;
+        private int expectedModCount;
+
+        private Itr() {
+            cursor = 0;
+            lastRet = -1;
+            expectedModCount = modCount;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return cursor != size;
+        }
+
+        @Override
+        public E next() {
+            checkForComodification();
+            return data[lastRet = cursor++];
+        }
+
+        /**
+         * 调用 next() 之后, 最多调用一次 remove(), 多次调用 remove() 会报错
+         */
+        @Override
+        public void remove() {
+            if (lastRet < 0) throw new IllegalStateException();
+            checkForComodification();
+            Array.this.remove(lastRet);
+            cursor = lastRet;
+            lastRet = -1;
+            expectedModCount = modCount;
+        }
+
+        private final void checkForComodification() {
+            if (modCount != expectedModCount) throw new ConcurrentModificationException();
+        }
+    }
+
+    @Override
+    public Iterator<E> iterator() {
+        return new Itr();
     }
 }
