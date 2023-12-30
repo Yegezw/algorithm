@@ -14,7 +14,7 @@ public class RabinKarp {
 
         int B = 256;
         long MOD = (long) (1e9 + 7);
-        long P = 1; // P = B ^ (t.length - 1)
+        long P = 1; // P = B ^ (t.length - 1) % MOD
         for (int i = 0; i < t.length() - 1; i++) P = P * B % MOD;
 
         // targetHash = hash(t)
