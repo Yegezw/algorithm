@@ -151,6 +151,7 @@ public class LinkedList<E> {
     }
 
     private void link(Node prev, Node cur, Node next) {
+        // prev <-> cur <-> next
         prev.next = cur;
         cur.prev = prev;
         cur.next = next;
@@ -158,6 +159,7 @@ public class LinkedList<E> {
     }
 
     private Node unLink(Node prev, Node del, Node next) {
+        // prev <-> del <-> next
         prev.next = next;
         next.prev = prev;
         del.prev = del.next = null;
