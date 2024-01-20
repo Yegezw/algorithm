@@ -16,11 +16,13 @@ public class BST<E extends Comparable<E>> {
         public E e;
         public Node left;
         public Node right;
+        public int size;
 
         public Node(E e) {
             this.e = e;
             this.left = null;
             this.right = null;
+            this.size = 1;
         }
     }
 
@@ -34,6 +36,13 @@ public class BST<E extends Comparable<E>> {
 
     public int size() {
         return size;
+    }
+
+    /**
+     * 返回以 node 为根节点的二分搜索树的元素个数
+     */
+    private int size(Node node) {
+        return node != null ? node.size : 0;
     }
 
     public boolean isEmpty() {
@@ -55,6 +64,8 @@ public class BST<E extends Comparable<E>> {
 
         if (e.compareTo(node.e) < 0) node.left = add(node.left, e);
         else if (e.compareTo(node.e) > 0) node.right = add(node.right, e);
+
+        node.size = size(node.left) + size(node.right) + 1;
 
         return node;
     }
@@ -118,6 +129,7 @@ public class BST<E extends Comparable<E>> {
         }
 
         node.left = removeMin(node.left);
+        node.size = size(node.left) + size(node.right) + 1;
         return node;
     }
 
@@ -139,6 +151,7 @@ public class BST<E extends Comparable<E>> {
         }
 
         node.right = removeMax(node.right);
+        node.size = size(node.left) + size(node.right) + 1;
         return node;
     }
 
@@ -152,23 +165,24 @@ public class BST<E extends Comparable<E>> {
     private Node remove(Node node, E e) {
         if (node == null) return null;
 
+        Node retNode;
         if (e.compareTo(node.e) < 0) {
             node.left = remove(node.left, e);
-            return node;
+            retNode = node;
         } else if (e.compareTo(node.e) > 0) {
             node.right = remove(node.right, e);
-            return node;
+            retNode = node;
         } else {
             if (node.left == null) {
                 Node rightNode = node.right;
                 node.right = null;
                 size--;
-                return rightNode;
+                retNode = rightNode;
             } else if (node.right == null) {
                 Node leftNode = node.left;
                 node.left = null;
                 size--;
-                return leftNode;
+                retNode = leftNode;
             } else {
                 // 待删除节点左右子树均不为空
                 // 找到比待删除节点大的最小节点, 即待删除节点右子树的最小节点, 它是后继节点
@@ -177,9 +191,13 @@ public class BST<E extends Comparable<E>> {
                 successor.right = removeMin(node.right); // 已经 size-- 了
                 successor.left = node.left;
                 node.left = node.right = null;
-                return successor;
+                retNode = successor;
             }
         }
+
+        if (retNode == null) return null; // 删除叶子节点后, 返回的 retNode 就为 null
+        retNode.size = size(retNode.left) + size(retNode.right) + 1;
+        return retNode;
     }
 
     public void preOrder() {
@@ -326,5 +344,42 @@ public class BST<E extends Comparable<E>> {
         // 需要尝试向 node 的左子树寻找一下
         Node tempNode = ceil(node.left, e);
         return tempNode != null ? tempNode : node;
+    }
+
+    /**
+     * 寻找 e 的 rank 值
+     */
+    public int rank(E e) {
+        if (!contains(e)) return -1;
+        return rank(root, e);
+    }
+
+    /**
+     * 在以 node 为根节点的二分搜索树中搜索元素 e 的 rank 值
+     */
+    private int rank(Node node, E e) {
+        if (node.e.compareTo(e) == 0) return size(node.left) + 1;
+
+        if (node.e.compareTo(e) > 0) return rank(node.left, e);
+        return size(node.left) + 1 + rank(node.right, e);
+    }
+
+    /**
+     * 寻找排名为 index 的元素(index is 0-based)
+     */
+    public E select(int index) {
+        if (index < 0 || index >= size()) throw new RuntimeException("need 0 <= index < size");
+        return select(root, index);
+    }
+
+    /**
+     * <p>在以 node 为根节点的二分搜索树中搜索排名为 index 的元素(index is 0-based)
+     * <p>排名为 index 的元素, 它的前面有 index 个比它小的元素
+     */
+    private E select(Node node, int index) {
+        if (index == size(node.left)) return node.e;
+
+        if (index < size(node.left)) return select(node.left, index);
+        return select(node.right, index - size(node.left) - 1);
     }
 }
