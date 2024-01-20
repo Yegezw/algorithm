@@ -358,9 +358,9 @@ public class BST<E extends Comparable<E>> {
      * 在以 node 为根节点的二分搜索树中搜索元素 e 的 rank 值
      */
     private int rank(Node node, E e) {
-        if (node.e.compareTo(e) == 0) return size(node.left) + 1;
+        if (e.compareTo(node.e) == 0) return size(node.left) + 1;
 
-        if (node.e.compareTo(e) > 0) return rank(node.left, e);
+        if (e.compareTo(node.e) < 0) return rank(node.left, e);
         return size(node.left) + 1 + rank(node.right, e);
     }
 
@@ -377,9 +377,9 @@ public class BST<E extends Comparable<E>> {
      * <p>排名为 index 的元素, 它的前面有 index 个比它小的元素
      */
     private E select(Node node, int index) {
-        if (index == size(node.left)) return node.e;
+        if (size(node.left) == index) return node.e;
 
-        if (index < size(node.left)) return select(node.left, index);
+        if (size(node.left) > index) return select(node.left, index);
         return select(node.right, index - size(node.left) - 1);
     }
 }
