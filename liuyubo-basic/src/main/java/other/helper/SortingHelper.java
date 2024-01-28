@@ -9,6 +9,7 @@ import stage2.week6.quicksort.QuickSort1;
 import stage2.week6.quicksort.QuickSort2;
 import stage2.week6.quicksort.QuickSort3;
 import stage2.week6.work.QuickSortMid;
+import stage2.week7.work.PatienceSort;
 import stage3.week10.sort.BubbleSort;
 import stage3.week10.sort.ShellSort;
 import stage3.week9.sort.HeapSort;
@@ -60,6 +61,8 @@ public class SortingHelper {
             case BucketSort1 -> BucketSort.sort1((Integer[]) arr, 200);
             case BucketSort2 -> BucketSort.sort2((Integer[]) arr, 100);
             case BucketSort3 -> BucketSort.sort3((Integer[]) arr, 10);
+
+            case PatienceSort -> PatienceSort.sort(arr);
         }
     }
 

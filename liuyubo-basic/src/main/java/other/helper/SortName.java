@@ -9,5 +9,6 @@ public enum SortName {
     BubbleSort1, BubbleSort2, BubbleSort3,
     ShellSort1, ShellSort2, ShellSort3,
     LSDSort, MSDSort,
-    BucketSort1, BucketSort2, BucketSort3
+    BucketSort1, BucketSort2, BucketSort3,
+    PatienceSort
 }
