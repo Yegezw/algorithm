@@ -73,9 +73,8 @@ public class LinkedList<E> {
      * 删除
      */
     public E remove(int index) {
-        if (isEmpty()) throw new RuntimeException("LinkedList is empty!");
         if (index == 0) return removeFirst();
-        if (index == size) return removeLast();
+        if (index == size - 1) return removeLast();
 
         Node del = getNode(index);
         unLink(del.prev, del, del.next);

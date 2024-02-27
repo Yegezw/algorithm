@@ -22,6 +22,7 @@ public class InsertionSort {
         for (int i = 1; i < arr.length; i++) {
             // 循环不变量: arr[0, i) 已局部排序
             // 循环体维持循环不变量: 将 arr[i] 插入合适的位置(也可以理解为调整 arr[0...i] 中与 i 绑定的逆序数对)
+            // 比 k 大的应该放在 k 的右侧(将元素 k 往左插)
             E k = arr[i];
             int j;
             for (j = i; j - 1 >= 0 && arr[j - 1].compareTo(k) > 0; j--) {
