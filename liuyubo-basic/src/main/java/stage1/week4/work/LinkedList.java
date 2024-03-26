@@ -49,8 +49,14 @@ public class LinkedList<E> {
      * 添加
      */
     public void add(int index, E e) {
-        if (index == 0) addFirst(e);
-        if (index == size) addLast(e);
+        if (index == 0) {
+            addFirst(e);
+            return;
+        }
+        if (index == size) {
+            addLast(e);
+            return;
+        }
 
         Node next = getNode(index);
         Node prev = next.prev;
