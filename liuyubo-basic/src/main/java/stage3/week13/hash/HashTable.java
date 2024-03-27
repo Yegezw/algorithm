@@ -4,7 +4,7 @@ import java.util.TreeMap;
 
 /**
  * <p>哈希表, key 需要实现 hashCode()
- * <p>分块分组思想，哈希值相等的 key 放在一组中
+ * <p>分块分组思想, 哈希值相等的 key 放在一组中
  * <p>容忍度 Tolerance degree
  */
 @SuppressWarnings("all")
