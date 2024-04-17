@@ -36,7 +36,7 @@ public class ShellSort {
     public static <E extends Comparable<E>> void sort2(E[] arr) {
         int h = arr.length / 2; // h = 间隔数 = 组数, 分母 = 每组的元素数
         while (h >= 1) {
-            // 对 arr[h, n - 1] 进行插入排序
+            // 对 arr[h ... n - 1] 进行间隔为 h 的插入排序
             for (int i = h; i < arr.length; i++) {
                 E k = arr[i];
                 int j;
@@ -55,7 +55,7 @@ public class ShellSort {
         while (h < arr.length) h = h * 3 + 1;
         // 1, 4, 13, 40 ...
         while (h >= 1) {
-            // 对 arr[h, n - 1] 进行插入排序
+            // 对 arr[h ... n - 1] 进行间隔为 h 的插入排序
             for (int i = h; i < arr.length; i++) {
                 E k = arr[i];
                 int j;
