@@ -7,15 +7,18 @@ import java.util.ArrayList;
 /**
  * word: 傲慢与偏见
  */
-public class AVLMapTest {
+public class AVLMapTest
+{
 
     private static final ArrayList<String> words = Novel.words1List; // 傲慢与偏见
 
-    public static void testAVLMap() {
+    public static void testAVLMap()
+    {
         long startTime = System.nanoTime();
 
         AVLMap<String, Integer> avlMap = new AVLMap<>();
-        for (String word : words) {
+        for (String word : words)
+        {
             if (avlMap.contains(word)) avlMap.set(word, avlMap.get(word) + 1);
             else avlMap.add(word, 1);
         }
@@ -29,7 +32,8 @@ public class AVLMapTest {
         System.out.println("AVLMap: " + time + " s");
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         testAVLMap();
     }
 }

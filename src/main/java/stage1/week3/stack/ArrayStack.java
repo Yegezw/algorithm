@@ -7,52 +7,63 @@ import stage1.week3.array.Array;
  * 数组栈
  */
 @SuppressWarnings("all")
-public class ArrayStack<E> implements Stack<E> {
+public class ArrayStack<E> implements Stack<E>
+{
 
     private final Array<E> array;
 
-    public ArrayStack() {
+    public ArrayStack()
+    {
         this.array = new Array<>();
     }
 
-    public ArrayStack(int capacity) {
+    public ArrayStack(int capacity)
+    {
         this.array = new Array<>(capacity);
     }
 
     @Override
-    public void push(E e) {
+    public void push(E e)
+    {
         array.addLast(e);
     }
 
     @Override
-    public E pop() {
+    public E pop()
+    {
         return array.removeLast();
     }
 
     @Override
-    public E peek() {
+    public E peek()
+    {
         return array.getLast();
     }
 
     @Override
-    public int getSize() {
+    public int getSize()
+    {
         return array.getSize();
     }
 
     @Override
-    public boolean isEmpty() {
+    public boolean isEmpty()
+    {
         return array.isEmpty();
     }
 
-    public int getCapacity() {
+    public int getCapacity()
+    {
         return array.getCapacity();
     }
 
     @Override
-    public String toString() {
+    public String toString()
+    {
         StringBuilder sb = new StringBuilder();
         sb.append("ArrayStack: [");
-        for (int i = 0; i < array.getSize(); i++) {
+        for (int i = 0; i < array.getSize(); i++)
+        {
             sb.append(array.get(i));
             if (i != array.getSize() - 1) sb.append(", ");
         }

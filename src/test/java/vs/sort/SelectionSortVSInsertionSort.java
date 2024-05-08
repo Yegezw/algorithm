@@ -6,14 +6,17 @@ import other.helper.SortingHelper;
 
 import java.util.Arrays;
 
-public class SelectionSortVSInsertionSort {
+public class SelectionSortVSInsertionSort
+{
 
-    public static void test() {
+    public static void test()
+    {
         int[] dataSize = {10000, 100000};
 
         Integer[] arr1;
         Integer[] arr2;
-        for (int n : dataSize) {
+        for (int n : dataSize)
+        {
             System.out.println("Random Array:");
             arr1 = ArrayGenerator.generateRandomArray(n, n);
             arr2 = Arrays.copyOf(arr1, arr1.length);
@@ -28,7 +31,8 @@ public class SelectionSortVSInsertionSort {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         test();
     }
 }

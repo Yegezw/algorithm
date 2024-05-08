@@ -7,11 +7,13 @@ import java.util.ArrayList;
 /**
  * word: 傲慢与偏见
  */
-public class RBSetTest {
+public class RBSetTest
+{
 
     private static final ArrayList<String> words = Novel.words1List; // 傲慢与偏见
 
-    public static void testRBSet() {
+    public static void testRBSet()
+    {
         long startTime = System.nanoTime();
 
         RBSet<String> rbSet = new RBSet<>();
@@ -24,7 +26,8 @@ public class RBSetTest {
         System.out.println("RBSet: " + time + " s");
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         testRBSet();
     }
 }

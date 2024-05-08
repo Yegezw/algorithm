@@ -11,16 +11,20 @@ import java.util.Arrays;
  * <p>复杂度: O(N * logK)
  */
 @SuppressWarnings("all")
-public class GetLeastNumbers_2 {
+public class GetLeastNumbers_2
+{
 
-    public static int[] getLeastNumbers(int[] arr, int k) {
+    public static int[] getLeastNumbers(int[] arr, int k)
+    {
         if (k == 0) return new int[0];
 
         PriorityQueue<Integer> pq = new PriorityQueue<>();
         for (int i = 0; i < k; i++) pq.enqueue(arr[i]);
 
-        for (int i = k; i < arr.length; i++) {
-            if (arr[i] < pq.getFront()) {
+        for (int i = k; i < arr.length; i++)
+        {
+            if (arr[i] < pq.getFront())
+            {
                 pq.dequeue();
                 pq.enqueue(arr[i]);
             }
@@ -31,7 +35,8 @@ public class GetLeastNumbers_2 {
         return res;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         int[] arr = {3, 9, 7, 5, 4, 1, 6, 8, 2};
         System.out.println(Arrays.toString(getLeastNumbers(arr, 4))); // [4, 3, 2, 1]
     }

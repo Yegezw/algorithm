@@ -7,47 +7,56 @@ import java.util.TreeMap;
  * <p>查询的时间复杂度为: O(w), w 为 word 的长度! 跟 Trie 中存储的 word 数量无关</p>
  */
 @SuppressWarnings("all")
-public class Trie {
+public class Trie
+{
 
-    private class Node {
-        public boolean isWord;
+    private class Node
+    {
+        public boolean                  isWord;
         public TreeMap<Character, Node> next;
 
-        public Node(boolean isWord) {
+        public Node(boolean isWord)
+        {
             this.isWord = isWord;
-            this.next = new TreeMap<>();
+            this.next   = new TreeMap<>();
         }
 
-        public Node() {
+        public Node()
+        {
             this(false);
         }
     }
 
     private final Node root;
-    private int size;
+    private       int  size;
 
-    public Trie() {
+    public Trie()
+    {
         root = new Node();
         size = 0;
     }
 
-    public int getSize() {
+    public int getSize()
+    {
         return size;
     }
 
     /**
      * 向 Trie 中添加一个新的单词 word
      */
-    public void add(String word) {
+    public void add(String word)
+    {
         Node cur = root;
 
-        for (int i = 0; i < word.length(); i++) {
+        for (int i = 0; i < word.length(); i++)
+        {
             char c = word.charAt(i);
             if (!cur.next.containsKey(c)) cur.next.put(c, new Node());
             cur = cur.next.get(c);
         }
 
-        if (!cur.isWord) {
+        if (!cur.isWord)
+        {
             cur.isWord = true;
             size++;
         }
@@ -56,10 +65,12 @@ public class Trie {
     /**
      * 查询 Trie 中是否包含单词 word
      */
-    public boolean contains(String word) {
+    public boolean contains(String word)
+    {
         Node cur = root;
 
-        for (int i = 0; i < word.length(); i++) {
+        for (int i = 0; i < word.length(); i++)
+        {
             char c = word.charAt(i);
             if (!cur.next.containsKey(c)) return false;
             cur = cur.next.get(c);
@@ -71,10 +82,12 @@ public class Trie {
     /**
      * 查询 Trie 中是否有以 prefix 为前缀的单词
      */
-    public boolean isPrefix(String prefix) {
+    public boolean isPrefix(String prefix)
+    {
         Node cur = root;
 
-        for (int i = 0; i < prefix.length(); i++) {
+        for (int i = 0; i < prefix.length(); i++)
+        {
             char c = prefix.charAt(i);
             if (!cur.next.containsKey(c)) return false;
             cur = cur.next.get(c);

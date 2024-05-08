@@ -4,10 +4,12 @@ import other.helper.ArrayGenerator;
 import other.helper.SortName;
 import other.helper.SortingHelper;
 
-public class QuickSortVS {
+public class QuickSortVS
+{
 
-    private static void vs() {
-        int n = 5000000;
+    private static void vs()
+    {
+        int       n = 5000000;
         Integer[] arr1, arr2, arr3;
 
         System.out.println("RandomArray");
@@ -35,7 +37,8 @@ public class QuickSortVS {
         SortingHelper.sortTest(SortName.QuickSort3, arr3);
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         vs();
     }
 }

@@ -6,9 +6,11 @@ import java.util.Arrays;
  * <a href="https://leetcode.cn/problems/capacity-to-ship-packages-within-d-days/">1011 - 在 D 天内送达包裹的能力</a>
  */
 @SuppressWarnings("all")
-public class ShipWithinDays {
+public class ShipWithinDays
+{
 
-    public static int shipWithinDays(int[] weights, int days) {
+    public static int shipWithinDays(int[] weights, int days)
+    {
         int capacityL = Arrays.stream(weights).max().getAsInt();
         int capacityR = Arrays.stream(weights).sum();
         int capacityMid;
@@ -16,7 +18,8 @@ public class ShipWithinDays {
         // arr[capacityL, capacityR] 代表运载能力, time = getShipTime(capacity)
         // 二分搜索 time <= days 最大的 time 对应 capacity
         // 每次循环开始时: capacityL 还没看, capacityR 可能是解, 因此当 capacityL == capacityR 时, capacityR 就是解
-        while (capacityL < capacityR) {
+        while (capacityL < capacityR)
+        {
             capacityMid = capacityL + (capacityR - capacityL) / 2;
             int times = getShipTime(weights, capacityMid);
             if (times <= days) capacityR = capacityMid;
@@ -26,12 +29,15 @@ public class ShipWithinDays {
         return capacityR;
     }
 
-    private static int getShipTime(int[] weights, int maxCapacity) {
-        int times = 0;
+    private static int getShipTime(int[] weights, int maxCapacity)
+    {
+        int times       = 0;
         int hasCapacity = 0;
-        for (int weight : weights) {
+        for (int weight : weights)
+        {
             if (hasCapacity + weight <= maxCapacity) hasCapacity += weight;
-            else {
+            else
+            {
                 times++;
                 hasCapacity = weight;
             }
@@ -39,7 +45,8 @@ public class ShipWithinDays {
         return times + 1;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         int[] weights = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10}; // 15
         System.out.println(shipWithinDays(weights, 5));
     }

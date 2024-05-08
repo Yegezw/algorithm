@@ -5,36 +5,41 @@ import port.UF;
 import java.util.Random;
 
 @SuppressWarnings("all")
-public class UnionFindTest {
+public class UnionFindTest
+{
 
     /**
      * 对 uf 进行 m 次合并和查询操作
      */
-    private static void testUF(UF uf, int m) {
-        int size = uf.getSize();
-        Random random = new Random();
-        long startTime = System.nanoTime();
+    private static void testUF(UF uf, int m)
+    {
+        int    size      = uf.getSize();
+        Random random    = new Random();
+        long   startTime = System.nanoTime();
 
-        for (int i = 0; i < m; i++) {
+        for (int i = 0; i < m; i++)
+        {
             int a = random.nextInt(size);
             int b = random.nextInt(size);
             uf.unionElements(a, b);
         }
-        for (int i = 0; i < m; i++) {
+        for (int i = 0; i < m; i++)
+        {
             int a = random.nextInt(size);
             int b = random.nextInt(size);
             uf.isConnected(a, b);
         }
 
-        long endTime = System.nanoTime();
-        double time = (endTime - startTime) / 1000000000.0;
+        long   endTime    = System.nanoTime();
+        double time       = (endTime - startTime) / 1000000000.0;
         String simpleName = uf.getClass().getSimpleName();
         System.out.println(simpleName + ": " + time + " s");
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         int size = 10000000;
-        int m = 10000000;
+        int m    = 10000000;
 
         // UnionFind1 uf1 = new UnionFind1(size);
         // UnionFind2 uf2 = new UnionFind2(size);

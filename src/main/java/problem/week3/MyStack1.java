@@ -11,39 +11,48 @@ import java.util.Queue;
  * <p>empty(): O(1)
  */
 @SuppressWarnings("all")
-public class MyStack1 {
+public class MyStack1
+{
 
     private final Queue<Integer> q;
 
-    public MyStack1() {
+    public MyStack1()
+    {
         q = new LinkedList<>();
     }
 
-    public void push(int x) {
+    public void push(int x)
+    {
         q.add(x);
     }
 
-    public int pop() {
+    public int pop()
+    {
         for (int i = 0; i < q.size() - 1; i++) q.add(q.remove());
         return q.remove();
     }
 
-    public int top() {
+    public int top()
+    {
         int pop = pop();
         push(pop);
         return pop;
     }
 
-    public boolean empty() {
+    public boolean empty()
+    {
         return q.isEmpty();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         MyStack1 stack = new MyStack1();
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 5; i++)
+        {
             stack.push(i);
         }
-        while (!stack.empty()) {
+        while (!stack.empty())
+        {
             System.out.println(stack.pop());
         }
     }

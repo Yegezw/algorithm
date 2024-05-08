@@ -1,6 +1,7 @@
 package port;
 
-public interface Set<E> {
+public interface Set<E>
+{
 
     void add(E e);
 

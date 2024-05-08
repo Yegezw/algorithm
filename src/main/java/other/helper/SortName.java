@@ -1,6 +1,7 @@
 package other.helper;
 
-public enum SortName {
+public enum SortName
+{
 
     SelectionSort, InsertionSort,
     MergeSort, MergeSortPlus, MergeSortBU,

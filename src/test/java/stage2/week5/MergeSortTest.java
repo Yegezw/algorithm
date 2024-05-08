@@ -7,30 +7,36 @@ import other.helper.SortingHelper;
 import java.util.Arrays;
 
 @SuppressWarnings("all")
-public class MergeSortTest {
+public class MergeSortTest
+{
 
-    private static void testMergeSort() {
-        int n = 1000000;
+    private static void testMergeSort()
+    {
+        int       n   = 1000000;
         Integer[] arr = ArrayGenerator.generateRandomArray(n, n);
         SortingHelper.sortTest(SortName.MergeSort, arr);
     }
 
-    private static void testMergeSortPlus() {
-        int n = 1000000;
+    private static void testMergeSortPlus()
+    {
+        int       n   = 1000000;
         Integer[] arr = ArrayGenerator.generateRandomArray(n, n);
         SortingHelper.sortTest(SortName.MergeSortPlus, arr);
     }
 
-    private static void testMergeSortBU() {
-        int n = 1000000;
+    private static void testMergeSortBU()
+    {
+        int       n   = 1000000;
         Integer[] arr = ArrayGenerator.generateRandomArray(n, n);
         SortingHelper.sortTest(SortName.MergeSortBU, arr);
     }
 
-    private static void vs() {
+    private static void vs()
+    {
         int[] dataSize = {500000, 5000000};
 
-        for (int n : dataSize) {
+        for (int n : dataSize)
+        {
             Integer[] arr1 = ArrayGenerator.generateRandomArray(n, n);
             Integer[] arr2 = Arrays.copyOf(arr1, arr1.length);
             Integer[] arr3 = Arrays.copyOf(arr1, arr1.length);
@@ -43,7 +49,8 @@ public class MergeSortTest {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         // testMergeSort();
 
         // testMergeSortPlus();

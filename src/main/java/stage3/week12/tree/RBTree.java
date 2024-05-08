@@ -6,31 +6,35 @@ package stage3.week12.tree;
  * <p>红黑树添加和删除比 AVL 树快, 查询比 AVL 树慢(它比 AVL 树更高)
  */
 @SuppressWarnings("all")
-public class RBTree<K extends Comparable<K>, V> {
+public class RBTree<K extends Comparable<K>, V>
+{
 
-    private static final boolean RED = true;
+    private static final boolean RED   = true;
     private static final boolean BLACK = false;
 
-    private class Node {
-        public K key;
-        public V value;
-        public Node left;
-        public Node right;
+    private class Node
+    {
+        public K       key;
+        public V       value;
+        public Node    left;
+        public Node    right;
         public boolean color;
 
-        public Node(K key, V value) {
-            this.key = key;
+        public Node(K key, V value)
+        {
+            this.key   = key;
             this.value = value;
-            this.left = null;
+            this.left  = null;
             this.right = null;
             this.color = RED; // 默认插入红色节点
         }
     }
 
     private Node root;
-    private int size;
+    private int  size;
 
-    public RBTree() {
+    public RBTree()
+    {
         root = null;
         size = 0;
     }
@@ -38,7 +42,8 @@ public class RBTree<K extends Comparable<K>, V> {
     /**
      * 判断节点 node 的颜色
      */
-    private boolean isRed(Node node) {
+    private boolean isRed(Node node)
+    {
         if (node == null) return BLACK;
         return node.color;
     }
@@ -51,15 +56,16 @@ public class RBTree<K extends Comparable<K>, V> {
     // T1     x   - - - - - - - ->   node   T3
     //      /   \                   /    \
     //     T2   T3                 T1     T2
-    private Node leftRotate(Node node) {
+    private Node leftRotate(Node node)
+    {
         Node x = node.right;
 
         // 向左旋转过程
         node.right = x.left;
-        x.left = node;
+        x.left     = node;
 
         // 调整颜色
-        x.color = node.color;
+        x.color    = node.color;
         node.color = RED;
 
         return x;
@@ -73,15 +79,16 @@ public class RBTree<K extends Comparable<K>, V> {
     //    x     T3   - - - - - - - ->   T1   node
     //  /   \                               /    \
     // T1    T2                            T2    T3
-    private Node rightRotate(Node node) {
+    private Node rightRotate(Node node)
+    {
         Node x = node.left;
 
         // 向右旋转过程
         node.left = x.right;
-        x.right = node;
+        x.right   = node;
 
         // 调整颜色
-        x.color = node.color;
+        x.color    = node.color;
         node.color = RED;
 
         return x;
@@ -90,15 +97,17 @@ public class RBTree<K extends Comparable<K>, V> {
     /**
      * 颜色翻转
      */
-    private void flipColors(Node node) {
-        node.color = RED;
+    private void flipColors(Node node)
+    {
+        node.color      = RED;
         node.left.color = node.right.color = BLACK;
     }
 
     /**
      * 返回以 node 为根节点的红黑树中, 键为 key 所在的节点
      */
-    private Node getNode(Node node, K key) {
+    private Node getNode(Node node, K key)
+    {
         if (node == null) return null;
 
         if (key.compareTo(node.key) == 0) return node;
@@ -109,16 +118,19 @@ public class RBTree<K extends Comparable<K>, V> {
     /**
      * 向红黑树中添加元素 (key, value)
      */
-    public void add(K key, V value) {
-        root = add(root, key, value);
+    public void add(K key, V value)
+    {
+        root       = add(root, key, value);
         root.color = BLACK; // 保持根节点为黑色节点
     }
 
     /**
      * 向以 node 为根节点的红黑树中添加元素 (key, value), 并返回新的根节点
      */
-    private Node add(Node node, K key, V value) {
-        if (node == null) {
+    private Node add(Node node, K key, V value)
+    {
+        if (node == null)
+        {
             size++;
             return new Node(key, value); // 默认插入红色节点
         }
@@ -138,7 +150,8 @@ public class RBTree<K extends Comparable<K>, V> {
     /**
      * 返回以 node 为根节点的红黑树中的最小元素所在的节点
      */
-    private Node minimum(Node node) {
+    private Node minimum(Node node)
+    {
         if (node.left == null) return node;
         return minimum(node.left);
     }
@@ -146,8 +159,10 @@ public class RBTree<K extends Comparable<K>, V> {
     /**
      * 删除以 node 为根节点的红黑树的最小元素所在的节点, 并返回新的根节点
      */
-    private Node removeMin(Node node) {
-        if (node.left == null) {
+    private Node removeMin(Node node)
+    {
+        if (node.left == null)
+        {
             Node rightNode = node.right;
             node.right = null;
             size--;
@@ -158,9 +173,11 @@ public class RBTree<K extends Comparable<K>, V> {
         return node;
     }
 
-    public V remove(K key) {
+    public V remove(K key)
+    {
         Node node = getNode(root, key);
-        if (node != null) {
+        if (node != null)
+        {
             root = remove(root, key);
             return node.value;
         }
@@ -170,56 +187,72 @@ public class RBTree<K extends Comparable<K>, V> {
     /**
      * 以 node 为根节点的红黑树, 删除键为 key 所在的节点, 并返回新的根节点
      */
-    private Node remove(Node node, K key) {
+    private Node remove(Node node, K key)
+    {
         if (node == null) return null;
 
-        if (key.compareTo(node.key) < 0) {
+        if (key.compareTo(node.key) < 0)
+        {
             node.left = remove(node.left, key);
             return node;
-        } else if (key.compareTo(node.key) > 0) {
+        }
+        else if (key.compareTo(node.key) > 0)
+        {
             node.right = remove(node.right, key);
             return node;
-        } else {
-            if (node.left == null) {
+        }
+        else
+        {
+            if (node.left == null)
+            {
                 Node rightNode = node.right;
                 node.right = null;
                 size--;
                 return rightNode;
-            } else if (node.right == null) {
+            }
+            else if (node.right == null)
+            {
                 Node leftNode = node.left;
                 node.left = null;
                 size--;
                 return leftNode;
-            } else {
+            }
+            else
+            {
                 Node successor = minimum(node.right);
                 successor.right = removeMin(node.right);
-                successor.left = node.left;
-                node.left = node.right = null;
+                successor.left  = node.left;
+                node.left       = node.right = null;
                 return successor;
             }
         }
     }
 
-    public boolean contains(K key) {
+    public boolean contains(K key)
+    {
         return getNode(root, key) != null;
     }
 
-    public V get(K key) {
+    public V get(K key)
+    {
         Node node = getNode(root, key);
         return node != null ? node.value : null;
     }
 
-    public void set(K key, V newValue) {
+    public void set(K key, V newValue)
+    {
         Node node = getNode(root, key);
         if (node != null) node.value = newValue;
         else throw new IllegalArgumentException(key + " doesn't exist!");
     }
 
-    public int getSize() {
+    public int getSize()
+    {
         return size;
     }
 
-    public boolean isEmpty() {
+    public boolean isEmpty()
+    {
         return size == 0;
     }
 }

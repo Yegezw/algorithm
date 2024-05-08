@@ -6,9 +6,11 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 @SuppressWarnings("all")
-public class HashCodeTest {
+public class HashCodeTest
+{
 
-    public static void test() {
+    public static void test()
+    {
         int a = 42;
         System.out.println(((Integer) a).hashCode());
 
@@ -25,21 +27,24 @@ public class HashCodeTest {
         System.out.println(member.hashCode());
     }
 
-    public static void testHashSet() {
+    public static void testHashSet()
+    {
         Member member = new Member(3, 2, "bobo", "Liu");
 
         HashSet<Member> set = new HashSet<>();
         set.add(member);
     }
 
-    public static void testHashMap() {
+    public static void testHashMap()
+    {
         Member stu = new Member(3, 2, "bobo", "Liu");
 
         HashMap<Member, Integer> scores = new HashMap<>();
         scores.put(stu, 100);
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         test();
 
         testHashSet();

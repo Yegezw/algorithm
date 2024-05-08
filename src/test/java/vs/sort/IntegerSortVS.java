@@ -6,9 +6,11 @@ import other.helper.SortingHelper;
 
 import java.util.Arrays;
 
-public class IntegerSortVS {
+public class IntegerSortVS
+{
 
-    private static void vs() {
+    private static void vs()
+    {
         int n = 10000000;
 
         Integer[] arr1 = ArrayGenerator.generateRandomArray(n, n);
@@ -28,7 +30,8 @@ public class IntegerSortVS {
         SortingHelper.sortTest(SortName.BucketSort3, arr7);
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         vs();
     }
 }

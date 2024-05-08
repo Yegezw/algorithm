@@ -10,12 +10,14 @@ import java.util.ArrayList;
  * <p>word2: 双城记
  */
 @SuppressWarnings("all")
-public class SetTest {
+public class SetTest
+{
 
     private static final ArrayList<String> words1 = Novel.words1List; // 傲慢与偏见
     private static final ArrayList<String> words2 = Novel.words2List; // 双城记
 
-    public static void testBSTSet() {
+    public static void testBSTSet()
+    {
         System.out.println("Pride and Prejudice");
         System.out.println("Total words: " + words1.size());
         Set<String> set1 = new BSTSet<>();
@@ -31,7 +33,8 @@ public class SetTest {
         System.out.println("Total different words: " + set2.getSize());
     }
 
-    public static void testLinkedListSet() {
+    public static void testLinkedListSet()
+    {
         System.out.println("Pride and Prejudice");
         System.out.println("Total words: " + words1.size());
         Set<String> set1 = new LinkedListSet<>();
@@ -47,7 +50,8 @@ public class SetTest {
         System.out.println("Total different words: " + set2.getSize());
     }
 
-    public static void vs(Set<String> set, ArrayList<String> words) {
+    public static void vs(Set<String> set, ArrayList<String> words)
+    {
         long startTime = System.nanoTime();
 
         for (String word : words) set.add(word);
@@ -55,17 +59,18 @@ public class SetTest {
         long endTime = System.nanoTime();
         System.out.println("Total words: " + words.size());
         System.out.println("Total different words: " + set.getSize());
-        double time = (endTime - startTime) / 1000000000.0;
+        double time       = (endTime - startTime) / 1000000000.0;
         String simpleName = set.getClass().getSimpleName();
         System.out.println(simpleName + ": " + time + " s");
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         // testBSTSet();
 
         // testLinkedListSet();
 
-        BSTSet<String> set1 = new BSTSet<>();
+        BSTSet<String>        set1 = new BSTSet<>();
         LinkedListSet<String> set2 = new LinkedListSet<>();
         vs(set1, words2);
         System.out.println("-------------------");

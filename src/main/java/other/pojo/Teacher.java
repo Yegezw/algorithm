@@ -3,16 +3,19 @@ package other.pojo;
 import java.util.Objects;
 
 @SuppressWarnings("all")
-public class Teacher {
+public class Teacher
+{
 
     private String name;
 
-    public Teacher(String name) {
+    public Teacher(String name)
+    {
         this.name = name;
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(Object o)
+    {
         if (this == o) return true;
         if (o == null || this.getClass() != o.getClass()) return false;
         Teacher another = (Teacher) o;
@@ -20,7 +23,8 @@ public class Teacher {
     }
 
     @Override
-    public String toString() {
+    public String toString()
+    {
         return String.format("Teacher(name = %s)", name);
     }
 }

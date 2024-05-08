@@ -1,6 +1,7 @@
 package other.helper;
 
-public enum MatchName {
+public enum MatchName
+{
 
     Bruteforce, RabinKarp, KMP
 }

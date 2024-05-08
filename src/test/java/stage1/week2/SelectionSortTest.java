@@ -8,15 +8,18 @@ import other.pojo.Student;
 import java.util.Arrays;
 
 @SuppressWarnings("all")
-public class SelectionSortTest {
+public class SelectionSortTest
+{
 
-    private static void test1() {
+    private static void test1()
+    {
         Integer[] arr = {2, 9, 6, 7, 1, 5, 4, 3, 8};
         SelectionSort.sort(arr);
         System.out.println(Arrays.toString(arr));
     }
 
-    private static void test2() {
+    private static void test2()
+    {
         Student[] students = {
                 new Student("张三", 89),
                 new Student("李四", 91),
@@ -27,13 +30,16 @@ public class SelectionSortTest {
         System.out.println(Arrays.toString(students));
     }
 
-    private static void test3() {
+    private static void test3()
+    {
         Integer[] arr;
 
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 100; i++)
+        {
             arr = ArrayGenerator.generateRandomArray(10000, 10000);
             SelectionSort.sort1(arr);
-            if (!SortingHelper.isSorted(arr)) {
+            if (!SortingHelper.isSorted(arr))
+            {
                 System.out.println(false);
                 return;
             }
@@ -41,17 +47,20 @@ public class SelectionSortTest {
         System.out.println(true);
     }
 
-    private static void test4() {
-        int[] dataSize = {10000, 100000};
+    private static void test4()
+    {
+        int[]     dataSize = {10000, 100000};
         Integer[] arr;
 
-        for (int n : dataSize) {
+        for (int n : dataSize)
+        {
             arr = ArrayGenerator.generateRandomArray(n, n);
             SortingHelper.sortTest(SortName.SelectionSort, arr);
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         // test1();
 
         // test2();

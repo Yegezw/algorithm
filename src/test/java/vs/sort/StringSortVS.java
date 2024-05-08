@@ -7,9 +7,11 @@ import other.helper.SortingHelper;
 import java.util.Arrays;
 
 @SuppressWarnings("all")
-public class StringSortVS {
+public class StringSortVS
+{
 
-    private static void quickSortVSLSDSort() {
+    private static void quickSortVSLSDSort()
+    {
         int n = 10000000;
         // int W = 200;
         int W = 2;
@@ -23,7 +25,8 @@ public class StringSortVS {
         SortingHelper.sortTest(SortName.LSDSort, arr3);
     }
 
-    private static void quickSortVSMSDSort() {
+    private static void quickSortVSMSDSort()
+    {
         int n = 50000000;
         // int bound = 200;
         int bound = 20;
@@ -35,7 +38,8 @@ public class StringSortVS {
         SortingHelper.sortTest(SortName.MSDSort, arr2);
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         quickSortVSLSDSort();
 
         System.out.println();

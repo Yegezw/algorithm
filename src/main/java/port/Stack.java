@@ -1,6 +1,7 @@
 package port;
 
-public interface Stack<E> {
+public interface Stack<E>
+{
 
     void push(E e);
 

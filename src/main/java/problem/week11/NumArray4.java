@@ -7,12 +7,14 @@ import java.util.Arrays;
  * <p>通过前缀和解决
  * <p>超出时间限制
  */
-public class NumArray4 {
+public class NumArray4
+{
 
     private final int[] arr;
     private final int[] sum; // sum[i] 代表 arr[0...i] 的和
 
-    public NumArray4(int[] nums) {
+    public NumArray4(int[] nums)
+    {
         arr = Arrays.copyOf(nums, nums.length);
         sum = new int[nums.length];
 
@@ -23,20 +25,23 @@ public class NumArray4 {
     /**
      * O(n)
      */
-    public void update(int index, int val) {
+    public void update(int index, int val)
+    {
         int diff = val - arr[index];
         arr[index] = val;
         for (int i = index; i < sum.length; i++) sum[i] += diff;
     }
 
-    public int sumRange(int left, int right) {
+    public int sumRange(int left, int right)
+    {
         if (left == 0) return sum[right];
         return sum[right] - sum[left - 1];
     }
 
-    public static void main(String[] args) {
-        int[] nums = {-2, 0, 3, -5, 2, -1};
-        NumArray4 x = new NumArray4(nums);
+    public static void main(String[] args)
+    {
+        int[]     nums = {-2, 0, 3, -5, 2, -1};
+        NumArray4 x    = new NumArray4(nums);
 
         System.out.println(x.sumRange(0, 2)); // 1
 

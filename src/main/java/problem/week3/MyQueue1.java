@@ -10,39 +10,48 @@ import java.util.Stack;
  * <p>empty(): O(1)
  */
 @SuppressWarnings("all")
-public class MyQueue1 {
+public class MyQueue1
+{
 
     private final Stack<Integer> stack;
 
-    public MyQueue1() {
+    public MyQueue1()
+    {
         stack = new Stack<>();
     }
 
-    public void push(int x) {
+    public void push(int x)
+    {
         Stack<Integer> temp = new Stack<>();
         while (!stack.isEmpty()) temp.push(stack.pop());
         stack.push(x);
         while (!temp.isEmpty()) stack.push(temp.pop());
     }
 
-    public int pop() {
+    public int pop()
+    {
         return stack.pop();
     }
 
-    public int peek() {
+    public int peek()
+    {
         return stack.peek();
     }
 
-    public boolean empty() {
+    public boolean empty()
+    {
         return stack.empty();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         MyQueue1 queue = new MyQueue1();
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 5; i++)
+        {
             queue.push(i);
         }
-        while (!queue.empty()) {
+        while (!queue.empty())
+        {
             System.out.println(queue.pop());
         }
     }

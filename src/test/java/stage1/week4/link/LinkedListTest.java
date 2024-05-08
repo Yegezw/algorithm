@@ -1,10 +1,13 @@
 package stage1.week4.link;
 
-public class LinkedListTest {
+public class LinkedListTest
+{
 
-    public static void test() {
+    public static void test()
+    {
         LinkedList<Integer> linkedList = new LinkedList<>();
-        for (int i = 0; i < 7; i++) {
+        for (int i = 0; i < 7; i++)
+        {
             linkedList.addFirst(i);
             System.out.println(linkedList);
         }
@@ -26,7 +29,8 @@ public class LinkedListTest {
         System.out.println(linkedList.getLast());
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         test();
     }
 }

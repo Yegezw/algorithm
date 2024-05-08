@@ -6,12 +6,14 @@ import other.helper.SortingHelper;
 
 import java.util.Arrays;
 
-public class PatienceSortTest {
+public class PatienceSortTest
+{
 
     /**
      * 测试随机数组
      */
-    private static void testRandomArray() {
+    private static void testRandomArray()
+    {
         System.out.println("RandomArray");
         int n = 1000000;
 
@@ -22,7 +24,8 @@ public class PatienceSortTest {
         SortingHelper.sortTest(SortName.MergeSortPlus, arr2);
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         testRandomArray();
     }
 }

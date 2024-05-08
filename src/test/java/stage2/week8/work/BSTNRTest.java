@@ -1,8 +1,10 @@
 package stage2.week8.work;
 
-public class BSTNRTest {
+public class BSTNRTest
+{
 
-    private static void test() {
+    private static void test()
+    {
         int[] arr = {5, 3, 6, 8, 4, 2};
 
         BSTNR<Integer> bstNR = new BSTNR<>();
@@ -21,7 +23,8 @@ public class BSTNRTest {
         System.out.println(bstNR.contains(10));
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         test();
     }
 }

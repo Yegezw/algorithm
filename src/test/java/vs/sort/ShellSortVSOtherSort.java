@@ -6,9 +6,11 @@ import other.helper.SortingHelper;
 
 import java.util.Arrays;
 
-public class ShellSortVSOtherSort {
+public class ShellSortVSOtherSort
+{
 
-    private static void vs() {
+    private static void vs()
+    {
         int n = 1000000;
 
         Integer[] arr1 = ArrayGenerator.generateRandomArray(n, n);
@@ -22,7 +24,8 @@ public class ShellSortVSOtherSort {
         SortingHelper.sortTest(SortName.ShellSort3, arr4);
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         vs();
     }
 }

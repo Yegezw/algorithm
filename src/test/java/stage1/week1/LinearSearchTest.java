@@ -4,15 +4,18 @@ import other.helper.ArrayGenerator;
 import other.pojo.Teacher;
 
 @SuppressWarnings("all")
-public class LinearSearchTest {
+public class LinearSearchTest
+{
 
-    private static void test1() {
+    private static void test1()
+    {
         Integer[] data = {6, 9, 7, 2, 5, 4};
         System.out.println(LinearSearch.search(data, 5));
         System.out.println(LinearSearch.search(data, 15));
     }
 
-    private static void test2() {
+    private static void test2()
+    {
         Teacher[] teachers = {
                 new Teacher("张三"),
                 new Teacher("李四"),
@@ -22,15 +25,18 @@ public class LinearSearchTest {
         System.out.println(LinearSearch.search(teachers, new Teacher("赵六")));
     }
 
-    private static void test3() {
-        int[] dataSize = {1000000, 10000000};
+    private static void test3()
+    {
+        int[]     dataSize = {1000000, 10000000};
         Integer[] arr;
 
-        for (int n : dataSize) {
+        for (int n : dataSize)
+        {
             arr = ArrayGenerator.generateOrderedArray(n);
 
             long startTime = System.nanoTime();
-            for (int k = 0; k < 100; k++) {
+            for (int k = 0; k < 100; k++)
+            {
                 LinearSearch.search(arr, n);
             }
             long endTime = System.nanoTime();
@@ -40,7 +46,8 @@ public class LinearSearchTest {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         // test1();
 
         // test2();

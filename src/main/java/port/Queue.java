@@ -1,6 +1,7 @@
 package port;
 
-public interface Queue<E> {
+public interface Queue<E>
+{
 
     void enqueue(E e);
 

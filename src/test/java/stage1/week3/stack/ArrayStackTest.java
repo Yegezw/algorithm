@@ -1,11 +1,14 @@
 package stage1.week3.stack;
 
 @SuppressWarnings("all")
-public class ArrayStackTest {
+public class ArrayStackTest
+{
 
-    public static void test() {
+    public static void test()
+    {
         ArrayStack<Integer> stack = new ArrayStack<>();
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 5; i++)
+        {
             stack.push(i);
             System.out.println(stack);
         }
@@ -14,7 +17,8 @@ public class ArrayStackTest {
         System.out.println(stack);
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         test();
     }
 }

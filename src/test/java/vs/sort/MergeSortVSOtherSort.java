@@ -6,9 +6,11 @@ import other.helper.SortingHelper;
 
 import java.util.Arrays;
 
-public class MergeSortVSOtherSort {
+public class MergeSortVSOtherSort
+{
 
-    private static void vs() {
+    private static void vs()
+    {
         int n = 100000;
 
         Integer[] arr1 = ArrayGenerator.generateRandomArray(n, n);
@@ -20,7 +22,8 @@ public class MergeSortVSOtherSort {
         SortingHelper.sortTest(SortName.MergeSortPlus, arr3);
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         vs();
     }
 }

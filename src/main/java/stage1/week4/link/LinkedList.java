@@ -4,51 +4,61 @@ package stage1.week4.link;
  * 用虚拟头结点 dummyHead 来简化添加、删除的操作
  */
 @SuppressWarnings("all")
-public class LinkedList<E> {
+public class LinkedList<E>
+{
 
-    private class Node {
-        public E e;
+    private class Node
+    {
+        public E    e;
         public Node next;
 
-        public Node(E e, Node next) {
-            this.e = e;
+        public Node(E e, Node next)
+        {
+            this.e    = e;
             this.next = next;
         }
 
-        public Node(E e) {
+        public Node(E e)
+        {
             this(e, null);
         }
 
-        public Node() {
+        public Node()
+        {
             this(null, null);
         }
 
         @Override
-        public String toString() {
+        public String toString()
+        {
             return e.toString();
         }
     }
 
     private final Node dummyHead;
-    private int size;
+    private       int  size;
 
-    public LinkedList() {
+    public LinkedList()
+    {
         dummyHead = new Node();
-        size = 0;
+        size      = 0;
     }
 
-    public int getSize() {
+    public int getSize()
+    {
         return size;
     }
 
-    public boolean isEmpty() {
+    public boolean isEmpty()
+    {
         return size == 0;
     }
 
     /**
      * 添加
      */
-    public void add(int index, E e) {
+    public void add(int index, E e)
+    {
         if (index < 0 || index > size) throw new RuntimeException("need 0 <= index <= size");
 
         Node prev = dummyHead;
@@ -57,55 +67,65 @@ public class LinkedList<E> {
         size++;
     }
 
-    public void addFirst(E e) {
+    public void addFirst(E e)
+    {
         add(0, e);
     }
 
-    public void addLast(E e) {
+    public void addLast(E e)
+    {
         add(size, e);
     }
 
     /**
      * 删除
      */
-    public E remove(int index) {
+    public E remove(int index)
+    {
         if (index < 0 || index >= size) throw new RuntimeException("need 0 <= index < size");
 
         Node prev = dummyHead;
         for (int i = 0; i < index; i++) prev = prev.next;
 
         Node delNode = prev.next;
-        prev.next = delNode.next;
+        prev.next    = delNode.next;
         delNode.next = null;
         size--;
         return delNode.e;
     }
 
-    public E removeFirst() {
+    public E removeFirst()
+    {
         return remove(0);
     }
 
-    public E removeLast() {
+    public E removeLast()
+    {
         return remove(size - 1);
     }
 
     /**
      * 存在就删除
      */
-    public void removeElement(E e) {
+    public void removeElement(E e)
+    {
         Node prev = dummyHead;
-        while (prev.next != null) {
-            if (e.equals(prev.next.e)) {
+        while (prev.next != null)
+        {
+            if (e.equals(prev.next.e))
+            {
                 prev.next = prev.next.next;
                 size--;
-            } else prev = prev.next;
+            }
+            else prev = prev.next;
         }
     }
 
     /**
      * 修改
      */
-    public void set(int index, E e) {
+    public void set(int index, E e)
+    {
         if (index < 0 || index >= size) throw new RuntimeException("need 0 <= index < size");
 
         Node cur = dummyHead.next;
@@ -116,7 +136,8 @@ public class LinkedList<E> {
     /**
      * 查看
      */
-    public E get(int index) {
+    public E get(int index)
+    {
         if (index < 0 || index >= size) throw new RuntimeException("need 0 <= index < size");
 
         Node cur = dummyHead.next;
@@ -124,17 +145,21 @@ public class LinkedList<E> {
         return cur.e;
     }
 
-    public E getFirst() {
+    public E getFirst()
+    {
         return get(0);
     }
 
-    public E getLast() {
+    public E getLast()
+    {
         return get(size - 1);
     }
 
-    public boolean contains(E e) {
+    public boolean contains(E e)
+    {
         Node cur = dummyHead.next;
-        while (cur != null) {
+        while (cur != null)
+        {
             if (cur.e.equals(e)) return true;
             cur = cur.next;
         }
@@ -142,9 +167,11 @@ public class LinkedList<E> {
     }
 
     @Override
-    public String toString() {
+    public String toString()
+    {
         StringBuilder sb = new StringBuilder();
-        for (Node cur = dummyHead.next; cur != null; cur = cur.next) {
+        for (Node cur = dummyHead.next; cur != null; cur = cur.next)
+        {
             sb.append(cur).append("->");
         }
         sb.append("NULL");

@@ -8,56 +8,66 @@ import port.Queue;
  * <p>出队要考虑: 1 -> 0
  */
 @SuppressWarnings("all")
-public class LinkedListQueue<E> implements Queue<E> {
+public class LinkedListQueue<E> implements Queue<E>
+{
 
-    private class Node {
-        public E e;
+    private class Node
+    {
+        public E    e;
         public Node next;
 
-        public Node(E e, Node next) {
-            this.e = e;
+        public Node(E e, Node next)
+        {
+            this.e    = e;
             this.next = next;
         }
 
-        public Node(E e) {
+        public Node(E e)
+        {
             this(e, null);
         }
 
-        public Node() {
+        public Node()
+        {
             this(null, null);
         }
 
         @Override
-        public String toString() {
+        public String toString()
+        {
             return e.toString();
         }
     }
 
     private Node head;
     private Node tail;
-    private int size;
+    private int  size;
 
-    public LinkedListQueue() {
+    public LinkedListQueue()
+    {
         head = tail = null;
         size = 0;
     }
 
     @Override
-    public void enqueue(E e) {
+    public void enqueue(E e)
+    {
         if (tail == null) head = tail = new Node(e);
-        else {
+        else
+        {
             tail.next = new Node(e);
-            tail = tail.next;
+            tail      = tail.next;
         }
         size++;
     }
 
     @Override
-    public E dequeue() {
+    public E dequeue()
+    {
         if (isEmpty()) throw new RuntimeException("Queue is empty");
 
         Node retNode = head;
-        head = retNode.next;
+        head         = retNode.next;
         retNode.next = null;
         size--;
         if (head == null) tail = null;
@@ -65,26 +75,31 @@ public class LinkedListQueue<E> implements Queue<E> {
     }
 
     @Override
-    public E getFront() {
+    public E getFront()
+    {
         if (isEmpty()) throw new RuntimeException("Queue is empty");
         return head.e;
     }
 
     @Override
-    public int getSize() {
+    public int getSize()
+    {
         return size;
     }
 
     @Override
-    public boolean isEmpty() {
+    public boolean isEmpty()
+    {
         return size == 0;
     }
 
     @Override
-    public String toString() {
+    public String toString()
+    {
         StringBuilder sb = new StringBuilder();
         sb.append("LinkedListQueue: Front [");
-        for (Node cur = head; cur != null; cur = cur.next) {
+        for (Node cur = head; cur != null; cur = cur.next)
+        {
             sb.append(cur).append("->");
         }
         sb.append("NULL] Tail");

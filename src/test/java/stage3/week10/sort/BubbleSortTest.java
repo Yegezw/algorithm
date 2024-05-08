@@ -6,9 +6,11 @@ import other.helper.SortingHelper;
 
 import java.util.Arrays;
 
-public class BubbleSortTest {
+public class BubbleSortTest
+{
 
-    private static void test() {
+    private static void test()
+    {
         int n = 100000;
 
         Integer[] arr1 = ArrayGenerator.generateRandomArray(n, n);
@@ -25,7 +27,8 @@ public class BubbleSortTest {
         SortingHelper.sortTest(SortName.BubbleSort3, arr3);
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         test();
     }
 }

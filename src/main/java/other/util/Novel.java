@@ -7,9 +7,11 @@ import java.util.Objects;
  * <p>file1、words1List、words1String: 傲慢与偏见
  * <p>file2、words2List、words2String: 双城记
  */
-public class Novel {
+public class Novel
+{
 
-    private Novel() {
+    private Novel()
+    {
     }
 
     /**
@@ -32,7 +34,8 @@ public class Novel {
      */
     public static final String words2String;
 
-    static {
+    static
+    {
         String file1 = Objects.requireNonNull(Novel.class.getResource("/pride-and-prejudice.txt")).getPath();
         String file2 = Objects.requireNonNull(Novel.class.getResource("/a-tale-of-two-cities.txt")).getPath();
         FileOperation.readFile(file1, words1List);

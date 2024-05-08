@@ -5,10 +5,12 @@ import other.helper.SortingHelper;
 
 import java.util.Arrays;
 
-public class BubbleSort1Test {
+public class BubbleSort1Test
+{
 
-    private static void test() {
-        int n = 10000;
+    private static void test()
+    {
+        int       n    = 10000;
         Integer[] arr1 = ArrayGenerator.generateRandomArray(n, n);
         Integer[] arr2 = Arrays.copyOf(arr1, n);
         Integer[] arr3 = Arrays.copyOf(arr1, n);
@@ -22,7 +24,8 @@ public class BubbleSort1Test {
         System.out.println(SortingHelper.isSorted(arr3));
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         test();
     }
 }

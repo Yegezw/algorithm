@@ -1,19 +1,23 @@
 package stage2.week7.work;
 
-public class BinarySearchWork {
+public class BinarySearchWork
+{
 
-    private BinarySearchWork() {
+    private BinarySearchWork()
+    {
     }
 
     /**
      * 用 >= target 的最左边的索引的思路实现二分查找法
      */
-    public static <E extends Comparable<E>> int search(E[] data, E target) {
+    public static <E extends Comparable<E>> int search(E[] data, E target)
+    {
         int l = 0;
         int r = data.length;
         int mid;
 
-        while (l < r) {
+        while (l < r)
+        {
             mid = l + (r - l) / 2;
             if (data[mid].compareTo(target) >= 0) r = mid;
             else l = mid + 1;

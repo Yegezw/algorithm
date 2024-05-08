@@ -1,6 +1,7 @@
 package port;
 
-public interface UF {
+public interface UF
+{
 
     int getSize();
 

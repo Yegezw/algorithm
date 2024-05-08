@@ -9,38 +9,43 @@ import port.Queue;
  * <p>会浪费一个空间 data[tail]
  */
 @SuppressWarnings("all")
-public class LoopQueue<E> implements Queue<E> {
+public class LoopQueue<E> implements Queue<E>
+{
 
     private E[] data;
     private int front;
     private int tail;
     private int size;
 
-    public LoopQueue(int capacity) {
-        data = (E[]) new Object[capacity + 1];
+    public LoopQueue(int capacity)
+    {
+        data  = (E[]) new Object[capacity + 1];
         front = tail = size = 0;
     }
 
-    public LoopQueue() {
+    public LoopQueue()
+    {
         this(10);
     }
 
     @Override
-    public void enqueue(E e) {
+    public void enqueue(E e)
+    {
         if ((tail + 1) % data.length == front) resize(getCapacity() * 2);
 
         data[tail] = e;
-        tail = (tail + 1) % data.length;
+                     tail = (tail + 1) % data.length;
         size++;
     }
 
     @Override
-    public E dequeue() {
+    public E dequeue()
+    {
         if (isEmpty()) throw new RuntimeException("队列为空");
 
         E ret = data[front];
         data[front] = null;
-        front = (front + 1) % data.length;
+        front       = (front + 1) % data.length;
         size--;
 
         if (size == getCapacity() / 4 && getCapacity() / 2 != 0) resize(getCapacity() / 2);
@@ -48,44 +53,52 @@ public class LoopQueue<E> implements Queue<E> {
     }
 
     @Override
-    public E getFront() {
+    public E getFront()
+    {
         if (isEmpty()) throw new RuntimeException("队列为空");
         return data[front];
     }
 
     @Override
-    public int getSize() {
+    public int getSize()
+    {
         return size;
     }
 
     @Override
-    public boolean isEmpty() {
+    public boolean isEmpty()
+    {
         return front == tail;
     }
 
-    public int getCapacity() {
+    public int getCapacity()
+    {
         return data.length - 1;
     }
 
     /**
      * 动态数组
      */
-    private void resize(int newCapacity) {
+    private void resize(int newCapacity)
+    {
         E[] newData = (E[]) new Object[newCapacity + 1];
-        for (int i = 0; i < size; i++) {
+        for (int i = 0; i < size; i++)
+        {
             newData[i] = data[(i + front) % data.length];
         }
-        data = newData;
+        data  = newData;
         front = 0;
-        tail = size;
+        tail  = size;
     }
 
     @Override
-    public String toString() {
+    public String toString()
+    {
         StringBuilder sb = new StringBuilder();
         sb.append(String.format("LoopQueue: size = %d, capacity = %d\n", size, getCapacity()));
         sb.append("Front [");
-        for (int i = front; i != tail; i = (i + 1) % data.length) {
+        for (int i = front; i != tail; i = (i + 1) % data.length)
+        {
             sb.append(data[i]);
             if ((i + 1) % data.length != tail) sb.append(", ");
         }

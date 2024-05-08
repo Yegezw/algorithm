@@ -6,32 +6,39 @@ import java.util.TreeMap;
  * <a href="https://leetcode-cn.com/problems/map-sum-pairs/">677 - 键值映射</a>
  */
 @SuppressWarnings("all")
-public class MapSum {
+public class MapSum
+{
 
-    private class Node {
-        public int val;
+    private class Node
+    {
+        public int                      val;
         public TreeMap<Character, Node> next;
 
-        public Node(int val) {
+        public Node(int val)
+        {
             this.val = val;
-            next = new TreeMap<>();
+            next     = new TreeMap<>();
         }
 
-        public Node() {
+        public Node()
+        {
             this(0);
         }
     }
 
     private final Node root;
 
-    public MapSum() {
+    public MapSum()
+    {
         root = new Node();
     }
 
-    public void insert(String word, int val) {
+    public void insert(String word, int val)
+    {
         Node cur = root;
 
-        for (int i = 0; i < word.length(); i++) {
+        for (int i = 0; i < word.length(); i++)
+        {
             char c = word.charAt(i);
             if (!cur.next.containsKey(c)) cur.next.put(c, new Node());
             cur = cur.next.get(c);
@@ -40,10 +47,12 @@ public class MapSum {
         cur.val = val;
     }
 
-    public int sum(String prefix) {
+    public int sum(String prefix)
+    {
         Node cur = root;
 
-        for (int i = 0; i < prefix.length(); i++) {
+        for (int i = 0; i < prefix.length(); i++)
+        {
             char c = prefix.charAt(i);
             if (!cur.next.containsKey(c)) return 0;
             cur = cur.next.get(c);
@@ -52,7 +61,8 @@ public class MapSum {
         return sum(cur);
     }
 
-    private int sum(Node node) {
+    private int sum(Node node)
+    {
         int sum = node.val;
         if (node.next.isEmpty()) return sum;
 

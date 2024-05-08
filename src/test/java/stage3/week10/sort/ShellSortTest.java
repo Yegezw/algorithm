@@ -6,9 +6,11 @@ import other.helper.SortingHelper;
 
 import java.util.Arrays;
 
-public class ShellSortTest {
+public class ShellSortTest
+{
 
-    private static void test() {
+    private static void test()
+    {
         int n = 1000000;
 
         Integer[] arr1 = ArrayGenerator.generateRandomArray(n, n);
@@ -20,7 +22,8 @@ public class ShellSortTest {
         SortingHelper.sortTest(SortName.ShellSort3, arr3);
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         test();
     }
 }

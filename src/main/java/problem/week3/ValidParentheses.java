@@ -5,17 +5,21 @@ import stage1.week3.stack.ArrayStack;
 /**
  * <a href="https://leetcode-cn.com/problems/valid-parentheses/">20 - 有效的括号</a>
  */
-public class ValidParentheses {
+public class ValidParentheses
+{
 
     /**
      * 给定一个只包括 '('、')'、'{'、'}'、'['、']'的字符串 s, 判断字符串是否有效
      */
-    public boolean isValid(String s) {
+    public boolean isValid(String s)
+    {
         ArrayStack<Character> stack = new ArrayStack<>();
-        char[] chars = s.toCharArray();
-        for (char c : chars) {
+        char[]                chars = s.toCharArray();
+        for (char c : chars)
+        {
             if (c == '(' || c == '{' || c == '[') stack.push(c);
-            else {
+            else
+            {
                 if (stack.isEmpty()) return false;
                 Character topChar = stack.pop();
                 if (topChar == '(' && c != ')') return false;
@@ -26,7 +30,8 @@ public class ValidParentheses {
         return stack.isEmpty();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         ValidParentheses test = new ValidParentheses();
 
         System.out.println(test.isValid("(("));

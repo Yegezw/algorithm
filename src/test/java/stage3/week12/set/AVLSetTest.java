@@ -7,11 +7,13 @@ import java.util.ArrayList;
 /**
  * word: 傲慢与偏见
  */
-public class AVLSetTest {
+public class AVLSetTest
+{
 
     private static final ArrayList<String> words = Novel.words1List; // 傲慢与偏见
 
-    public static void testAVLSet() {
+    public static void testAVLSet()
+    {
         long startTime = System.nanoTime();
 
         AVLSet<String> avlSet = new AVLSet<>();
@@ -24,7 +26,8 @@ public class AVLSetTest {
         System.out.println("AVLSet: " + time + " s");
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         testAVLSet();
     }
 }

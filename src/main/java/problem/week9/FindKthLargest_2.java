@@ -9,13 +9,17 @@ import stage3.week9.work.PriorityQueue;
  * <p>复杂度: O(N * logK)
  */
 @SuppressWarnings("all")
-public class FindKthLargest_2 {
+public class FindKthLargest_2
+{
 
-    public static int findKthLargest(int[] arr, int k) {
+    public static int findKthLargest(int[] arr, int k)
+    {
         PriorityQueue<Integer> pq = new PriorityQueue<>();
         for (int i = 0; i < k; i++) pq.enqueue(arr[i]);
-        for (int i = k; i < arr.length; i++) {
-            if (arr[i] > pq.getFront()) {
+        for (int i = k; i < arr.length; i++)
+        {
+            if (arr[i] > pq.getFront())
+            {
                 pq.dequeue();
                 pq.enqueue(arr[i]);
             }
@@ -24,7 +28,8 @@ public class FindKthLargest_2 {
         return pq.getFront();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         int[] arr = {3, 2, 3, 1, 2, 4, 5, 5, 6}; // k = 4, res = 4
         System.out.println(findKthLargest(arr, 4));
     }

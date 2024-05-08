@@ -8,7 +8,8 @@ import java.util.TreeMap;
  * <p>容忍度 Tolerance degree
  */
 @SuppressWarnings("all")
-public class HashTable<K, V> {
+public class HashTable<K, V>
+{
 
     /**
      * 最大容忍度 Upper Tolerance degree
@@ -19,40 +20,45 @@ public class HashTable<K, V> {
      */
     private static final int lowerTol = 2;
 
-    private final int[] capacity = {
+    private final int[] capacity      = {
             53, 97, 193, 389, 769, 1543, 3079, 6151, 12289, 24593, 49157,
             98317, 196613, 393241, 786433, 1572869, 3145739, 6291469, 12582917,
             25165843, 50331653, 100663319, 201326611, 402653189, 805306457, 1610612741
     };
-    private int capacityIndex = 0;
+    private       int   capacityIndex = 0;
 
     private TreeMap<K, V>[] hashTable;
-    private int M; // M 是 hashTable 的长度, 它是一个素数
-    private int size;
+    private int             M; // M 是 hashTable 的长度, 它是一个素数
+    private int             size;
 
-    public HashTable() {
-        this.M = capacity[capacityIndex];
-        size = 0;
+    public HashTable()
+    {
+        this.M    = capacity[capacityIndex];
+        size      = 0;
         hashTable = new TreeMap[M];
         for (int i = 0; i < M; i++) hashTable[i] = new TreeMap<>();
     }
 
-    private int hash(K key) {
+    private int hash(K key)
+    {
         return (key.hashCode() & 0x7FFFFFFF) % M;
     }
 
-    public int getSize() {
+    public int getSize()
+    {
         return size;
     }
 
     /**
      * 添加
      */
-    public void add(K key, V value) {
+    public void add(K key, V value)
+    {
         TreeMap<K, V> map = hashTable[hash(key)];
 
         if (map.containsKey(key)) map.put(key, value);
-        else {
+        else
+        {
             map.put(key, value);
             size++;
 
@@ -63,11 +69,13 @@ public class HashTable<K, V> {
     /**
      * 删除
      */
-    public V remove(K key) {
+    public V remove(K key)
+    {
         TreeMap<K, V> map = hashTable[hash(key)];
 
         V ret = null;
-        if (map.containsKey(key)) {
+        if (map.containsKey(key))
+        {
             ret = map.remove(key);
             size--;
 
@@ -80,7 +88,8 @@ public class HashTable<K, V> {
     /**
      * 修改
      */
-    public void set(K key, V newValue) {
+    public void set(K key, V newValue)
+    {
         TreeMap<K, V> map = hashTable[hash(key)];
 
         if (!map.containsKey(key)) throw new IllegalArgumentException(key + "doesn't exist!");
@@ -90,7 +99,8 @@ public class HashTable<K, V> {
     /**
      * 查看
      */
-    public boolean contains(K key) {
+    public boolean contains(K key)
+    {
         TreeMap<K, V> map = hashTable[hash(key)];
         return map.containsKey(key);
     }
@@ -98,21 +108,24 @@ public class HashTable<K, V> {
     /**
      * 查看
      */
-    public V get(K key) {
+    public V get(K key)
+    {
         return hashTable[hash(key)].get(key);
     }
 
     /**
      * 动态的扩容或缩容
      */
-    private void resize(int newM) {
+    private void resize(int newM)
+    {
         TreeMap<K, V>[] newHashTable = new TreeMap[newM];
         for (int i = 0; i < newM; i++) newHashTable[i] = new TreeMap<>();
 
         int oldM = M;
         this.M = newM;
 
-        for (int i = 0; i < oldM; i++) {
+        for (int i = 0; i < oldM; i++)
+        {
             TreeMap<K, V> map = hashTable[i];
             for (K key : map.keySet()) newHashTable[hash(key)].put(key, map.get(key));
         }

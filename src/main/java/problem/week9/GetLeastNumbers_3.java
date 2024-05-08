@@ -11,20 +11,24 @@ import java.util.PriorityQueue;
  * <p>复杂度: O(N * logK)
  */
 @SuppressWarnings("all")
-public class GetLeastNumbers_3 {
+public class GetLeastNumbers_3
+{
 
     /**
      * <p>Java 的 PriorityQueue 默认为最小堆
      * <p>最大堆 new PriorityQueue<>(Collections.reverseOrder());
      */
-    public static int[] getLeastNumbers(int[] arr, int k) {
+    public static int[] getLeastNumbers(int[] arr, int k)
+    {
         if (k == 0) return new int[0];
 
         PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
         for (int i = 0; i < k; i++) pq.add(arr[i]);
 
-        for (int i = k; i < arr.length; i++) {
-            if (arr[i] < pq.peek()) {
+        for (int i = k; i < arr.length; i++)
+        {
+            if (arr[i] < pq.peek())
+            {
                 pq.remove();
                 pq.add(arr[i]);
             }
@@ -35,7 +39,8 @@ public class GetLeastNumbers_3 {
         return res;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         int[] arr = {3, 9, 7, 5, 4, 1, 6, 8, 2};
         System.out.println(Arrays.toString(getLeastNumbers(arr, 4))); // [4, 3, 2, 1]
     }

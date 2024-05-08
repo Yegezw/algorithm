@@ -10,43 +10,52 @@ import java.util.Stack;
  * <p>empty(): O(1)
  */
 @SuppressWarnings("all")
-public class MyQueue3 {
+public class MyQueue3
+{
 
     private Stack<Integer> stack1; // 用来添加元素
     private Stack<Integer> stack2; // 用来缓存部分已经排好的元素
-    private int front; // 需要保证 front 是 stack1 中最先进来的元素
+    private int            front; // 需要保证 front 是 stack1 中最先进来的元素
 
-    public MyQueue3() {
+    public MyQueue3()
+    {
         stack1 = new Stack<>();
         stack2 = new Stack<>();
     }
 
-    public void push(int x) {
+    public void push(int x)
+    {
         if (stack1.isEmpty()) front = x;
         stack1.push(x);
     }
 
-    public int pop() {
+    public int pop()
+    {
         if (!stack2.isEmpty()) return stack2.pop();
         while (stack1.size() != 1) stack2.push(stack1.pop());
         return stack1.pop();
     }
 
-    public int peek() {
+    public int peek()
+    {
         if (!stack2.isEmpty()) return stack2.peek();
         return front;
     }
 
-    public boolean empty() {
+    public boolean empty()
+    {
         return stack1.isEmpty() && stack2.isEmpty();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         MyQueue3 queue = new MyQueue3();
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 5; i++)
+        {
             queue.push(i);
         }
-        while (!queue.empty()) {
+        while (!queue.empty())
+        {
             System.out.println(queue.pop());
         }
     }
