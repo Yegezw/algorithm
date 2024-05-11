@@ -1,10 +1,10 @@
-package my.timewheel.core;
+package more.timewheel.core;
 
 import lombok.extern.slf4j.Slf4j;
-import my.timewheel.task.Task;
-import my.timewheel.task.TaskEntry;
-import my.timewheel.task.TaskList;
-import my.timewheel.wheel.TimeWheel;
+import more.timewheel.task.Task;
+import more.timewheel.task.TaskEntry;
+import more.timewheel.task.TaskList;
+import more.timewheel.wheel.TimeWheel;
 
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;

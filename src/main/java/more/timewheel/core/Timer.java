@@ -1,6 +1,6 @@
-package my.timewheel.core;
+package more.timewheel.core;
 
-import my.timewheel.task.Task;
+import more.timewheel.task.Task;
 
 public interface Timer extends AutoCloseable
 {

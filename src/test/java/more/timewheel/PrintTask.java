@@ -1,7 +1,7 @@
-package my.timewheel;
+package more.timewheel;
 
 import lombok.extern.slf4j.Slf4j;
-import my.timewheel.task.Task;
+import more.timewheel.task.Task;
 
 @Slf4j
 public class PrintTask extends Task

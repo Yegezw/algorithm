@@ -1,7 +1,7 @@
-package my.timewheel;
+package more.timewheel;
 
-import my.timewheel.core.SystemTimer;
-import my.timewheel.task.Task;
+import more.timewheel.core.SystemTimer;
+import more.timewheel.task.Task;
 
 @SuppressWarnings("all")
 public class TimeWheelTest

@@ -1,8 +1,8 @@
-package my.timewheel.wheel;
+package more.timewheel.wheel;
 
 import lombok.extern.slf4j.Slf4j;
-import my.timewheel.task.TaskEntry;
-import my.timewheel.task.TaskList;
+import more.timewheel.task.TaskEntry;
+import more.timewheel.task.TaskList;
 
 import java.util.concurrent.DelayQueue;
 import java.util.concurrent.atomic.AtomicInteger;
