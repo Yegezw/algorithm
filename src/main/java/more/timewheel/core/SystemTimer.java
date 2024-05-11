@@ -8,6 +8,7 @@ import more.timewheel.wheel.TimeWheel;
 
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 import java.util.function.Consumer;
 
 /**
@@ -73,6 +74,12 @@ public class SystemTimer implements Timer
      */
     private final ExecutorService taskExecutor;
 
+    // ----------------------------------------
+
+    private final ReentrantReadWriteLock           readWriteLock = new ReentrantReadWriteLock();
+    private final ReentrantReadWriteLock.ReadLock  readLock      = readWriteLock.readLock();
+    private final ReentrantReadWriteLock.WriteLock writeLock     = readWriteLock.writeLock();
+
     // =============================================================================
 
     public SystemTimer(String executorName)
@@ -114,21 +121,30 @@ public class SystemTimer implements Timer
         TaskList bucket = delayQueue.poll(timeoutMs, TimeUnit.MILLISECONDS);
         if (bucket != null)
         {
-            while (bucket != null)
+            // 加写锁的原因: 避免多线程同时推进 TimeWheel.currentTimeMs, 这是一个写操作
+            writeLock.lock();
+            try
             {
-                // 推进时间轮的 currentTimeMs
-                timeWheel.advanceClock(bucket.getExpiration());
-                // 任务的降级: 清除任务, 重新添加到时间轮, 如果添加失败就代表定时任务到期
-                bucket.flush(new Consumer<TaskEntry>()
+                while (bucket != null)
                 {
-                    @Override
-                    public void accept(TaskEntry taskEntry)
+                    // 推进时间轮的 currentTimeMs
+                    timeWheel.advanceClock(bucket.getExpiration());
+                    // 任务的降级: 清除任务, 重新添加到时间轮, 如果添加失败就代表定时任务到期
+                    bucket.flush(new Consumer<TaskEntry>()
                     {
-                        addTaskEntry(taskEntry);
-                    }
-                });
-                // 重新获取到期的 bucket
-                bucket = delayQueue.poll();
+                        @Override
+                        public void accept(TaskEntry taskEntry)
+                        {
+                            addTaskEntry(taskEntry);
+                        }
+                    });
+                    // 重新获取到期的 bucket
+                    bucket = delayQueue.poll();
+                }
+            }
+            finally
+            {
+                writeLock.unlock();
             }
         }
     }
@@ -138,8 +154,19 @@ public class SystemTimer implements Timer
     @Override
     public void addTask(Task task)
     {
-        TaskEntry entry = new TaskEntry(task, task.delayMs + System.currentTimeMillis());
-        addTaskEntry(entry);
+        // 在没有线程持有写锁的前提下
+        // 多个线程能够 "同时" 向时间轮 "添加" 定时任务
+        // 加读锁的原因: 添加定时任务涉及到对 TimeWheel.currentTimeMs 的读
+        readLock.lock();
+        try
+        {
+            TaskEntry entry = new TaskEntry(task, task.delayMs + System.currentTimeMillis());
+            addTaskEntry(entry);
+        }
+        finally
+        {
+            readLock.unlock();
+        }
     }
 
     private void addTaskEntry(TaskEntry entry)

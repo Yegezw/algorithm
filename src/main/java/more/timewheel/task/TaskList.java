@@ -67,7 +67,7 @@ public class TaskList implements Delayed
     /**
      * 向链表中添加 TaskEntry
      */
-    public void addTaskEntry(TaskEntry entry)
+    public synchronized void addTaskEntry(TaskEntry entry)
     {
         TaskEntry tail = root.prev;
 
@@ -85,7 +85,7 @@ public class TaskList implements Delayed
     /**
      * 遍历链表中的所有 TaskEntry.Task, 调用 consumer.accept(task)
      */
-    public void foreach(Consumer<Task> consumer)
+    public synchronized void foreach(Consumer<Task> consumer)
     {
         TaskEntry cur = root.next;
         while (cur != root)
@@ -100,7 +100,7 @@ public class TaskList implements Delayed
      * <p>清空链表中的所有 TaskEntry
      * <p>对于每个 entry, 移除后都会调用 consumer.accept(entry)
      */
-    public void flush(Consumer<TaskEntry> consumer)
+    public synchronized void flush(Consumer<TaskEntry> consumer)
     {
         TaskEntry cur = root.next;
         while (cur != root)
@@ -115,7 +115,7 @@ public class TaskList implements Delayed
     /**
      * 从链表中移除 TaskEntry
      */
-    public void removeTaskEntry(TaskEntry entry)
+    public synchronized void removeTaskEntry(TaskEntry entry)
     {
         TaskEntry prev = entry.prev;
         TaskEntry next = entry.next;

@@ -85,7 +85,7 @@ public class TimeWheel
     /**
      * 添加上层时间轮
      */
-    private void addOverflowWheel()
+    private synchronized void addOverflowWheel()
     {
         if (overflowWheel == null)
         {
