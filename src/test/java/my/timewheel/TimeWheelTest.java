@@ -1,27 +1,34 @@
 package my.timewheel;
 
-import my.timewheel.core.TimerLauncher;
+import my.timewheel.core.SystemTimer;
 import my.timewheel.task.Task;
 
-import java.util.concurrent.locks.LockSupport;
-
+@SuppressWarnings("all")
 public class TimeWheelTest
 {
 
-    public static void main(String[] args)
+    public static void main(String[] args) throws InterruptedException
     {
         Task[] tasks = new Task[64];
         for (int i = 0; i < tasks.length; i++)
         {
-            tasks[i] = new PrintTask(i + 1 + "", 1000 * (i + 1));
+            tasks[i] = new PrintTask(i + "", 1000 * i);
         }
 
-        TimerLauncher launcher = new TimerLauncher();
+        SystemTimer timer = new SystemTimer("test");
         for (Task task : tasks)
         {
-            launcher.addTask(task);
+            timer.addTask(task);
         }
 
-        LockSupport.park();
+        while (true)
+        {
+            Thread.sleep(500);
+            if (timer.size() == 0)
+            {
+                timer.close();
+                break;
+            }
+        }
     }
 }

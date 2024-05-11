@@ -1,82 +1,102 @@
 package my.timewheel.wheel;
 
-import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import my.timewheel.task.TaskEntry;
 import my.timewheel.task.TaskList;
 
 import java.util.concurrent.DelayQueue;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * 时间轮
  */
-@Data
 @Slf4j
 public class TimeWheel
 {
 
     /**
+     * 该层时间轮的创建时间
+     */
+    @SuppressWarnings("all")
+    private final long startMs;
+
+    // ----------------------------------------
+
+    /**
      * 基本时间跨度
      */
-    private long tickMs;
+    private final long tickMs;
     /**
      * 时间单位个数
      */
-    private int  wheelSize;
+    private final int  wheelSize;
     /**
      * 总体时间跨度
      */
-    private long interval;
+    private final long interval;
     /**
      * <p>当前所处时间 - 绝对 - tickMs 的倍数
      * <p>代表 [currentTime ... currentTime + tickMs) 已过期
+     * <p>当前时间轮所能处理的时间段为 [currentTime ... currentTime + interval)
      */
-    private long currentTime;
+    private       long currentTimeMs;
 
     // ----------------------------------------
 
     /**
      * 定时任务列表, 间隔 [0 ... tickMs)
      */
-    private TaskList[]           buckets;
+    private final TaskList[]           buckets;
     /**
      * 只有一个 DelayQueue, 协助推进时间轮
      */
-    private DelayQueue<TaskList> delayQueue;
+    private final DelayQueue<TaskList> delayQueue;
+    /**
+     * 当前 TimeWheel 中的任务数量
+     */
+    private final AtomicInteger        taskCounter;
 
     // ----------------------------------------
 
     /**
      * 上层时间轮
      */
-    private volatile TimeWheel overflowWheel;
+    private volatile TimeWheel overflowWheel = null;
 
     // =============================================================================
 
-    public TimeWheel(long tickMs, int wheelSize, long startMs, DelayQueue<TaskList> delayQueue)
+    public TimeWheel(long tickMs, int wheelSize, long startMs, AtomicInteger taskCounter, DelayQueue<TaskList> delayQueue)
     {
-        this.tickMs      = tickMs;
-        this.wheelSize   = wheelSize;
-        this.interval    = tickMs * wheelSize;
-        this.currentTime = startMs - (startMs % tickMs);
-        this.buckets     = new TaskList[wheelSize];
-        this.delayQueue  = delayQueue;
+        this.startMs       = startMs;
+        this.tickMs        = tickMs;
+        this.wheelSize     = wheelSize;
+        this.interval      = tickMs * wheelSize;
+        this.currentTimeMs = startMs - (startMs % tickMs);
+        this.buckets       = new TaskList[wheelSize];
+        this.delayQueue    = delayQueue;
+        this.taskCounter   = taskCounter;
+
         for (int i = 0; i < wheelSize; i++)
         {
-            buckets[i] = new TaskList();
+            buckets[i] = new TaskList(taskCounter);
         }
     }
 
     /**
-     * 获取上层时间轮
+     * 添加上层时间轮
      */
-    private TimeWheel getOverflowWheel()
+    private void addOverflowWheel()
     {
         if (overflowWheel == null)
         {
-            overflowWheel = new TimeWheel(interval, wheelSize, currentTime, delayQueue);
+            overflowWheel = new TimeWheel(
+                    interval,
+                    wheelSize,
+                    currentTimeMs,
+                    taskCounter,
+                    delayQueue
+            );
         }
-        return overflowWheel;
     }
 
     // =============================================================================
@@ -85,43 +105,51 @@ public class TimeWheel
     {
         // 过期时间 - 绝对
         // expiration in [currentTime + tickMs ... currentTime + interval)
-        long expiration = entry.getExpireMs();
+        long expiration = entry.expirationMs;
 
-        if (expiration < currentTime + tickMs)
+        if (expiration < currentTimeMs + tickMs)
         {
             return false; // 定时任务到期 - 添加失败
         }
-        else if (expiration < currentTime + interval)
+        else if (expiration < currentTimeMs + interval)
         {
             long virtualId = (expiration / tickMs);
-            int  index     = (int) (virtualId % wheelSize);
+            int  bucketId  = (int) (virtualId % (long) wheelSize);
 
-            TaskList bucket = buckets[index];
+            TaskList bucket = buckets[bucketId];
             bucket.addTaskEntry(entry);
 
-            boolean first = bucket.setExpiration(virtualId * tickMs);
-            if (first) delayQueue.offer(bucket); // 关键
+            // 如果 bucket 的过期时间已更新, 则需要加入 delayQueue
+            boolean updated = bucket.setExpiration(virtualId * tickMs);
+            if (updated)
+            {
+                delayQueue.offer(bucket); // 关键
+            }
+
             return true;
         }
         else
         {
-            // 当前时间轮不能满足, 需要升级时间轮
-            TimeWheel wheel = getOverflowWheel();
-            return wheel.addTaskEntry(entry);
+            // 超出 interval, 放入上层时间轮
+            if (overflowWheel == null)
+            {
+                addOverflowWheel();
+            }
+            return overflowWheel.addTaskEntry(entry);
         }
     }
 
     /**
-     * 推进指针
+     * 推进 currentTimeMs
      */
     public void advanceClock(long timeMs)
     {
-        if (timeMs >= currentTime + tickMs)
+        if (timeMs >= currentTimeMs + tickMs)
         {
-            currentTime = timeMs - (timeMs % tickMs);
+            currentTimeMs = timeMs - (timeMs % tickMs);
             if (overflowWheel != null)
             {
-                getOverflowWheel().advanceClock(timeMs);
+                overflowWheel.advanceClock(currentTimeMs);
             }
         }
     }

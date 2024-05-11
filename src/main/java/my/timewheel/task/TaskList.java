@@ -1,34 +1,45 @@
 package my.timewheel.task;
 
-import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.concurrent.Delayed;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.Consumer;
 
 /**
  * 定时任务 - 环形链表
  */
-@Data
 @Slf4j
 public class TaskList implements Delayed
 {
 
     /**
+     * <p>过期时间 - 绝对 - tickMs 的倍数
+     * <p>该 bucket 下的所有 TaskEntry.expirationMs in [expiration ... expiration + tickMs)
+     */
+    private final AtomicLong expiration;
+
+    // ----------------------------------------
+
+    /**
      * 虚拟头节点
      */
-    private TaskEntry  root       = new TaskEntry(null, -1);
+    private final TaskEntry     root;
     /**
-     * 过期时间 - 绝对 - tickMs 的倍数, [expiration ... expiration + tickMs)
+     * 当前 TaskList 所属 TimeWheel 中的任务数量
      */
-    private AtomicLong expiration = new AtomicLong(-1L);
+    private final AtomicInteger taskCounter;
 
     // =============================================================================
 
-    public TaskList()
+    public TaskList(AtomicInteger taskCounter)
     {
+        this.expiration  = new AtomicLong(-1L);
+        this.root        = new TaskEntry(null, -1L);
+        this.taskCounter = taskCounter;
+
         root.next = root;
         root.prev = root;
     }
@@ -65,15 +76,31 @@ public class TaskList implements Delayed
 
         entry.next = root;
         root.prev  = entry;
+
+        taskCounter.incrementAndGet();
     }
 
     // ----------------------------------------
 
     /**
+     * 遍历链表中的所有 TaskEntry.Task, 调用 consumer.accept(task)
+     */
+    public void foreach(Consumer<Task> consumer)
+    {
+        TaskEntry cur = root.next;
+        while (cur != root)
+        {
+            TaskEntry next = cur.next;
+            consumer.accept(cur.task);
+            cur = next;
+        }
+    }
+
+    /**
      * <p>清空链表中的所有 TaskEntry
      * <p>对于每个 entry, 移除后都会调用 consumer.accept(entry)
      */
-    public void clear(Consumer<TaskEntry> consumer)
+    public void flush(Consumer<TaskEntry> consumer)
     {
         TaskEntry cur = root.next;
         while (cur != root)
@@ -88,7 +115,7 @@ public class TaskList implements Delayed
     /**
      * 从链表中移除 TaskEntry
      */
-    private void removeTaskEntry(TaskEntry entry)
+    public void removeTaskEntry(TaskEntry entry)
     {
         TaskEntry prev = entry.prev;
         TaskEntry next = entry.next;
@@ -98,6 +125,8 @@ public class TaskList implements Delayed
 
         entry.prev = null;
         entry.next = null;
+
+        taskCounter.decrementAndGet();
     }
 
     // =============================================================================
@@ -108,7 +137,7 @@ public class TaskList implements Delayed
     @Override
     public long getDelay(TimeUnit unit)
     {
-        long diff = expiration.get() - System.currentTimeMillis();
+        long diff = Math.max(getExpiration() - System.currentTimeMillis(), 0);
         return unit.convert(diff, TimeUnit.MICROSECONDS);
     }
 

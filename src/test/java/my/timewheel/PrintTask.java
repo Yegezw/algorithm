@@ -14,8 +14,8 @@ public class PrintTask extends Task
 
     public PrintTask(String desc, long delayMs)
     {
-        this.desc    = desc;
-        this.delayMs = delayMs;
+        super(delayMs);
+        this.desc = desc;
     }
 
     @Override

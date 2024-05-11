@@ -1,22 +1,19 @@
 package my.timewheel.task;
 
-import lombok.Getter;
-
 /**
  * 定时任务项
  */
-@Getter
 public class TaskEntry
 {
 
     /**
      * 定时任务
      */
-    private final Task task;
+    public final Task task;
     /**
      * 过期时间 - 绝对
      */
-    private final long expireMs;
+    public final long expirationMs;
 
     // ----------------------------------------
 
@@ -25,11 +22,11 @@ public class TaskEntry
 
     // =============================================================================
 
-    public TaskEntry(Task task, long expireMs)
+    public TaskEntry(Task task, long expirationMs)
     {
-        this.task     = task;
-        this.expireMs = expireMs;
-        this.prev     = null;
-        this.next     = null;
+        this.task         = task;
+        this.expirationMs = expirationMs;
+        this.prev         = null;
+        this.next         = null;
     }
 }

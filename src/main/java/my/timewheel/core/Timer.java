@@ -2,7 +2,7 @@ package my.timewheel.core;
 
 import my.timewheel.task.Task;
 
-public interface Timer
+public interface Timer extends AutoCloseable
 {
 
     /**
@@ -13,10 +13,10 @@ public interface Timer
     /**
      * 推动指针
      */
-    void advanceClock(long timeout);
+    void advanceClock(long timeout) throws InterruptedException;
 
     /**
-     * 关闭服务, 剩下的无法被执行
+     * 获取任务数量
      */
-    void shutdown();
+    int size();
 }
