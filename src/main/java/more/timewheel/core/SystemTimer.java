@@ -4,7 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import more.timewheel.task.Task;
 import more.timewheel.task.TaskEntry;
 import more.timewheel.task.TaskList;
-import more.timewheel.wheel.TimeWheel;
+import more.timewheel.task.TimeWheel;
 
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -113,23 +113,27 @@ public class SystemTimer implements Timer
 
     /**
      * 推进时间轮的 currentTimeMs, 定时任务到期则进行处理
+     *
+     * @return 是否执行了任何任务
      */
     @Override
-    public synchronized void advanceClock(long timeoutMs) throws InterruptedException
+    public synchronized boolean advanceClock(long timeoutMs) throws InterruptedException
     {
         // 获取到期的 bucket
         TaskList bucket = delayQueue.poll(timeoutMs, TimeUnit.MILLISECONDS);
         if (bucket != null)
         {
-            // 加写锁的原因: 避免多线程同时推进 TimeWheel.currentTimeMs, 这是一个写操作
+            // 加写锁的原因: 避免多线程同时推进 TimeWheel.currentTimeMs
             writeLock.lock();
             try
             {
                 while (bucket != null)
                 {
-                    // 推进时间轮的 currentTimeMs
+                    // 推进 TimeWheel.currentTimeMs
                     timeWheel.advanceClock(bucket.getExpiration());
-                    // 任务的降级: 清除任务, 重新添加到时间轮, 如果添加失败就代表定时任务到期
+
+                    // TaskEntry 的降级: 如果 entry 未到期, 就会从 bucket1 移动到 bucket2
+                    // 清除 bucket.TaskEntry 并重新添加到时间轮, 如果添加失败就代表定时任务 - 已取消 OR 已到期
                     bucket.flush(new Consumer<TaskEntry>()
                     {
                         @Override
@@ -138,25 +142,30 @@ public class SystemTimer implements Timer
                             addTaskEntry(taskEntry);
                         }
                     });
+
                     // 重新获取到期的 bucket
-                    bucket = delayQueue.poll();
+                    bucket = delayQueue.poll(); // 非阻塞函数
                 }
             }
             finally
             {
                 writeLock.unlock();
             }
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 
     // =============================================================================
 
     @Override
-    public void addTask(Task task)
+    public void add(Task task)
     {
         // 在没有线程持有写锁的前提下
-        // 多个线程能够 "同时" 向时间轮 "添加" 定时任务
-        // 加读锁的原因: 添加定时任务涉及到对 TimeWheel.currentTimeMs 的读
+        // 多线程能 "同时向时间轮添加" 定时任务
         readLock.lock();
         try
         {
@@ -171,13 +180,19 @@ public class SystemTimer implements Timer
 
     private void addTaskEntry(TaskEntry entry)
     {
-        if (!timeWheel.addTaskEntry(entry))
+        // 定时任务 - 已取消 OR 已到期
+        if (!timeWheel.add(entry))
         {
-            // 定时任务到期
-            Task task = entry.task;
-            taskExecutor.submit(task);
+            // 定时任务 - 未取消
+            if (!entry.cancelled())
+            {
+                Task task = entry.task;
+                taskExecutor.submit(task);
+            }
         }
     }
+
+    // =============================================================================
 
     @Override
     public int size()

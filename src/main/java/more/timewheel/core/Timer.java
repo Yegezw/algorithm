@@ -6,17 +6,19 @@ public interface Timer extends AutoCloseable
 {
 
     /**
-     * 添加一个新任务
+     * 添加定时任务
      */
-    void addTask(Task task);
+    void add(Task task);
 
     /**
-     * 推动指针
+     * 推进内部时钟
+     *
+     * @return 是否执行了任何任务
      */
-    void advanceClock(long timeout) throws InterruptedException;
+    boolean advanceClock(long timeout) throws InterruptedException;
 
     /**
-     * 获取任务数量
+     * 获取待执行任务的数量
      */
     int size();
 }

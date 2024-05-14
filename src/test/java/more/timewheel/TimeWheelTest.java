@@ -18,8 +18,11 @@ public class TimeWheelTest
         SystemTimer timer = new SystemTimer("test");
         for (Task task : tasks)
         {
-            timer.addTask(task);
+            timer.add(task);
         }
+
+        tasks[16].cancel();
+        tasks[45].cancel();
 
         while (true)
         {
