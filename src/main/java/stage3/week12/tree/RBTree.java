@@ -44,6 +44,7 @@ public class RBTree<K extends Comparable<K>, V>
      */
     private boolean isRed(Node node)
     {
+        // 空节点是黑色的
         if (node == null) return BLACK;
         return node.color;
     }

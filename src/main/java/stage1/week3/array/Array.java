@@ -190,6 +190,9 @@ public class Array<E> implements Iterable<E>
 
     private class Itr implements Iterator<E>
     {
+        /**
+         * 待遍历
+         */
         private int cursor;
         private int lastRet;
         private int expectedModCount;

@@ -40,7 +40,7 @@ public class Deque<E>
         if (size == data.length) resize(data.length * 2);
 
         data[tail] = e;
-                     tail = (tail + 1) % data.length;
+        tail = (tail + 1) % data.length;
         size++;
     }
 
