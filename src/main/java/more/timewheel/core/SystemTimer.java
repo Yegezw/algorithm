@@ -6,10 +6,12 @@ import more.timewheel.task.TaskEntry;
 import more.timewheel.task.TaskList;
 import more.timewheel.task.TimeWheel;
 
-import java.util.concurrent.*;
+import java.util.concurrent.DelayQueue;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
-import java.util.function.Consumer;
 
 /**
  * 系统定时器
@@ -99,14 +101,10 @@ public class SystemTimer implements Timer
                 delayQueue
         );
         this.reaper       = new Reaper();
-        this.taskExecutor = Executors.newFixedThreadPool(1, new ThreadFactory()
-        {
-            @Override
-            public Thread newThread(Runnable r)
-            {
-                return KafkaThread.nonDaemon("executor-" + executorName, r);
-            }
-        });
+        this.taskExecutor = Executors.newFixedThreadPool(
+                1,
+                r -> KafkaThread.nonDaemon("SystemTimer-executor-" + executorName, r)
+        );
 
         reaper.start();
     }
@@ -134,14 +132,7 @@ public class SystemTimer implements Timer
 
                     // TaskEntry 的降级: 如果 entry 未到期, 就会从 bucket1 移动到 bucket2
                     // 清除 bucket.TaskEntry 并重新添加到时间轮, 如果添加失败就代表定时任务 - 已取消 OR 已到期
-                    bucket.flush(new Consumer<TaskEntry>()
-                    {
-                        @Override
-                        public void accept(TaskEntry taskEntry)
-                        {
-                            addTaskEntry(taskEntry);
-                        }
-                    });
+                    bucket.flush(this::addTaskEntry);
 
                     // 重新获取到期的 bucket
                     bucket = delayQueue.poll(); // 非阻塞函数
