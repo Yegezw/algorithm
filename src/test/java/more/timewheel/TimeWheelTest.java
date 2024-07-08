@@ -7,7 +7,7 @@ import more.timewheel.task.Task;
 public class TimeWheelTest
 {
 
-    public static void main(String[] args) throws InterruptedException
+    public static void main(String[] args)
     {
         Task[] tasks = new Task[64];
         for (int i = 0; i < tasks.length; i++)
@@ -24,14 +24,6 @@ public class TimeWheelTest
         tasks[16].cancel();
         tasks[45].cancel();
 
-        while (true)
-        {
-            Thread.sleep(500);
-            if (timer.size() == 0)
-            {
-                timer.close();
-                break;
-            }
-        }
+        timer.close(); // 阻塞函数
     }
 }

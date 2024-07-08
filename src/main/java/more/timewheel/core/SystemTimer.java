@@ -6,10 +6,11 @@ import more.timewheel.task.TaskEntry;
 import more.timewheel.task.TaskList;
 import more.timewheel.task.TimeWheel;
 
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.DelayQueue;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
@@ -41,11 +42,18 @@ public class SystemTimer implements Timer
                 while (true)
                 {
                     advanceClock(WORK_TIMEOUT_MS);
+                    if (closing.get() && taskCounter.get() == 0)
+                    {
+                        // 转移完成
+                        transferComplete.countDown();
+                        log.trace("Thread {} is closed", Thread.currentThread().getName());
+                        break;
+                    }
                 }
             }
             catch (InterruptedException ignore)
             {
-                log.info("Thread {} is closed", Thread.currentThread().getName());
+                log.trace("Thread {} is interrupted", Thread.currentThread().getName());
             }
         }
     }
@@ -70,6 +78,7 @@ public class SystemTimer implements Timer
     /**
      * 收割线程, 轮询 delayQueue 获取到期的定时任务
      */
+    @SuppressWarnings("all")
     private final Reaper          reaper;
     /**
      * 任务线程, 处理到期的定时任务
@@ -81,6 +90,17 @@ public class SystemTimer implements Timer
     private final ReentrantReadWriteLock           readWriteLock = new ReentrantReadWriteLock();
     private final ReentrantReadWriteLock.ReadLock  readLock      = readWriteLock.readLock();
     private final ReentrantReadWriteLock.WriteLock writeLock     = readWriteLock.writeLock();
+
+    // ----------------------------------------
+
+    /**
+     * SystemTimer 是否在关闭中
+     */
+    private final AtomicBoolean  closing          = new AtomicBoolean(false);
+    /**
+     * 等待 reaper 将 timeWheel 中的任务都转移到 taskExecutor 中
+     */
+    private final CountDownLatch transferComplete = new CountDownLatch(1);
 
     // =============================================================================
 
@@ -101,7 +121,7 @@ public class SystemTimer implements Timer
                 delayQueue
         );
         this.reaper       = new Reaper();
-        this.taskExecutor = Executors.newFixedThreadPool(
+        this.taskExecutor = new KafkaThreadPool(
                 1,
                 r -> KafkaThread.nonDaemon("SystemTimer-executor-" + executorName, r)
         );
@@ -155,6 +175,11 @@ public class SystemTimer implements Timer
     @Override
     public void add(Task task)
     {
+        if (closing.get())
+        {
+            throw new RuntimeException("SystemTimer is closing");
+        }
+
         // 在没有线程持有写锁的前提下
         // 多线程能 "同时向时间轮添加" 定时任务
         readLock.lock();
@@ -191,10 +216,24 @@ public class SystemTimer implements Timer
         return taskCounter.get();
     }
 
+    /**
+     * 阻塞函数: 已有任务执行完后关闭 SystemTimer, 在此期间拒绝接收新任务
+     */
     @Override
     public void close()
     {
-        reaper.interrupt();
-        taskExecutor.shutdown();
+        log.info("SystemTimer is closing");
+
+        try
+        {
+            closing.set(true);        // 标记 closing 为 true
+            transferComplete.await(); // 等待 reaper 将 timeWheel 中的任务都转移到 taskExecutor 中
+            taskExecutor.shutdown();  // 此时 taskExecutor.workQueue 可能会存在未执行完成的任务, 需要等待
+        }
+        catch (InterruptedException ignore)
+        {
+        }
+
+        log.info("SystemTimer is closed");
     }
 }
