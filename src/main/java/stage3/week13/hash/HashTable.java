@@ -127,7 +127,12 @@ public class HashTable<K, V>
         for (int i = 0; i < oldM; i++)
         {
             TreeMap<K, V> map = hashTable[i];
-            for (K key : map.keySet()) newHashTable[hash(key)].put(key, map.get(key));
+            map.forEach(
+                    (key, value) ->
+                    {
+                        newHashTable[hash(key)].put(key, value);
+                    }
+            );
         }
 
         hashTable = newHashTable;
