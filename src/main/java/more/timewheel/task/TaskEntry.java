@@ -2,6 +2,8 @@ package more.timewheel.task;
 
 import more.timewheel.core.SystemTimer;
 
+import java.util.function.Consumer;
+
 /**
  * 定时任务项
  */
@@ -46,6 +48,7 @@ public class TaskEntry
      *
      * @see TaskList#add(TaskEntry)
      * @see TaskList#remove(TaskEntry)
+     * @see TaskList#foreach(Consumer)
      */
     TaskEntry prev;
     /**
@@ -53,6 +56,7 @@ public class TaskEntry
      *
      * @see TaskList#add(TaskEntry)
      * @see TaskList#remove(TaskEntry)
+     * @see TaskList#foreach(Consumer)
      */
     TaskEntry next;
     /**
@@ -81,7 +85,7 @@ public class TaskEntry
         // bucket
         TaskList currentList = list;
 
-        // 当前方法执行时, list 可能会改变
+        // 当前方法执行时, list 可能会改变(任务降级的过程中取消任务)
         // 因为其它线程可能把当前 entry 移动到另一个 list 中, 这里需要自旋, 直到 list = null
         // 在极少数情况下, 当前线程会看到 list = null 并退出循环, 但其它线程稍后会将该 entry 插入到另一个 list 中, 即 entry 删除失败
         while (currentList != null)

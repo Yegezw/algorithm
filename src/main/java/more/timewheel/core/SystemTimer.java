@@ -6,10 +6,7 @@ import more.timewheel.task.TaskEntry;
 import more.timewheel.task.TaskList;
 import more.timewheel.task.TimeWheel;
 
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.DelayQueue;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
@@ -37,23 +34,22 @@ public class SystemTimer implements Timer
         @SuppressWarnings("all")
         public void run()
         {
-            try
+            while (true)
             {
-                while (true)
+                try
                 {
                     advanceClock(WORK_TIMEOUT_MS);
                     if (closing.get() && taskCounter.get() == 0)
                     {
                         // 转移完成
                         transferComplete.countDown();
-                        log.trace("Thread {} is closed", Thread.currentThread().getName());
+                        log.info("Reaper is closed");
                         break;
                     }
                 }
-            }
-            catch (InterruptedException ignore)
-            {
-                log.trace("Thread {} is interrupted", Thread.currentThread().getName());
+                catch (InterruptedException ignore)
+                {
+                }
             }
         }
     }
@@ -121,9 +117,9 @@ public class SystemTimer implements Timer
                 delayQueue
         );
         this.reaper       = new Reaper();
-        this.taskExecutor = new KafkaThreadPool(
+        this.taskExecutor = Executors.newFixedThreadPool(
                 1,
-                r -> KafkaThread.nonDaemon("SystemTimer-executor-" + executorName, r)
+                runnable -> KafkaThread.nonDaemon("SystemTimer-executor-" + executorName, runnable)
         );
 
         reaper.start();
@@ -229,11 +225,21 @@ public class SystemTimer implements Timer
             closing.set(true);        // 标记 closing 为 true
             transferComplete.await(); // 等待 reaper 将 timeWheel 中的任务都转移到 taskExecutor 中
             taskExecutor.shutdown();  // 此时 taskExecutor.workQueue 可能会存在未执行完成的任务, 需要等待
+            boolean terminated;
+            do
+            {
+                terminated = taskExecutor.awaitTermination(5, TimeUnit.SECONDS);
+            } while (!terminated);
         }
         catch (InterruptedException ignore)
         {
         }
 
         log.info("SystemTimer is closed");
+    }
+
+    public boolean isTerminated()
+    {
+        return taskExecutor.isTerminated();
     }
 }

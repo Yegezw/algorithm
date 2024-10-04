@@ -21,6 +21,6 @@ public class PrintTask extends Task
     @Override
     public void run()
     {
-        log.info("任务 {} 执行", desc);
+        log.info("任务 {} 执行完成", desc);
     }
 }

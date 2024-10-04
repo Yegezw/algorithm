@@ -6,6 +6,12 @@ import java.util.concurrent.DelayQueue;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
+ * <p>
+ * 当操作在超时前完成时, 分层定时轮的效果尤其好<br>
+ * 即使所有操作都超时, 当定时轮中有很多项目时, 分层定时轮仍有优势<br>
+ * 它的插入(包括重新插入)和删除成本分别为 O(m) 和 O(1), 其中 m = the number of wheels<br>
+ * 而基于 priority queue 的定时器插入和删除成本均为 O(log N), 其中 N = the number of items in the queue
+ * <p>
  * 该类不是线程安全的<br>
  * 多线程同时调用 {@link #add(TaskEntry)} 是线程安全的<br>
  * 多线程同时调用 {@link #advanceClock(long)} 不是线程安全的<br>

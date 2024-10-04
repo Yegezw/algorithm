@@ -25,5 +25,6 @@ public class TimeWheelTest
         tasks[45].cancel();
 
         timer.close(); // 阻塞函数
+        System.out.println(timer.isTerminated());
     }
 }

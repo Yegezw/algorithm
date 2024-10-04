@@ -22,7 +22,7 @@ public abstract class Task implements Runnable
 
     /**
      * <p>用于实现任务的取消功能
-     * <p>该属性的写操作需要保证线程安全
+     * <p>该属性的写操作需要保证线程安全, 创建 TaskEntry 期间进行取消需要等待
      */
     private volatile TaskEntry taskEntry;
 
