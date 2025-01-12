@@ -22,26 +22,26 @@ public class ChartFactoryTest
 
     public static void testLine1()
     {
-        ArrayList<ElecCurve> lineList = new ArrayList<>();
         ArrayList<String>    nameList = new ArrayList<>();
+        ArrayList<ElecCurve> lineList = new ArrayList<>();
         nameList.add("line1");
         nameList.add("line2");
 
-        Chart chart = ChartFactory.lineListToChart(lineList, nameList, ElecCurve.class);
+        Chart chart = ChartFactory.lineListToChart(nameList, lineList, ElecCurve.class);
 
         System.out.println(JSONObject.toJSONString(chart));
     }
 
     public static void testLine2()
     {
-        ArrayList<ElecCurve> lineList = new ArrayList<>();
         ArrayList<String>    nameList = new ArrayList<>();
+        ArrayList<ElecCurve> lineList = new ArrayList<>();
         lineList.add(new ElecCurve("1", "2", "3", "4", "5", "6", "7", "8", "9"));
         lineList.add(new ElecCurve("1", "2", null, "4", "5", null, "7", "8", "9"));
         nameList.add("line1");
         nameList.add("line2");
 
-        Chart chart = ChartFactory.lineListToChart(lineList, nameList, ElecCurve.class);
+        Chart chart = ChartFactory.lineListToChart(nameList, lineList, ElecCurve.class);
 
         System.out.println(JSONObject.toJSONString(chart));
     }
