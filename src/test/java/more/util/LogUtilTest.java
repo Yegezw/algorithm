@@ -11,6 +11,24 @@ import java.util.TreeSet;
 public class LogUtilTest
 {
 
+    public static final TreeSet<String> keywordSet = new TreeSet<>();
+    static
+    {
+        keywordSet.add("气象站点");
+        keywordSet.add("基本信息");
+
+        keywordSet.add("月功率因数");
+        keywordSet.add("月电量");
+        keywordSet.add("月电费组成");
+
+        keywordSet.add("日电量");
+        keywordSet.add("日负载96点数据同步成功");
+        keywordSet.add("预测天气数据同步成功");
+        keywordSet.add("历史天气数据同步成功");
+
+        keywordSet.add("数据同步-单线程监控");
+    }
+
     public static void main(String[] args) throws IOException
     {
         TreeSet<String> set = new TreeSet<>();
@@ -25,22 +43,38 @@ public class LogUtilTest
         List<String> slowSQL = new ArrayList<>();
 
         LogUtil.handleLog(
-                "D:\\02-data\\05-DingDingDownload\\03-绿网\\数据迁移\\日志\\01-31",
+                "D:\\02-data\\05-DingDingDownload\\03-绿网\\0314日志",
                 block ->
                 {
                     for (String ignore : set)
                     {
                         if (block.contains(ignore)) return null;
                     }
-                    if (block.contains("StatFilter:478")) slowSQL.add(LogUtil.handleBlock(block));
+                    for (String keyword : keywordSet)
+                    {
+                        if (block.contains(keyword)) print(LogUtil.handleBlock(block));
+                    }
+                    if (block.contains("StatFilter:478"))
+                    {
+                        if (block.contains("sup_lx_day_ana_index") ||  block.contains("sup_lx_month_ana_index"))
+                        {
+                            slowSQL.add(LogUtil.handleBlock(block));
+                        }
+                    }
                     return block;
                 }
         );
 
         FileUtils.writeLines(
-                new File("D:\\02-data\\05-DingDingDownload\\03-绿网\\数据迁移\\日志\\01-31\\slow-sql.log"), 
+                new File("D:\\02-data\\05-DingDingDownload\\03-绿网\\0314日志\\res\\slow-sql.log"), 
                 "UTF-8", 
                 slowSQL
         );
+    }
+
+    private static void print(String str)
+    {
+        String res = str.replaceAll(" \\[com.sgcc.iesg.datatransfer.lx.transfer.buffer.adapter.monitor.SingleThreadMonitorAdapter:30]", "");
+        System.out.println(res);
     }
 }
