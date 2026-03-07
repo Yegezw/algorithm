@@ -1,9 +1,12 @@
 package stage1.week4.stack;
 
+import org.junit.jupiter.api.Test;
+
 public class LinkedListStackTest
 {
 
-    public static void test()
+    @Test
+    void test()
     {
         LinkedListStack<Integer> stack = new LinkedListStack<>();
         for (int i = 0; i < 5; i++)
@@ -16,10 +19,5 @@ public class LinkedListStackTest
         System.out.println(stack);
 
         System.out.println("size = " + stack.getSize());
-    }
-
-    public static void main(String[] args)
-    {
-        test();
     }
 }

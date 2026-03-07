@@ -1,5 +1,6 @@
 package vs.hash;
 
+import org.junit.jupiter.api.Test;
 import other.util.Novel;
 import stage2.week8.map.BSTMap;
 import stage3.week12.tree.AVLTree;
@@ -17,7 +18,8 @@ public class HashVSTree
 
     private static final ArrayList<String> words = Novel.words1List; // 傲慢与偏见
 
-    public static void testBSTMap()
+    @Test
+    void testBSTMap()
     {
         long startTime = System.nanoTime();
 
@@ -37,7 +39,8 @@ public class HashVSTree
         System.out.println("BSTMap: " + time + " s");
     }
 
-    public static void testAVLTree()
+    @Test
+    void testAVLTree()
     {
         long startTime = System.nanoTime();
 
@@ -57,7 +60,8 @@ public class HashVSTree
         System.out.println("AVLTree: " + time + " s");
     }
 
-    public static void testRBTree()
+    @Test
+    void testRBTree()
     {
         long startTime = System.nanoTime();
 
@@ -77,7 +81,8 @@ public class HashVSTree
         System.out.println("RBTree: " + time + " s");
     }
 
-    public static void testHashTable()
+    @Test
+    void testHashTable()
     {
         long startTime = System.nanoTime();
 
@@ -97,7 +102,8 @@ public class HashVSTree
         System.out.println("HashTable: " + time + " s");
     }
 
-    public static void main(String[] args)
+    @Test
+    void test()
     {
         System.out.println("Pride and Prejudice");
         System.out.println("Total words: " + words.size());

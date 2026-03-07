@@ -1,5 +1,6 @@
 package stage4.week14;
 
+import org.junit.jupiter.api.Test;
 import other.pojo.Student;
 
 import java.util.Arrays;
@@ -11,7 +12,7 @@ public class CountingSortTest
     /**
      * 验证排序结果是否正确
      */
-    private static void isSorted(Student[] arr)
+    void isSorted(Student[] arr)
     {
         int n = arr.length;
 
@@ -35,7 +36,8 @@ public class CountingSortTest
     /**
      * 测试 1, 分数 [0, 3), R = 3
      */
-    public static void test1()
+    @Test
+    void test1()
     {
         Student[] students = {
                 new Student("A", 2), new Student("B", 1),
@@ -49,7 +51,8 @@ public class CountingSortTest
     /**
      * 测试 2, 分数 [0, 101),  R = 101
      */
-    public static void test2()
+    @Test
+    void test2()
     {
         int       n        = 26 * 26 * 26 * 26;
         Student[] students = new Student[n];
@@ -64,12 +67,5 @@ public class CountingSortTest
 
         CountingSort.sort(students, 101);
         isSorted(students);
-    }
-
-    public static void main(String[] args)
-    {
-        test1();
-
-        test2();
     }
 }

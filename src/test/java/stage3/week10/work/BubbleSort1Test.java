@@ -1,5 +1,6 @@
 package stage3.week10.work;
 
+import org.junit.jupiter.api.Test;
 import other.helper.ArrayGenerator;
 import other.helper.SortingHelper;
 
@@ -8,7 +9,8 @@ import java.util.Arrays;
 public class BubbleSort1Test
 {
 
-    private static void test()
+    @Test
+    void test()
     {
         int       n    = 10000;
         Integer[] arr1 = ArrayGenerator.generateRandomArray(n, n);
@@ -22,10 +24,5 @@ public class BubbleSort1Test
         System.out.println(SortingHelper.isSorted(arr1));
         System.out.println(SortingHelper.isSorted(arr2));
         System.out.println(SortingHelper.isSorted(arr3));
-    }
-
-    public static void main(String[] args)
-    {
-        test();
     }
 }

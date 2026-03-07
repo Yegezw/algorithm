@@ -1,15 +1,17 @@
 package vs.sort;
 
+import org.junit.jupiter.api.Test;
 import other.helper.ArrayGenerator;
 import other.helper.SortName;
 import other.helper.SortingHelper;
 
 import java.util.Arrays;
 
-public class HeapSortVSOtherSort
+public class HeapSortVSOtherSortTest
 {
 
-    private static void vs()
+    @Test
+    void vs()
     {
         int n = 1000000;
 
@@ -24,10 +26,5 @@ public class HeapSortVSOtherSort
         SortingHelper.sortTest(SortName.QuickSort3, arr3);
         SortingHelper.sortTest(SortName.HeapSort1, arr4);
         SortingHelper.sortTest(SortName.HeapSort2, arr5);
-    }
-
-    public static void main(String[] args)
-    {
-        vs();
     }
 }

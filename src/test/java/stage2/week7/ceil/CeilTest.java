@@ -1,5 +1,6 @@
 package stage2.week7.ceil;
 
+import org.junit.jupiter.api.Test;
 import other.helper.ArrayGenerator;
 
 import java.util.Arrays;
@@ -7,7 +8,8 @@ import java.util.Arrays;
 public class CeilTest
 {
 
-    private static void testCeilR()
+    @Test
+    void testCeilR()
     {
         System.out.println("存在 target 时, 返回 = target 的最右边的索引");
 
@@ -23,7 +25,8 @@ public class CeilTest
         System.out.println();
     }
 
-    private static void testCeilL()
+    @Test
+    void testCeilL()
     {
         System.out.println("存在 target 时, 返回 = target 的最左边的索引");
 
@@ -37,12 +40,5 @@ public class CeilTest
             System.out.println("大于 " + i + " 的最小值的索引为 " + Ceil.ceilL(arr, i));
         }
         System.out.println();
-    }
-
-    public static void main(String[] args)
-    {
-        testCeilR();
-
-        testCeilL();
     }
 }

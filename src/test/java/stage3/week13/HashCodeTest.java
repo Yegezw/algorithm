@@ -1,5 +1,6 @@
 package stage3.week13;
 
+import org.junit.jupiter.api.Test;
 import other.pojo.Member;
 
 import java.util.HashMap;
@@ -9,7 +10,8 @@ import java.util.HashSet;
 public class HashCodeTest
 {
 
-    public static void test()
+    @Test
+    void test()
     {
         int a = 42;
         System.out.println(((Integer) a).hashCode());
@@ -27,7 +29,8 @@ public class HashCodeTest
         System.out.println(member.hashCode());
     }
 
-    public static void testHashSet()
+    @Test
+    void testHashSet()
     {
         Member member = new Member(3, 2, "bobo", "Liu");
 
@@ -35,20 +38,12 @@ public class HashCodeTest
         set.add(member);
     }
 
-    public static void testHashMap()
+    @Test
+    void testHashMap()
     {
         Member stu = new Member(3, 2, "bobo", "Liu");
 
         HashMap<Member, Integer> scores = new HashMap<>();
         scores.put(stu, 100);
-    }
-
-    public static void main(String[] args)
-    {
-        test();
-
-        testHashSet();
-
-        testHashMap();
     }
 }

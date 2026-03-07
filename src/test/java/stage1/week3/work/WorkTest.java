@@ -1,10 +1,13 @@
 package stage1.week3.work;
 
+import org.junit.jupiter.api.Test;
+
 @SuppressWarnings("all")
 public class WorkTest
 {
 
-    private static void testLoopQueue1()
+    @Test
+    void testLoopQueue1()
     {
         LoopQueue1<Integer> queue = new LoopQueue1<>();
         for (int i = 0; i < 10; i++)
@@ -21,7 +24,8 @@ public class WorkTest
         }
     }
 
-    private static void testLoopQueue2()
+    @Test
+    void testLoopQueue2()
     {
         LoopQueue2<Integer> queue = new LoopQueue2<>();
         for (int i = 0; i < 10; i++)
@@ -38,7 +42,8 @@ public class WorkTest
         }
     }
 
-    private static void testLoopQueue3()
+    @Test
+    void testLoopQueue3()
     {
         LoopQueue3<Integer> queue = new LoopQueue3<>();
         for (int i = 0; i < 10; i++)
@@ -55,7 +60,8 @@ public class WorkTest
         }
     }
 
-    public static void testDeque()
+    @Test
+    void testDeque()
     {
         // 在下面的双端队列的测试中, 偶数从队尾加入、奇数从队首加入
         Deque<Integer> dq = new Deque<>();
@@ -75,16 +81,5 @@ public class WorkTest
             else dq.removeLast();
             System.out.println(dq);
         }
-    }
-
-    public static void main(String[] args)
-    {
-        // testLoopQueue1();
-
-        // testLoopQueue2();
-
-        // testLoopQueue3();
-
-        testDeque();
     }
 }

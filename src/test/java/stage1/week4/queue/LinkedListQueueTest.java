@@ -1,9 +1,12 @@
 package stage1.week4.queue;
 
+import org.junit.jupiter.api.Test;
+
 public class LinkedListQueueTest
 {
 
-    public static void test()
+    @Test
+    void test()
     {
         LinkedListQueue<Integer> queue = new LinkedListQueue<>();
         for (int i = 0; i < 10; i++)
@@ -20,10 +23,5 @@ public class LinkedListQueueTest
         }
 
         System.out.println("size = " + queue.getSize());
-    }
-
-    public static void main(String[] args)
-    {
-        test();
     }
 }

@@ -3,13 +3,15 @@ package more.util;
 import com.alibaba.fastjson2.JSONObject;
 import more.util.chart.Chart;
 import more.util.chart.ChartFactory;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
 public class ChartFactoryTest
 {
 
-    public static void main(String[] args)
+    @Test
+    void test()
     {
         testLine1();
         testLine2();
@@ -20,7 +22,8 @@ public class ChartFactoryTest
         testRow2();
     }
 
-    public static void testLine1()
+    @Test
+    void testLine1()
     {
         ArrayList<String>    nameList = new ArrayList<>();
         ArrayList<ElecCurve> lineList = new ArrayList<>();
@@ -32,7 +35,8 @@ public class ChartFactoryTest
         System.out.println(JSONObject.toJSONString(chart));
     }
 
-    public static void testLine2()
+    @Test
+    void testLine2()
     {
         ArrayList<String>    nameList = new ArrayList<>();
         ArrayList<ElecCurve> lineList = new ArrayList<>();
@@ -46,7 +50,8 @@ public class ChartFactoryTest
         System.out.println(JSONObject.toJSONString(chart));
     }
 
-    public static void testRow1()
+    @Test
+    void testRow1()
     {
         ArrayList<MaxMinLoad> rowList = new ArrayList<>();
         MaxMinLoad            load1   = new MaxMinLoad();
@@ -61,7 +66,8 @@ public class ChartFactoryTest
         System.out.println(JSONObject.toJSONString(chart));
     }
 
-    public static void testRow2()
+    @Test
+    void testRow2()
     {
         ArrayList<MaxMinLoad> rowList = new ArrayList<>();
         rowList.add(new MaxMinLoad("2024-01-01", "50", "30"));

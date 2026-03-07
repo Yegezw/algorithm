@@ -1,5 +1,6 @@
 package stage3.week11.unionFind;
 
+import org.junit.jupiter.api.Test;
 import port.UF;
 
 import java.util.Random;
@@ -11,7 +12,7 @@ public class UnionFindTest
     /**
      * 对 uf 进行 m 次合并和查询操作
      */
-    private static void testUF(UF uf, int m)
+    void testUF(UF uf, int m)
     {
         int    size      = uf.getSize();
         Random random    = new Random();
@@ -36,7 +37,8 @@ public class UnionFindTest
         System.out.println(simpleName + ": " + time + " s");
     }
 
-    public static void main(String[] args)
+    @Test
+    void vs()
     {
         int size = 10000000;
         int m    = 10000000;

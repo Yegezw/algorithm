@@ -1,12 +1,15 @@
 package stage2.week8.bst;
 
+import org.junit.jupiter.api.Test;
+
 import java.util.ArrayList;
 import java.util.Random;
 
 public class BSTTest
 {
 
-    private static void testBST1()
+    @Test
+    void testBST1()
     {
         int[] arr = {5, 3, 6, 8, 4, 2};
 
@@ -30,7 +33,8 @@ public class BSTTest
         bst.levelOrder(); // 5 4 6 2 8
     }
 
-    public static void testBST2()
+    @Test
+    void testBST2()
     {
         BST<Integer> bst    = new BST<>();
         Random       random = new Random();
@@ -38,7 +42,8 @@ public class BSTTest
         testRemoveMax(bst, random);
     }
 
-    public static void testBST3()
+    @Test
+    void testBST3()
     {
         BST<Integer> bst = new BST<>();
         for (int i = 1; i < 10; i += 2) bst.add(i); // 1 3 5 7 9
@@ -53,7 +58,7 @@ public class BSTTest
         System.out.println();
     }
 
-    private static void testRemoveMin(BST<Integer> bst, Random random)
+    void testRemoveMin(BST<Integer> bst, Random random)
     {
         int n = 1000;
         for (int i = 0; i < n; i++) bst.add(random.nextInt(10000));
@@ -72,7 +77,7 @@ public class BSTTest
         System.out.println("removeMin test completed");
     }
 
-    private static void testRemoveMax(BST<Integer> bst, Random random)
+    void testRemoveMax(BST<Integer> bst, Random random)
     {
         int n = 1000;
         for (int i = 0; i < n; i++) bst.add(random.nextInt(10000));
@@ -89,14 +94,5 @@ public class BSTTest
             }
         }
         System.out.println("removeMax test completed");
-    }
-
-    public static void main(String[] args)
-    {
-        // testBST1();
-
-        // testBST2();
-
-        testBST3();
     }
 }

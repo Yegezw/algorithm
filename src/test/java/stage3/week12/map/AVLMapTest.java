@@ -1,5 +1,6 @@
 package stage3.week12.map;
 
+import org.junit.jupiter.api.Test;
 import other.util.Novel;
 
 import java.util.ArrayList;
@@ -12,7 +13,8 @@ public class AVLMapTest
 
     private static final ArrayList<String> words = Novel.words1List; // 傲慢与偏见
 
-    public static void testAVLMap()
+    @Test
+    void testAVLMap()
     {
         long startTime = System.nanoTime();
 
@@ -30,10 +32,5 @@ public class AVLMapTest
         System.out.println("Frequency of Prejudice: " + avlMap.get("prejudice"));
         double time = (endTime - startTime) / 1000000000.0;
         System.out.println("AVLMap: " + time + " s");
-    }
-
-    public static void main(String[] args)
-    {
-        testAVLMap();
     }
 }

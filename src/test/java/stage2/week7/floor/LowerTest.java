@@ -1,5 +1,6 @@
 package stage2.week7.floor;
 
+import org.junit.jupiter.api.Test;
 import other.helper.ArrayGenerator;
 
 import java.util.Arrays;
@@ -7,7 +8,8 @@ import java.util.Arrays;
 public class LowerTest
 {
 
-    private static void test()
+    @Test
+    void test()
     {
         Integer[] arr   = {1, 1, 3, 3, 5, 5};
         Integer[] index = ArrayGenerator.generateOrderedArray(7);
@@ -19,10 +21,5 @@ public class LowerTest
             System.out.println("小于 " + i + " 的最大值的索引为 " + Lower.lower(arr, i));
         }
         System.out.println();
-    }
-
-    public static void main(String[] args)
-    {
-        test();
     }
 }

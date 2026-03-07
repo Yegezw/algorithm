@@ -1,15 +1,17 @@
 package vs.sort;
 
+import org.junit.jupiter.api.Test;
 import other.helper.ArrayGenerator;
 import other.helper.SortName;
 import other.helper.SortingHelper;
 
 import java.util.Arrays;
 
-public class SelectionSortVSInsertionSort
+public class SelectionSortVSInsertionSortTest
 {
 
-    public static void test()
+    @Test
+    void test()
     {
         int[] dataSize = {10000, 100000};
 
@@ -29,10 +31,5 @@ public class SelectionSortVSInsertionSort
 
             System.out.println("-------------------------------------");
         }
-    }
-
-    public static void main(String[] args)
-    {
-        test();
     }
 }

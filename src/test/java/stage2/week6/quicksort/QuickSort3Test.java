@@ -1,5 +1,6 @@
 package stage2.week6.quicksort;
 
+import org.junit.jupiter.api.Test;
 import other.helper.ArrayGenerator;
 import other.helper.SortName;
 import other.helper.SortingHelper;
@@ -10,7 +11,8 @@ public class QuickSort3Test
     /**
      * 测试随机数组
      */
-    private static void testRandomArray()
+    @Test
+    void testRandomArray()
     {
         System.out.println("RandomArray");
         int       n   = 1000000;
@@ -21,7 +23,8 @@ public class QuickSort3Test
     /**
      * 测试有序数组
      */
-    private static void testOrderedArray()
+    @Test
+    void testOrderedArray()
     {
         System.out.println("OrderedArray");
         int       n   = 1000000;
@@ -32,20 +35,12 @@ public class QuickSort3Test
     /**
      * 测试元素相等的数组
      */
-    private static void testEqualsArray()
+    @Test
+    void testEqualsArray()
     {
         System.out.println("EqualsArray");
         int       n   = 1000000;
         Integer[] arr = ArrayGenerator.generateRandomArray(n, 0);
         SortingHelper.sortTest(SortName.QuickSort3, arr);
-    }
-
-    public static void main(String[] args)
-    {
-        testRandomArray();
-
-        testOrderedArray();
-
-        testEqualsArray();
     }
 }

@@ -1,5 +1,6 @@
 package vs.map;
 
+import org.junit.jupiter.api.Test;
 import other.util.Novel;
 import port.Map;
 import stage2.week8.map.BSTMap;
@@ -13,12 +14,12 @@ import java.util.Collections;
 /**
  * word: 傲慢与偏见
  */
-public class MapVS
+public class MapVSTest
 {
 
     private static final ArrayList<String> words = Novel.words1List; // 傲慢与偏见
 
-    public static void vs(Map<String, Integer> map)
+    void vs(Map<String, Integer> map)
     {
         long startTime = System.nanoTime();
 
@@ -38,7 +39,8 @@ public class MapVS
         System.out.println(simpleName + ": " + time + " s");
     }
 
-    public static void main(String[] args)
+    @Test
+    void test()
     {
         LinkedListMap<String, Integer> map1 = new LinkedListMap<>();
         BSTMap<String, Integer>        map2 = new BSTMap<>();

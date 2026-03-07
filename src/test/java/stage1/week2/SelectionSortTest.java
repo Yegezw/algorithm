@@ -1,5 +1,6 @@
 package stage1.week2;
 
+import org.junit.jupiter.api.Test;
 import other.helper.ArrayGenerator;
 import other.helper.SortName;
 import other.helper.SortingHelper;
@@ -11,14 +12,16 @@ import java.util.Arrays;
 public class SelectionSortTest
 {
 
-    private static void test1()
+    @Test
+    void test1()
     {
         Integer[] arr = {2, 9, 6, 7, 1, 5, 4, 3, 8};
         SelectionSort.sort(arr);
         System.out.println(Arrays.toString(arr));
     }
 
-    private static void test2()
+    @Test
+    void test2()
     {
         Student[] students = {
                 new Student("张三", 89),
@@ -30,7 +33,8 @@ public class SelectionSortTest
         System.out.println(Arrays.toString(students));
     }
 
-    private static void test3()
+    @Test
+    void test3()
     {
         Integer[] arr;
 
@@ -47,7 +51,8 @@ public class SelectionSortTest
         System.out.println(true);
     }
 
-    private static void test4()
+    @Test
+    void test4()
     {
         int[]     dataSize = {10000, 100000};
         Integer[] arr;
@@ -57,16 +62,5 @@ public class SelectionSortTest
             arr = ArrayGenerator.generateRandomArray(n, n);
             SortingHelper.sortTest(SortName.SelectionSort, arr);
         }
-    }
-
-    public static void main(String[] args)
-    {
-        // test1();
-
-        // test2();
-
-        // test3();
-
-        test4();
     }
 }

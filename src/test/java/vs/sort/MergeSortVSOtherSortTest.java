@@ -1,15 +1,17 @@
 package vs.sort;
 
+import org.junit.jupiter.api.Test;
 import other.helper.ArrayGenerator;
 import other.helper.SortName;
 import other.helper.SortingHelper;
 
 import java.util.Arrays;
 
-public class MergeSortVSOtherSort
+public class MergeSortVSOtherSortTest
 {
 
-    private static void vs()
+    @Test
+    void vs()
     {
         int n = 100000;
 
@@ -20,10 +22,5 @@ public class MergeSortVSOtherSort
         SortingHelper.sortTest(SortName.SelectionSort, arr1);
         SortingHelper.sortTest(SortName.InsertionSort, arr2);
         SortingHelper.sortTest(SortName.MergeSortPlus, arr3);
-    }
-
-    public static void main(String[] args)
-    {
-        vs();
     }
 }

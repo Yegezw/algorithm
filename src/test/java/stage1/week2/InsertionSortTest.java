@@ -1,5 +1,6 @@
 package stage1.week2;
 
+import org.junit.jupiter.api.Test;
 import other.helper.ArrayGenerator;
 import other.helper.SortName;
 import other.helper.SortingHelper;
@@ -8,7 +9,8 @@ import other.helper.SortingHelper;
 public class InsertionSortTest
 {
 
-    private static void test()
+    @Test
+    void test()
     {
         int[]     dataSize = {10000, 100000};
         Integer[] arr;
@@ -18,10 +20,5 @@ public class InsertionSortTest
             arr = ArrayGenerator.generateRandomArray(n, n);
             SortingHelper.sortTest(SortName.InsertionSort, arr);
         }
-    }
-
-    public static void main(String[] args)
-    {
-        test();
     }
 }

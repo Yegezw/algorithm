@@ -2,12 +2,14 @@ package more.timewheel;
 
 import more.timewheel.core.SystemTimer;
 import more.timewheel.task.Task;
+import org.junit.jupiter.api.Test;
 
 @SuppressWarnings("all")
 public class TimeWheelTest
 {
 
-    public static void main(String[] args)
+    @Test
+    void test()
     {
         Task[] tasks = new Task[64];
         for (int i = 0; i < tasks.length; i++)

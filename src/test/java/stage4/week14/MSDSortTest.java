@@ -1,10 +1,13 @@
 package stage4.week14;
 
+import org.junit.jupiter.api.Test;
+
 @SuppressWarnings("all")
 public class MSDSortTest
 {
 
-    public static void main(String[] args)
+    @Test
+    void test()
     {
         String[] arr = {"BCA", "CBAA", "AC", "BADFE", "ABC", "CBA"};
         MSDSort.sort(arr);

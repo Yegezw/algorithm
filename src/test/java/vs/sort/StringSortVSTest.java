@@ -1,5 +1,6 @@
 package vs.sort;
 
+import org.junit.jupiter.api.Test;
 import other.helper.ArrayGenerator;
 import other.helper.SortName;
 import other.helper.SortingHelper;
@@ -7,10 +8,11 @@ import other.helper.SortingHelper;
 import java.util.Arrays;
 
 @SuppressWarnings("all")
-public class StringSortVS
+public class StringSortVSTest
 {
 
-    private static void quickSortVSLSDSort()
+    @Test
+    void quickSortVSLSDSort()
     {
         int n = 10000000;
         // int W = 200;
@@ -25,7 +27,8 @@ public class StringSortVS
         SortingHelper.sortTest(SortName.LSDSort, arr3);
     }
 
-    private static void quickSortVSMSDSort()
+    @Test
+    void quickSortVSMSDSort()
     {
         int n = 50000000;
         // int bound = 200;
@@ -36,14 +39,5 @@ public class StringSortVS
 
         SortingHelper.sortTest(SortName.QuickSort2, arr1);
         SortingHelper.sortTest(SortName.MSDSort, arr2);
-    }
-
-    public static void main(String[] args)
-    {
-        quickSortVSLSDSort();
-
-        System.out.println();
-
-        quickSortVSMSDSort();
     }
 }

@@ -1,5 +1,6 @@
 package stage3.week10.sort;
 
+import org.junit.jupiter.api.Test;
 import other.helper.ArrayGenerator;
 import other.helper.SortName;
 import other.helper.SortingHelper;
@@ -9,7 +10,8 @@ import java.util.Arrays;
 public class BubbleSortTest
 {
 
-    private static void test()
+    @Test
+    void test()
     {
         int n = 100000;
 
@@ -25,10 +27,5 @@ public class BubbleSortTest
         SortingHelper.sortTest(SortName.BubbleSort1, arr1);
         SortingHelper.sortTest(SortName.BubbleSort2, arr2);
         SortingHelper.sortTest(SortName.BubbleSort3, arr3);
-    }
-
-    public static void main(String[] args)
-    {
-        test();
     }
 }

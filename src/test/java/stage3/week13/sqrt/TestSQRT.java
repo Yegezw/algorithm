@@ -1,5 +1,7 @@
 package stage3.week13.sqrt;
 
+import org.junit.jupiter.api.Test;
+
 @SuppressWarnings("all")
 public class TestSQRT
 {
@@ -9,7 +11,8 @@ public class TestSQRT
     private static SQRTDecomposition<Integer> maxSQRT = new SQRTDecomposition<>(nums, Math::max);
     private static SQRTDecomposition<Integer> minSQRT = new SQRTDecomposition<>(nums, Math::min);
 
-    public static void testSum()
+    @Test
+    void testSum()
     {
         System.out.println(sumSQRT.query(0, 2)); // 1
 
@@ -20,7 +23,8 @@ public class TestSQRT
         System.out.println(sumSQRT.query(0, 5)); // -1
     }
 
-    public static void testMax()
+    @Test
+    void testMax()
     {
         System.out.println(maxSQRT.query(0, 2)); // 3
 
@@ -31,7 +35,8 @@ public class TestSQRT
         System.out.println(maxSQRT.query(0, 5)); // 3
     }
 
-    public static void testMin()
+    @Test
+    void testMin()
     {
         System.out.println(minSQRT.query(0, 2)); // -2
 
@@ -40,14 +45,5 @@ public class TestSQRT
         System.out.println(minSQRT.query(0, 2)); // -9
         System.out.println(minSQRT.query(3, 5)); // -5
         System.out.println(minSQRT.query(0, 5)); // -9
-    }
-
-    public static void main(String[] args)
-    {
-        testSum();
-
-        testMax();
-
-        testMin();
     }
 }

@@ -1,5 +1,6 @@
 package stage2.week5;
 
+import org.junit.jupiter.api.Test;
 import other.helper.ArrayGenerator;
 import other.helper.SortName;
 import other.helper.SortingHelper;
@@ -10,28 +11,32 @@ import java.util.Arrays;
 public class MergeSortTest
 {
 
-    private static void testMergeSort()
+    @Test
+    void testMergeSort()
     {
         int       n   = 1000000;
         Integer[] arr = ArrayGenerator.generateRandomArray(n, n);
         SortingHelper.sortTest(SortName.MergeSort, arr);
     }
 
-    private static void testMergeSortPlus()
+    @Test
+    void testMergeSortPlus()
     {
         int       n   = 1000000;
         Integer[] arr = ArrayGenerator.generateRandomArray(n, n);
         SortingHelper.sortTest(SortName.MergeSortPlus, arr);
     }
 
-    private static void testMergeSortBU()
+    @Test
+    void testMergeSortBU()
     {
         int       n   = 1000000;
         Integer[] arr = ArrayGenerator.generateRandomArray(n, n);
         SortingHelper.sortTest(SortName.MergeSortBU, arr);
     }
 
-    private static void vs()
+    @Test
+    void vs()
     {
         int[] dataSize = {500000, 5000000};
 
@@ -47,16 +52,5 @@ public class MergeSortTest
 
             System.out.println("------------------------------------");
         }
-    }
-
-    public static void main(String[] args)
-    {
-        // testMergeSort();
-
-        // testMergeSortPlus();
-
-        // testMergeSortBU();
-
-        vs();
     }
 }

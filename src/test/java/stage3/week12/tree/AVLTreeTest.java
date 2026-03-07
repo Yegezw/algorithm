@@ -1,5 +1,6 @@
 package stage3.week12.tree;
 
+import org.junit.jupiter.api.Test;
 import other.util.Novel;
 
 import java.util.ArrayList;
@@ -12,7 +13,8 @@ public class AVLTreeTest
 
     private static final ArrayList<String> words = Novel.words1List; // 傲慢与偏见
 
-    public static void testAVLTree()
+    @Test
+    void testAVLTree()
     {
         long startTime = System.nanoTime();
 
@@ -38,10 +40,5 @@ public class AVLTreeTest
 
         System.out.println("is BST: " + avlTree.isBST());
         System.out.println("is Balanced: " + avlTree.isBalanced());
-    }
-
-    public static void main(String[] args)
-    {
-        testAVLTree();
     }
 }

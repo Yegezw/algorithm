@@ -1,13 +1,15 @@
 package vs.string;
 
+import org.junit.jupiter.api.Test;
 import other.helper.MatchName;
 import other.helper.SubStringMatchHelper;
 import other.util.Novel;
 
-public class SubStringMatchVS
+public class SubStringMatchVSTest
 {
 
-    public static void test1()
+    @Test
+    void test1()
     {
         String s = "hello, this is liuyubobobo.";
         String t = "bo";
@@ -18,7 +20,8 @@ public class SubStringMatchVS
         System.out.println();
     }
 
-    public static void test2()
+    @Test
+    void test2()
     {
         String s = Novel.words1String; // 傲慢与偏见
         String t = "china";
@@ -35,7 +38,8 @@ public class SubStringMatchVS
     /**
      * 暴力搜索最坏的情况
      */
-    public static void testWorstCase()
+    @Test
+    void testWorstCase()
     {
         int n = 1000000;
         int m = 10000;
@@ -55,14 +59,5 @@ public class SubStringMatchVS
         SubStringMatchHelper.matchTest(MatchName.Bruteforce, s, t);
         SubStringMatchHelper.matchTest(MatchName.RabinKarp, s, t);
         SubStringMatchHelper.matchTest(MatchName.KMP, s, t);
-    }
-
-    public static void main(String[] args)
-    {
-        test1();
-
-        test2();
-
-        testWorstCase();
     }
 }

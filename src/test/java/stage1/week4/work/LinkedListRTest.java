@@ -1,9 +1,12 @@
 package stage1.week4.work;
 
+import org.junit.jupiter.api.Test;
+
 public class LinkedListRTest
 {
 
-    public static void test()
+    @Test
+    void test()
     {
         LinkedListR<Integer> linkedListR = new LinkedListR<>();
         for (int i = 0; i < 7; i++)
@@ -27,10 +30,5 @@ public class LinkedListRTest
         System.out.println(linkedListR.getSize());
         System.out.println(linkedListR.getFirst());
         System.out.println(linkedListR.getLast());
-    }
-
-    public static void main(String[] args)
-    {
-        test();
     }
 }

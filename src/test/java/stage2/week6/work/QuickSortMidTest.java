@@ -1,5 +1,6 @@
 package stage2.week6.work;
 
+import org.junit.jupiter.api.Test;
 import other.helper.ArrayGenerator;
 import other.helper.SortName;
 import other.helper.SortingHelper;
@@ -13,7 +14,8 @@ public class QuickSortMidTest
     /**
      * 测试随机数组
      */
-    private static void testRandomArray()
+    @Test
+    void testRandomArray()
     {
         System.out.println("RandomArray");
         int       n   = 1000000;
@@ -24,7 +26,8 @@ public class QuickSortMidTest
     /**
      * 测试有序数组
      */
-    private static void testOrderedArray()
+    @Test
+    void testOrderedArray()
     {
         System.out.println("OrderedArray");
         int       n   = 1000000;
@@ -35,7 +38,8 @@ public class QuickSortMidTest
     /**
      * 测试元素相等的数组
      */
-    private static void testEqualsArray()
+    @Test
+    void testEqualsArray()
     {
         System.out.println("EqualsArray");
         int       n   = 100000;
@@ -46,7 +50,8 @@ public class QuickSortMidTest
     /**
      * 测试特殊数组
      */
-    private static void testSpecialArray()
+    @Test
+    void testSpecialArray()
     {
         System.out.println("SpecialArray");
         int       n   = 100000;
@@ -57,22 +62,10 @@ public class QuickSortMidTest
     /**
      * 生成特殊数组, 比如 [8, 2, 6, 4, 0, 1, 3, 5, 7, 9]
      */
-    private static void generateSpecialArray()
+    @Test
+    void generateSpecialArray()
     {
         Integer[] arr = ArrayGenerator.generateSpecialArray(10);
         System.out.println(Arrays.toString(arr));
-    }
-
-    public static void main(String[] args)
-    {
-        // testRandomArray();
-
-        // testOrderedArray();
-
-        // testEqualsArray();
-
-        // testSpecialArray();
-
-        generateSpecialArray();
     }
 }

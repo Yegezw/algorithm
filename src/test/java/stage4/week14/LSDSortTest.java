@@ -1,9 +1,12 @@
 package stage4.week14;
 
+import org.junit.jupiter.api.Test;
+
 public class LSDSortTest
 {
 
-    public static void main(String[] args)
+    @Test
+    void test()
     {
         String[] arr = {"BCA", "CAB", "ACB", "BAC", "ABC", "CBA"};
         LSDSort.sort(arr, 3);

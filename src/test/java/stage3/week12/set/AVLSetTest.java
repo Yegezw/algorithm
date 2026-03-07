@@ -1,5 +1,6 @@
 package stage3.week12.set;
 
+import org.junit.jupiter.api.Test;
 import other.util.Novel;
 
 import java.util.ArrayList;
@@ -12,7 +13,8 @@ public class AVLSetTest
 
     private static final ArrayList<String> words = Novel.words1List; // 傲慢与偏见
 
-    public static void testAVLSet()
+    @Test
+    void testAVLSet()
     {
         long startTime = System.nanoTime();
 
@@ -24,10 +26,5 @@ public class AVLSetTest
         System.out.println("Total different words: " + avlSet.getSize());
         double time = (endTime - startTime) / 1000000000.0;
         System.out.println("AVLSet: " + time + " s");
-    }
-
-    public static void main(String[] args)
-    {
-        testAVLSet();
     }
 }

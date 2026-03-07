@@ -1,5 +1,6 @@
 package stage3.week9.work;
 
+import org.junit.jupiter.api.Test;
 import other.helper.ArrayGenerator;
 import stage3.week9.queue.PriorityQueue;
 
@@ -8,7 +9,7 @@ import java.util.Random;
 public class WorkTest
 {
 
-    private static boolean verifyMinHeap(MinHeap<Integer> minHeap)
+    boolean verifyMinHeap(MinHeap<Integer> minHeap)
     {
         int[] arr = new int[minHeap.size()];
         for (int i = 0; i < arr.length; i++) arr[i] = minHeap.extractMin();
@@ -20,7 +21,8 @@ public class WorkTest
         return true;
     }
 
-    public static void testMinHeap()
+    @Test
+    void testMinHeap()
     {
         int              n       = 1000000;
         MinHeap<Integer> minHeap = new MinHeap<>();
@@ -31,7 +33,7 @@ public class WorkTest
         System.out.println("Test MinHeap completed");
     }
 
-    private static boolean isDescending(Integer[] arr)
+    boolean isDescending(Integer[] arr)
     {
         for (int i = 1; i < arr.length; i++)
         {
@@ -40,7 +42,8 @@ public class WorkTest
         return true;
     }
 
-    public static void testHeapSort1()
+    @Test
+    void testHeapSort1()
     {
         int       n   = 1000000;
         Integer[] arr = ArrayGenerator.generateRandomArray(n, n);
@@ -48,7 +51,8 @@ public class WorkTest
         System.out.println(isDescending(arr));
     }
 
-    public static void testHeapSort2()
+    @Test
+    void testHeapSort2()
     {
         int       n   = 1000000;
         Integer[] arr = ArrayGenerator.generateRandomArray(n, n);
@@ -56,22 +60,12 @@ public class WorkTest
         System.out.println(isDescending(arr));
     }
 
-    private static void testPQ()
+    @Test
+    void testPQ()
     {
         Random                 random = new Random();
         PriorityQueue<Integer> queue  = new PriorityQueue<>();
         for (int i = 0; i < 10; i++) queue.enqueue(random.nextInt(10));
         for (int i = 0; i < 10; i++) System.out.println(queue.dequeue());
-    }
-
-    public static void main(String[] args)
-    {
-        testMinHeap();
-
-        testHeapSort1();
-
-        testHeapSort2();
-
-        testPQ();
     }
 }

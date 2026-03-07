@@ -1,5 +1,6 @@
 package vs.set;
 
+import org.junit.jupiter.api.Test;
 import other.util.Novel;
 import port.Set;
 import stage2.week8.set.BSTSet;
@@ -13,12 +14,12 @@ import java.util.Collections;
 /**
  * word: 傲慢与偏见
  */
-public class SetVS
+public class SetVSTest
 {
 
     private static final ArrayList<String> words = Novel.words1List; // 傲慢与偏见
 
-    public static void vs(Set<String> set)
+    void vs(Set<String> set)
     {
         long startTime = System.nanoTime();
 
@@ -32,7 +33,8 @@ public class SetVS
         System.out.println(simpleName + ": " + time + " s");
     }
 
-    public static void main(String[] args)
+    @Test
+    void test()
     {
         LinkedListSet<String> set1 = new LinkedListSet<>();
         BSTSet<String>        set2 = new BSTSet<>();

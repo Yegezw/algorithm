@@ -1,18 +1,19 @@
 package vs.stack;
 
+import org.junit.jupiter.api.Test;
 import port.Stack;
 import stage1.week3.stack.ArrayStack;
 import stage1.week4.stack.LinkedListStack;
 
 import java.util.Random;
 
-public class ArrayStackVSLinkedListStack
+public class ArrayStackVSLinkedListStackTest
 {
 
     /**
      * 测试使用 stack 来运行 opCount 个 push 和 pop 所需要的时间, 单位: s
      */
-    public static double testStack(Stack<Integer> stack, int opCount)
+    double testStack(Stack<Integer> stack, int opCount)
     {
         long startTime = System.nanoTime();
 
@@ -30,7 +31,8 @@ public class ArrayStackVSLinkedListStack
         return (endTime - startTime) / 1000000000.0;
     }
 
-    public static void main(String[] args)
+    @Test
+    void test()
     {
         int opCount = 100000;
         // int opCount = 10000000;

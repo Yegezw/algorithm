@@ -1,5 +1,6 @@
 package stage3.week10.sort;
 
+import org.junit.jupiter.api.Test;
 import other.helper.ArrayGenerator;
 import other.helper.SortName;
 import other.helper.SortingHelper;
@@ -9,7 +10,8 @@ import java.util.Arrays;
 public class ShellSortTest
 {
 
-    private static void test()
+    @Test
+    void test()
     {
         int n = 1000000;
 
@@ -20,10 +22,5 @@ public class ShellSortTest
         SortingHelper.sortTest(SortName.ShellSort1, arr1);
         SortingHelper.sortTest(SortName.ShellSort2, arr2);
         SortingHelper.sortTest(SortName.ShellSort3, arr3);
-    }
-
-    public static void main(String[] args)
-    {
-        test();
     }
 }

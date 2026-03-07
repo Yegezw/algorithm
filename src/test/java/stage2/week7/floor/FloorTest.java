@@ -1,5 +1,6 @@
 package stage2.week7.floor;
 
+import org.junit.jupiter.api.Test;
 import other.helper.ArrayGenerator;
 
 import java.util.Arrays;
@@ -7,7 +8,8 @@ import java.util.Arrays;
 public class FloorTest
 {
 
-    private static void testFloorL()
+    @Test
+    void testFloorL()
     {
         System.out.println("存在 target 时, 返回 = target 的最左边的索引");
 
@@ -23,7 +25,8 @@ public class FloorTest
         System.out.println();
     }
 
-    private static void testFloorR()
+    @Test
+    void testFloorR()
     {
         System.out.println("存在 target 时, 返回 = target 的最右边的索引");
 
@@ -37,12 +40,5 @@ public class FloorTest
             System.out.println("小于 " + i + " 的最大值的索引为 " + Floor.floorR(arr, i));
         }
         System.out.println();
-    }
-
-    public static void main(String[] args)
-    {
-        testFloorL();
-
-        testFloorR();
     }
 }

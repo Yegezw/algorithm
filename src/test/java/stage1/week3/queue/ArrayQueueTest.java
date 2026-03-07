@@ -1,9 +1,12 @@
 package stage1.week3.queue;
 
+import org.junit.jupiter.api.Test;
+
 public class ArrayQueueTest
 {
 
-    public static void test()
+    @Test
+    void test()
     {
         ArrayQueue<Integer> queue = new ArrayQueue<>();
         for (int i = 0; i < 10; i++)
@@ -18,10 +21,5 @@ public class ArrayQueueTest
                 System.out.println("---------------");
             }
         }
-    }
-
-    public static void main(String[] args)
-    {
-        test();
     }
 }

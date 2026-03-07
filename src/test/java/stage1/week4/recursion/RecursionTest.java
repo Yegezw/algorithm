@@ -1,12 +1,15 @@
 package stage1.week4.recursion;
 
+import org.junit.jupiter.api.Test;
+
 import java.util.Arrays;
 
 @SuppressWarnings("all")
 public class RecursionTest
 {
 
-    private static void testSum()
+    @Test
+    void testSum()
     {
         int[] arr = new int[5];
         for (int i = 0; i < arr.length; i++)
@@ -17,16 +20,10 @@ public class RecursionTest
         System.out.println(Recursion.sum(arr));
     }
 
-    private static void testN()
+    @Test
+    void testN()
     {
         int n = 5;
         System.out.println("5! = " + Recursion.factorial(n));
-    }
-
-    public static void main(String[] args)
-    {
-        testSum();
-
-        testN();
     }
 }

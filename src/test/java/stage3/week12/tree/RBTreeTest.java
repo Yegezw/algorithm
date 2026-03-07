@@ -1,5 +1,6 @@
 package stage3.week12.tree;
 
+import org.junit.jupiter.api.Test;
 import other.util.Novel;
 
 import java.util.ArrayList;
@@ -12,7 +13,8 @@ public class RBTreeTest
 
     private static final ArrayList<String> words = Novel.words1List; // 傲慢与偏见
 
-    public static void testRBTree()
+    @Test
+    void testRBTree()
     {
         long startTime = System.nanoTime();
 
@@ -30,10 +32,5 @@ public class RBTreeTest
         System.out.println("Frequency of Pride: " + rbTree.get("pride"));
         System.out.println("Frequency of Prejudice: " + rbTree.get("prejudice"));
         System.out.println("RBTree: " + time + " s");
-    }
-
-    public static void main(String[] args)
-    {
-        testRBTree();
     }
 }

@@ -1,5 +1,6 @@
 package vs.tree;
 
+import org.junit.jupiter.api.Test;
 import stage2.week8.map.BSTMap;
 import stage3.week12.tree.AVLTree;
 import stage3.week12.tree.RBTree;
@@ -8,10 +9,10 @@ import java.util.ArrayList;
 import java.util.Random;
 
 @SuppressWarnings("all")
-public class TreeVS
+public class TreeVSTest
 {
 
-    private static void testBSTMap(ArrayList<Integer> testData)
+    void testBSTMap(ArrayList<Integer> testData)
     {
         long startTime = System.nanoTime();
 
@@ -23,7 +24,7 @@ public class TreeVS
         System.out.println("BSTMap: " + time + " s");
     }
 
-    private static void testAVLTree(ArrayList<Integer> testData)
+    void testAVLTree(ArrayList<Integer> testData)
     {
         long startTime = System.nanoTime();
 
@@ -35,7 +36,7 @@ public class TreeVS
         System.out.println("AVLTree: " + time + " s");
     }
 
-    private static void testRBTree(ArrayList<Integer> testData)
+    void testRBTree(ArrayList<Integer> testData)
     {
         long startTime = System.nanoTime();
 
@@ -50,7 +51,8 @@ public class TreeVS
     /**
      * 测试随机数据
      */
-    public static void testRandomData()
+    @Test
+    void testRandomData()
     {
         int n = 20000000;
 
@@ -66,7 +68,8 @@ public class TreeVS
     /**
      * 测试有序数据
      */
-    public static void testOrderedData()
+    @Test
+    void testOrderedData()
     {
         int n = 20000000;
 
@@ -75,12 +78,5 @@ public class TreeVS
 
         testAVLTree(testData);
         testRBTree(testData);
-    }
-
-    public static void main(String[] args)
-    {
-        testRandomData();
-
-        testOrderedData();
     }
 }

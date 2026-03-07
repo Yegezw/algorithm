@@ -1,6 +1,7 @@
 package more.util;
 
 import org.apache.commons.io.FileUtils;
+import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.IOException;
@@ -29,7 +30,8 @@ public class LogUtilTest
         keywordSet.add("数据同步-单线程监控");
     }
 
-    public static void main(String[] args) throws IOException
+    @Test
+    void test() throws IOException
     {
         TreeSet<String> set = new TreeSet<>();
         set.add("FilterConfigCacheSupport");
@@ -72,7 +74,7 @@ public class LogUtilTest
         );
     }
 
-    private static void print(String str)
+    void print(String str)
     {
         String res = str.replaceAll(" \\[com.sgcc.iesg.datatransfer.lx.transfer.buffer.adapter.monitor.SingleThreadMonitorAdapter:30]", "");
         System.out.println(res);

@@ -1,5 +1,6 @@
 package stage2.week7.work;
 
+import org.junit.jupiter.api.Test;
 import other.helper.ArrayGenerator;
 import other.helper.SortName;
 import other.helper.SortingHelper;
@@ -12,7 +13,8 @@ public class PatienceSortTest
     /**
      * 测试随机数组
      */
-    private static void testRandomArray()
+    @Test
+    void testRandomArray()
     {
         System.out.println("RandomArray");
         int n = 1000000;
@@ -22,10 +24,5 @@ public class PatienceSortTest
 
         SortingHelper.sortTest(SortName.PatienceSort, arr1);
         SortingHelper.sortTest(SortName.MergeSortPlus, arr2);
-    }
-
-    public static void main(String[] args)
-    {
-        testRandomArray();
     }
 }

@@ -1,5 +1,6 @@
 package stage3.week13.hash;
 
+import org.junit.jupiter.api.Test;
 import other.util.Novel;
 
 import java.util.ArrayList;
@@ -12,7 +13,8 @@ public class HashTableTest
 
     private static final ArrayList<String> words = Novel.words1List; // 傲慢与偏见
 
-    public static void testHashTable()
+    @Test
+    void testHashTable()
     {
         long startTime = System.nanoTime();
 
@@ -32,10 +34,5 @@ public class HashTableTest
         System.out.println("Frequency of Pride: " + hashTable.get("pride"));
         System.out.println("Frequency of Prejudice: " + hashTable.get("prejudice"));
         System.out.println("HashTable: " + time + " s");
-    }
-
-    public static void main(String[] args)
-    {
-        testHashTable();
     }
 }

@@ -1,5 +1,7 @@
 package stage3.week9.heap;
 
+import org.junit.jupiter.api.Test;
+
 import java.util.Arrays;
 import java.util.Random;
 
@@ -7,7 +9,7 @@ import java.util.Random;
 public class MaxHeapTest
 {
 
-    private static boolean verify(MaxHeap<Integer> maxHeap)
+    boolean verify(MaxHeap<Integer> maxHeap)
     {
         int[] arr = new int[maxHeap.size()];
         for (int i = 0; i < arr.length; i++) arr[i] = maxHeap.extractMax();
@@ -19,7 +21,7 @@ public class MaxHeapTest
         return true;
     }
 
-    private static void testHeap(Integer[] arr, boolean isHeapify)
+    void testHeap(Integer[] arr, boolean isHeapify)
     {
         long startTime = System.nanoTime();
 
@@ -37,7 +39,8 @@ public class MaxHeapTest
         System.out.println("time: " + time + " s");
     }
 
-    public static void test1()
+    @Test
+    void test1()
     {
         int              n       = 1000000;
         MaxHeap<Integer> maxHeap = new MaxHeap<>();
@@ -53,7 +56,8 @@ public class MaxHeapTest
      * <p>方式一: 对每个元素进行 siftUp</p>
      * <p>方式二: 从最后一个非叶子节点开始, 倒着进行 siftDown</p>
      */
-    public static void test2()
+    @Test
+    void test2()
     {
         int    n      = 1000000;
         Random random = new Random();
@@ -64,12 +68,5 @@ public class MaxHeapTest
 
         testHeap(arr1, false); // O(N * logN)
         testHeap(arr2, true);  // O(n)
-    }
-
-    public static void main(String[] args)
-    {
-        test1();
-
-        test2();
     }
 }

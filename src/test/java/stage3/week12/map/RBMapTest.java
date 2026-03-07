@@ -1,5 +1,6 @@
 package stage3.week12.map;
 
+import org.junit.jupiter.api.Test;
 import other.util.Novel;
 
 import java.util.ArrayList;
@@ -12,7 +13,8 @@ public class RBMapTest
 
     private static final ArrayList<String> words = Novel.words1List; // 傲慢与偏见
 
-    public static void testRBMap()
+    @Test
+    void testRBMap()
     {
         long startTime = System.nanoTime();
 
@@ -30,10 +32,5 @@ public class RBMapTest
         System.out.println("Frequency of Prejudice: " + rbMap.get("prejudice"));
         double time = (endTime - startTime) / 1000000000.0;
         System.out.println("RBMap: " + time + " s");
-    }
-
-    public static void main(String[] args)
-    {
-        testRBMap();
     }
 }

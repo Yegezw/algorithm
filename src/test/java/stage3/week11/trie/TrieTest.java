@@ -1,5 +1,6 @@
 package stage3.week11.trie;
 
+import org.junit.jupiter.api.Test;
 import other.util.Novel;
 import stage2.week8.set.BSTSet;
 
@@ -10,7 +11,8 @@ public class TrieTest
 
     private static final ArrayList<String> words = Novel.words2List; // 双城记
 
-    public static void testBSTSet()
+    @Test
+    void testBSTSet()
     {
         BSTSet<String> set       = new BSTSet<>();
         long           startTime = System.nanoTime();
@@ -24,7 +26,8 @@ public class TrieTest
         System.out.println("BSTSet: " + time);
     }
 
-    public static void testTrie()
+    @Test
+    void testTrie()
     {
         Trie trie      = new Trie();
         long startTime = System.nanoTime();
@@ -36,15 +39,5 @@ public class TrieTest
         double time    = (endTime - startTime) / 1000000000.0;
         System.out.println("Total different words: " + trie.getSize());
         System.out.println("Trie: " + time);
-    }
-
-    public static void main(String[] args)
-    {
-        System.out.println("A Tale of Two Cities");
-        System.out.println();
-
-        testBSTSet();
-        System.out.println();
-        testTrie();
     }
 }

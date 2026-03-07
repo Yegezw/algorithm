@@ -1,10 +1,13 @@
 package stage1.week3.stack;
 
+import org.junit.jupiter.api.Test;
+
 @SuppressWarnings("all")
 public class ArrayStackTest
 {
 
-    public static void test()
+    @Test
+    void test()
     {
         ArrayStack<Integer> stack = new ArrayStack<>();
         for (int i = 0; i < 5; i++)
@@ -15,10 +18,5 @@ public class ArrayStackTest
 
         System.out.println(stack.pop());
         System.out.println(stack);
-    }
-
-    public static void main(String[] args)
-    {
-        test();
     }
 }

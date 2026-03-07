@@ -1,6 +1,6 @@
 package more.util;
 
-import lombok.SneakyThrows;
+import org.junit.jupiter.api.Test;
 
 public class SQLUtilTest
 {
@@ -8,8 +8,8 @@ public class SQLUtilTest
     private static final String prefix = "dj_";
     private static final String dir    = "D:\\02-data\\05-DingDingDownload\\07-福建省级车联网\\脚本1";
 
-    @SneakyThrows
-    public static void main(String[] args)
+    @Test
+    void test()
     {
         LogTool.execute(
                 () ->

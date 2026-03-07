@@ -1,9 +1,12 @@
 package stage2.week8.work;
 
+import org.junit.jupiter.api.Test;
+
 public class BSTNRTest
 {
 
-    private static void test()
+    @Test
+    void test()
     {
         int[] arr = {5, 3, 6, 8, 4, 2};
 
@@ -21,10 +24,5 @@ public class BSTNRTest
         bstNR.levelOrder(); // 5 3 6 2 4 8
         System.out.println(bstNR.contains(8));
         System.out.println(bstNR.contains(10));
-    }
-
-    public static void main(String[] args)
-    {
-        test();
     }
 }

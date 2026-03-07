@@ -1,15 +1,17 @@
 package vs.sort;
 
+import org.junit.jupiter.api.Test;
 import other.helper.ArrayGenerator;
 import other.helper.SortName;
 import other.helper.SortingHelper;
 
 import java.util.Arrays;
 
-public class QuickSortVSMergeSort
+public class QuickSortVSMergeSortTest
 {
 
-    private static void vs()
+    @Test
+    void vs()
     {
         int[] dataSize = {500000, 5000000};
 
@@ -26,10 +28,5 @@ public class QuickSortVSMergeSort
 
             System.out.println("---------------------------------------");
         }
-    }
-
-    public static void main(String[] args)
-    {
-        vs();
     }
 }

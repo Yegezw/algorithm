@@ -1,5 +1,6 @@
 package stage1.week3.array;
 
+import org.junit.jupiter.api.Test;
 import other.pojo.Student;
 
 import java.util.Iterator;
@@ -8,7 +9,8 @@ import java.util.Iterator;
 public class ArrayTest
 {
 
-    private static void test1()
+    @Test
+    void test1()
     {
         Array<Integer> arr = new Array<>(20);
         for (int i = 0; i < 10; i++)
@@ -30,7 +32,8 @@ public class ArrayTest
         System.out.println(arr);
     }
 
-    private static void test2()
+    @Test
+    void test2()
     {
         Array<Student> arr = new Array<>();
 
@@ -42,7 +45,8 @@ public class ArrayTest
         System.out.println(arr);
     }
 
-    private static void test3()
+    @Test
+    void test3()
     {
         Array<Integer> arr = new Array<>(20);
         for (int i = 0; i < 10; i++) arr.addLast(i);
@@ -56,7 +60,8 @@ public class ArrayTest
         System.out.println(arr);
     }
 
-    private static void test4()
+    @Test
+    void test4()
     {
         Array<Integer> arr = new Array<>(10);
         for (int i = 0; i < 10; i++) arr.addLast(i);
@@ -68,16 +73,5 @@ public class ArrayTest
             if (i % 3 == 1) iterator.remove(); // 删除 1 4 7
             else System.out.print(i + " ");
         }
-    }
-
-    public static void main(String[] args)
-    {
-        // test1();
-
-        // test2();
-
-        // test3();
-
-        test4();
     }
 }

@@ -1,5 +1,6 @@
 package stage2.week8.map;
 
+import org.junit.jupiter.api.Test;
 import other.util.Novel;
 import port.Map;
 
@@ -14,7 +15,8 @@ public class MapTest
 
     private static final ArrayList<String> words = Novel.words1List; // 傲慢与偏见
 
-    public static void testBSTMap()
+    @Test
+    void testBSTMap()
     {
         System.out.println("Pride and Prejudice");
         System.out.println("Total words: " + words.size());
@@ -31,7 +33,8 @@ public class MapTest
         System.out.println("Frequency of Prejudice: " + map.get("prejudice"));
     }
 
-    public static void testLinkedListMap()
+    @Test
+    void testLinkedListMap()
     {
         System.out.println("Pride and Prejudice");
         System.out.println("Total words: " + words.size());
@@ -48,7 +51,17 @@ public class MapTest
         System.out.println("Frequency of Prejudice: " + map.get("prejudice"));
     }
 
-    public static void vs(Map<String, Integer> map)
+    @Test
+    void vs()
+    {
+        BSTMap<String, Integer>        map1 = new BSTMap<>();
+        LinkedListMap<String, Integer> map2 = new LinkedListMap<>();
+        vs(map1);
+        System.out.println("-------------------");
+        vs(map2);
+    }
+
+    void vs(Map<String, Integer> map)
     {
         long startTime = System.nanoTime();
 
@@ -68,18 +81,5 @@ public class MapTest
         double time       = (endTime - startTime) / 1000000000.0;
         String simpleName = map.getClass().getSimpleName();
         System.out.println(simpleName + ": " + time + " s");
-    }
-
-    public static void main(String[] args)
-    {
-        // testBSTMap();
-
-        // testLinkedListMap();
-
-        BSTMap<String, Integer>        map1 = new BSTMap<>();
-        LinkedListMap<String, Integer> map2 = new LinkedListMap<>();
-        vs(map1);
-        System.out.println("-------------------");
-        vs(map2);
     }
 }
